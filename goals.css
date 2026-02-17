@@ -1,0 +1,115 @@
+/* Goal Section Specifics */
+.goal-card {
+    background: rgba(10, 10, 10, 0.9);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+    padding: 50px;
+    max-width: 1100px !important;
+    /* Override generic card max-width */
+}
+
+.goal-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.goal-header h3 {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    border-bottom: none;
+    /* Remove default card h3 border */
+}
+
+.primary-goal-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    align-items: center;
+    text-align: left;
+}
+
+.primary-intro {
+    flex: 1;
+    min-width: 300px;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #e0e0e0;
+}
+
+.primary-list {
+    flex: 1.5;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.primary-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.primary-icon-box {
+    background: rgba(255, 215, 0, 0.1);
+    width: 70px;
+    height: 70px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+    flex-shrink: 0;
+}
+
+.primary-icon-box i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));
+    margin-bottom: 0 !important;
+    /* Override .card i */
+}
+
+.primary-text {
+    font-size: 1.1rem;
+    color: #fff;
+    line-height: 1.4;
+}
+
+/* Secondary Goals Grid */
+.secondary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    text-align: left;
+}
+
+.secondary-item h4 {
+    color: #fff;
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.secondary-item i {
+    color: var(--primary-color);
+    font-size: 1.2em;
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.8));
+}
+
+.secondary-item p {
+    color: #cccccc;
+    font-size: 1rem;
+    line-height: 1.6;
+    padding-left: 0;
+}

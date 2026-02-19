@@ -1,0 +1,106 @@
+/* Mobile Navigation */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+    z-index: 100;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background-color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+/* Mobile Menu Styles */
+@media (max-width: 768px) {
+    nav {
+        padding: 20px;
+        /* Reduce padding */
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    nav ul {
+        display: flex;
+        /* Override existing display: none */
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        /* Hidden by default */
+        width: 100%;
+        /* Full screen width */
+        height: 100vh;
+        background: rgba(10, 10, 10, 0.95);
+        backdrop-filter: blur(20px);
+        padding-top: 100px;
+        align-items: center;
+        transition: right 0.4s ease;
+        z-index: 50;
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    nav ul.active {
+        right: 0;
+    }
+
+    nav ul li {
+        margin: 20px 0;
+    }
+
+    nav ul li a {
+        font-size: 1.5rem;
+        font-family: 'Cinzel', serif;
+    }
+
+    /* Hamburger Animation */
+    .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 6px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -6px);
+    }
+
+    /* Hero Responsive */
+    .hero h1 {
+        font-size: 2.2rem !important;
+        /* Force override */
+        padding: 0 10px;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+        padding: 0 20px;
+    }
+
+    /* General Padding */
+    main {
+        padding: 80px 15px 30px 15px;
+        /* Increase top padding for fixed header overlap if any, reduce side */
+    }
+
+    .glass-section {
+        padding: 40px 20px;
+        margin-bottom: 40px;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    /* Navigation grid fix */
+    .info-nav-grid {
+        grid-template-columns: 1fr;
+        /* Single column on mobile */
+    }
+}

@@ -113,3 +113,55 @@
     line-height: 1.6;
     padding-left: 0;
 }
+
+@media (max-width: 768px) {
+    .goal-card {
+        padding: 30px 20px;
+    }
+
+    .goal-header h3 {
+        font-size: 1.6rem;
+        flex-direction: column;
+        display: flex;
+        /* Ensure it is flex */
+        width: 100%;
+        text-align: center;
+        gap: 15px;
+        word-wrap: break-word;
+        /* Ensure compatibility */
+        overflow-wrap: break-word;
+        /* Standard property */
+    }
+
+    .primary-goal-content {
+        gap: 30px;
+    }
+
+    .primary-intro {
+        text-align: center;
+        width: 100%;
+    }
+
+    .primary-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    .secondary-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .secondary-item {
+        text-align: center;
+    }
+
+    .secondary-item h4 {
+        justify-content: center;
+        flex-direction: column;
+    }
+}

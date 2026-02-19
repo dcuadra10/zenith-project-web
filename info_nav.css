@@ -77,3 +77,25 @@
     font-size: 1rem;
     line-height: 1.5;
 }
+
+/* Mobile responsiveness for info navigation */
+@media (max-width: 768px) {
+    .info-nav-grid {
+        grid-template-columns: 1fr;
+        padding: 0 10px;
+        gap: 20px;
+    }
+
+    .info-nav-card {
+        min-height: 200px;
+        padding: 20px;
+    }
+
+    .info-nav-card h3 {
+        font-size: 1.3rem;
+    }
+
+    .info-nav-card i {
+        font-size: 3rem;
+    }
+}

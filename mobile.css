@@ -215,9 +215,14 @@
         gap: 16px;
     }
 
+    .grid-container[style] {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
     .card {
         max-width: 100%;
-        padding: 24px 18px;
+        padding: 24px 18px !important;
         flex: 1 1 auto;
     }
 
@@ -364,6 +369,27 @@
     .alert-box,
     .info-box {
         padding: 12px;
+    }
+
+    /* ─── Premium Goals Page ─── */
+    .premium-goal-card {
+        padding: 30px 20px !important;
+        border-radius: 16px !important;
+    }
+
+    .premium-goal-card h3 {
+        font-size: 1.35rem !important;
+        margin-bottom: 15px;
+    }
+
+    .premium-icon-box {
+        width: 65px;
+        height: 65px;
+        margin-bottom: 15px;
+    }
+
+    .premium-icon-box i {
+        font-size: 2rem !important;
     }
 
     /* ─── Goals Page ─── */

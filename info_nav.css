@@ -1,101 +1,125 @@
-/* Info Navigation Cards */
+/* ═══════════════════════════════════════════════
+   INFO NAVIGATION CARDS — v2.0
+   ═══════════════════════════════════════════════ */
+
 .info-nav-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
     margin-top: 40px;
     padding: 0 20px;
 }
 
 .info-nav-card {
-    background: rgba(20, 20, 20, 0.6);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 215, 0, 0.2);
-    border-radius: 15px;
-    padding: 30px;
+    background: var(--bg-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: var(--card-radius);
+    padding: 40px 30px;
     text-align: center;
-    transition: all 0.4s ease;
+    transition: all 0.5s var(--ease-spring);
     text-decoration: none !important;
-    /* Ensure link underline doesn't show */
     display: flex;
-    /* Use flex to center content */
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 250px;
-    /* Consistent height */
+    min-height: 260px;
     position: relative;
     overflow: hidden;
 }
 
+/* Glow orb behind card on hover */
 .info-nav-card::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at center, rgba(255, 215, 0, 0.05) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    width: 130%;
+    height: 130%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle at center, rgba(255, 215, 0, 0.06) 0%, transparent 60%);
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+/* Bottom accent line */
+.info-nav-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold-500), transparent);
+    transition: width 0.5s var(--ease-out-expo);
 }
 
 .info-nav-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--primary-color);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.2);
+    transform: translateY(-10px) scale(1.01);
+    border-color: rgba(255, 215, 0, 0.15);
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(255, 215, 0, 0.06);
 }
 
 .info-nav-card:hover::before {
     opacity: 1;
 }
 
+.info-nav-card:hover::after {
+    width: 70%;
+}
+
 .info-nav-card i {
-    font-size: 3.5rem;
-    color: var(--primary-color);
-    margin-bottom: 20px;
-    transition: transform 0.4s ease;
-    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+    font-size: 3rem;
+    color: var(--gold-500);
+    margin-bottom: 22px;
+    transition: all 0.4s var(--ease-spring);
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.2));
 }
 
 .info-nav-card:hover i {
-    transform: scale(1.1);
-    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6));
+    transform: scale(1.15) translateY(-4px);
+    filter: drop-shadow(0 0 18px rgba(255, 215, 0, 0.5));
 }
 
 .info-nav-card h3 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: #fff;
-    margin-bottom: 15px;
+    margin-bottom: 14px;
     font-family: 'Cinzel', serif;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
+    font-weight: 600;
 }
 
 .info-nav-card p {
-    color: #ccc;
-    font-size: 1rem;
-    line-height: 1.5;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
 }
 
-/* Mobile responsiveness for info navigation */
+/* ─── Mobile ─── */
 @media (max-width: 768px) {
     .info-nav-grid {
         grid-template-columns: 1fr;
         padding: 0 10px;
-        gap: 20px;
+        gap: 18px;
     }
 
     .info-nav-card {
         min-height: 200px;
-        padding: 20px;
+        padding: 30px 20px;
     }
 
     .info-nav-card h3 {
-        font-size: 1.3rem;
+        font-size: 1.15rem;
     }
 
     .info-nav-card i {
-        font-size: 3rem;
+        font-size: 2.5rem;
     }
 }

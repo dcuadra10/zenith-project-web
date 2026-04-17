@@ -1,57 +1,155 @@
+/* ═══════════════════════════════════════════════
+   PROJECT ZENITH — Premium Design System v2.0
+   ═══════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
 :root {
+    /* Core Palette */
+    --gold-100: #FFF8E1;
+    --gold-200: #FFE082;
+    --gold-300: #FFD54F;
+    --gold-400: #FFCA28;
+    --gold-500: #FFD700;
+    --gold-600: #FFC107;
+    --gold-700: #D4A017;
+    --gold-800: #B8860B;
+
+    /* Surfaces */
+    --bg-deepest: #0a0a0f;
+    --bg-deep: #0e0e16;
+    --bg-card: rgba(15, 15, 25, 0.65);
+    --bg-card-hover: rgba(20, 20, 35, 0.8);
+    --bg-glass: rgba(255, 255, 255, 0.03);
+    --bg-glass-border: rgba(255, 215, 0, 0.08);
+
+    /* Text */
+    --text-primary: #f0ece4;
+    --text-secondary: #a8a2a2;
+    --text-muted: #6b6565;
+
+    /* Accents */
     --primary-color: #FFD700;
-    /* Gold */
-    --secondary-color: #1a1a1a;
-    /* Dark background */
-    --text-color: #ffffff;
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --accent-glow: rgba(255, 215, 0, 0.3);
+    --accent-glow: rgba(255, 215, 0, 0.25);
+    --accent-glow-strong: rgba(255, 215, 0, 0.5);
+    --discord-color: #5865F2;
+    --discord-glow: rgba(88, 101, 242, 0.35);
+    --danger: #ff453a;
+
+    /* Spacing */
+    --section-gap: 80px;
+    --card-radius: 20px;
+    --card-padding: 40px;
+
+    /* Animation */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --transition-smooth: 0.4s var(--ease-out-expo);
 }
 
-* {
+/* ─── Reset ─── */
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Lato', sans-serif;
-    background-color: var(--secondary-color);
-    color: var(--text-color);
-    overflow-x: hidden;
-    line-height: 1.6;
+html {
+    scroll-behavior: smooth;
 }
 
-/* Background Image Handling */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-deepest);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Background ─── */
 .background-overlay {
+    position: fixed;
+    top: -10%;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    background:
+        radial-gradient(ellipse at 20% 50%, rgba(255, 215, 0, 0.04) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(88, 101, 242, 0.03) 0%, transparent 50%),
+        linear-gradient(
+            to bottom,
+            rgba(10, 10, 15, 0.45),
+            rgba(10, 10, 15, 0.65) 40%,
+            rgba(10, 10, 15, 0.9)
+        ),
+        url('./assets/zenith_bg.png');
+    background-size: cover, cover, cover, cover;
+    background-position: center;
+    z-index: -1;
+}
+
+/* Floating ambient particles */
+.background-overlay::before {
+    content: '';
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.85)), url('./assets/IMG_5111.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    z-index: -1;
+    background:
+        radial-gradient(2px 2px at 10% 20%, rgba(255, 215, 0, 0.3), transparent),
+        radial-gradient(2px 2px at 30% 50%, rgba(255, 215, 0, 0.2), transparent),
+        radial-gradient(2px 2px at 60% 30%, rgba(255, 215, 0, 0.15), transparent),
+        radial-gradient(2px 2px at 80% 70%, rgba(255, 215, 0, 0.2), transparent),
+        radial-gradient(2px 2px at 50% 80%, rgba(255, 215, 0, 0.15), transparent),
+        radial-gradient(2px 2px at 90% 10%, rgba(255, 215, 0, 0.25), transparent),
+        radial-gradient(1.5px 1.5px at 15% 75%, rgba(255, 255, 255, 0.15), transparent),
+        radial-gradient(1.5px 1.5px at 70% 45%, rgba(255, 255, 255, 0.1), transparent);
+    animation: particleDrift 25s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0;
 }
 
-h1,
-h2,
-h3,
-.logo {
+@keyframes particleDrift {
+    0% { transform: translateY(0) translateX(0); opacity: 1; }
+    50% { transform: translateY(-20px) translateX(10px); opacity: 0.7; }
+    100% { transform: translateY(-40px) translateX(-10px); opacity: 1; }
+}
+
+/* ─── Typography ─── */
+h1, h2, h3, .logo {
     font-family: 'Cinzel', serif;
-    color: var(--primary-color);
+    color: var(--gold-500);
 }
 
 a {
     text-decoration: none;
     color: inherit;
-    transition: all 0.3s ease;
+    transition: all var(--transition-smooth);
 }
 
-/* Header & Nav */
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-deepest);
+}
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, var(--gold-700), var(--gold-800));
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gold-500);
+}
+
+/* ═══════════════════════════════════════════════
+   HEADER & NAV
+   ═══════════════════════════════════════════════ */
 header {
     height: 100vh;
     display: flex;
@@ -60,234 +158,379 @@ header {
     align-items: center;
     text-align: center;
     padding: 20px;
+    position: relative;
 }
 
 nav {
     position: absolute;
     top: 0;
     width: 100%;
-    padding: 20px 50px;
+    padding: 24px 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 10;
+    background: linear-gradient(to bottom, rgba(10, 10, 15, 0.6), transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 .logo-img {
-    height: 60px;
+    height: 55px;
     width: auto;
-    transition: transform 0.3s ease;
-    mix-blend-mode: screen;
-    /* Makes black background transparent */
+    transition: all 0.4s var(--ease-spring);
+    filter: brightness(1.1) drop-shadow(0 0 8px rgba(255, 215, 0, 0.3));
 }
 
 .logo-img:hover {
-    transform: scale(1.1) rotate(5deg);
+    transform: scale(1.12) rotate(3deg);
+    filter: brightness(1.3) drop-shadow(0 0 16px rgba(255, 215, 0, 0.6));
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    gap: 30px;
+    gap: 35px;
+    align-items: center;
+}
+
+nav a {
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    position: relative;
+    padding: 4px 0;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold-500), var(--gold-700));
+    transition: width 0.3s var(--ease-out-expo);
 }
 
 nav a:hover {
-    color: var(--primary-color);
-    text-shadow: 0 0 10px var(--accent-glow);
+    color: var(--gold-400);
+    text-shadow: 0 0 12px var(--accent-glow);
+}
+
+nav a:hover::after {
+    width: 100%;
 }
 
 .cta-button {
-    border: 1px solid var(--primary-color);
-    padding: 8px 20px;
-    border-radius: 5px;
+    border: 1px solid var(--gold-700);
+    padding: 8px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    color: var(--gold-500);
+    background: rgba(255, 215, 0, 0.05);
+    transition: all var(--transition-smooth);
 }
 
 .cta-button:hover {
-    background: var(--primary-color);
-    color: var(--secondary-color);
+    background: linear-gradient(135deg, var(--gold-500), var(--gold-700));
+    color: var(--bg-deepest);
+    border-color: var(--gold-500);
+    box-shadow: 0 4px 20px var(--accent-glow);
+    transform: translateY(-1px);
 }
 
-/* Hero Section */
+/* ═══════════════════════════════════════════════
+   HERO SECTION
+   ═══════════════════════════════════════════════ */
 .hero h1 {
-    font-size: 4rem;
+    font-size: clamp(2.5rem, 6vw, 5rem);
     margin-bottom: 20px;
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-    letter-spacing: 5px;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, var(--gold-200), var(--gold-500), var(--gold-700));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+}
+
+/* Glow layer behind the text */
+.hero h1::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: var(--gold-500);
+    filter: blur(30px);
+    opacity: 0.4;
+    animation: heroShimmer 4s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes heroShimmer {
+    0% { opacity: 0.3; }
+    100% { opacity: 0.6; }
 }
 
 .subtitle {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     margin-bottom: 30px;
     font-style: italic;
-    color: #ddd;
+    color: var(--text-secondary);
+    font-weight: 300;
+    letter-spacing: 1px;
 }
 
 .hero-stats {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     margin-bottom: 40px;
-    font-weight: bold;
-    color: var(--primary-color);
+    font-weight: 600;
+    color: var(--gold-400);
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 .discord-btn {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    background-color: #5865F2;
+    gap: 12px;
+    background: linear-gradient(135deg, #5865F2, #4752c4);
     color: white;
-    padding: 15px 40px;
-    border-radius: 30px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
+    padding: 16px 44px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    box-shadow: 0 6px 25px var(--discord-glow);
+    transition: all var(--transition-smooth);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .discord-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(88, 101, 242, 0.6);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 35px var(--discord-glow), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, #6b76f7, #5865F2);
 }
 
-/* Main Content - Glassmorphism */
+.discord-btn:active {
+    transform: translateY(-1px);
+}
+
+/* ═══════════════════════════════════════════════
+   MAIN CONTENT
+   ═══════════════════════════════════════════════ */
 main {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 50px 20px;
+    padding: 60px 20px;
+    position: relative;
+    z-index: 1;
 }
 
+/* ─── Glass Sections ─── */
 .glass-section {
-    background: rgba(20, 20, 20, 0.6);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 215, 0, 0.15);
-    border-radius: 20px;
-    padding: 60px 40px;
-    margin-bottom: 60px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    background: var(--bg-card);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid var(--bg-glass-border);
+    border-radius: var(--card-radius);
+    padding: 60px var(--card-padding);
+    margin-bottom: var(--section-gap);
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Top glow accent line */
+.glass-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-500), transparent);
+    opacity: 0.5;
 }
 
 h2 {
     text-align: center;
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
     margin-bottom: 50px;
     position: relative;
     display: block;
-    /* Ensure full width for centering */
+    letter-spacing: 3px;
+    text-transform: uppercase;
 }
 
 h2::after {
     content: '';
     display: block;
-    width: 60px;
-    height: 3px;
-    background: var(--primary-color);
-    margin: 10px auto 0;
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold-700), var(--gold-400), var(--gold-700));
+    margin: 14px auto 0;
+    border-radius: 2px;
 }
 
+/* ─── Grid Container ─── */
 .grid-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 40px;
+    gap: 30px;
 }
 
+/* ─── Cards ─── */
 .card {
-    background: rgba(30, 30, 30, 0.4);
-    padding: 35px;
-    border-radius: 20px;
+    background: var(--bg-glass);
+    padding: 35px 30px;
+    border-radius: var(--card-radius);
     text-align: center;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.5s var(--ease-spring);
+    border: 1px solid rgba(255, 255, 255, 0.04);
     position: relative;
     overflow: hidden;
-    flex: 1 1 300px;
-    max-width: 450px;
-    /* Prevents single items from getting too wide */
+    flex: 1 1 280px;
+    max-width: 420px;
 }
 
+/* Animated gradient border on hover */
 .card::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+    right: 0;
+    bottom: 0;
+    border-radius: var(--card-radius);
+    padding: 1px;
+    background: linear-gradient(135deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(255, 215, 0, 0.03) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
     pointer-events: none;
 }
 
 .card:hover {
-    transform: translateY(-10px) scale(1.02);
-    border-color: var(--primary-color);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 215, 0, 0.2);
+    transform: translateY(-8px) scale(1.01);
+    border-color: rgba(255, 215, 0, 0.15);
+    box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(255, 215, 0, 0.08);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card:hover::after {
+    opacity: 1;
 }
 
 .card i {
-    font-size: 3.5rem;
-    color: var(--primary-color);
-    margin-bottom: 25px;
-    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.4));
+    font-size: 3rem;
+    color: var(--gold-500);
+    margin-bottom: 22px;
+    display: block;
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.3));
+    transition: all 0.4s var(--ease-spring);
+}
+
+.card:hover i {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 16px rgba(255, 215, 0, 0.6));
 }
 
 .card h3 {
-    margin-bottom: 20px;
-    font-size: 1.5rem;
+    margin-bottom: 16px;
+    font-size: 1.25rem;
     color: #fff;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
+    font-weight: 600;
 }
 
-/* Alliance Cards */
+.card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════════════
+   ALLIANCE CARDS
+   ═══════════════════════════════════════════════ */
 .alliance-card {
     text-align: left;
     display: flex;
     flex-direction: column;
     height: 100%;
-    background: rgba(20, 20, 20, 0.7);
+    background: rgba(12, 12, 20, 0.7);
     justify-content: space-between;
-    /* Pushes content effectively */
 }
 
 .alliance-card h3 {
     text-align: center;
-    border-bottom: 2px solid var(--primary-color);
-    /* Thicker for visibility */
+    border-bottom: 1px solid rgba(255, 215, 0, 0.15);
     padding-bottom: 20px;
     margin-bottom: 20px;
     min-height: 80px;
-    /* Fixed height for title area to align lines */
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--primary-color);
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+    color: var(--gold-500);
+    text-shadow: 0 0 12px rgba(255, 215, 0, 0.15);
 }
 
 .leader-info,
 .plan-info {
     margin-bottom: 20px;
-    font-size: 1rem;
-    color: #e0e0e0;
-    line-height: 1.7;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
     flex-grow: 1;
-    /* Allows text areas to fill space evenly */
 }
 
 .leader-info h4,
 .plan-info h4 {
-    color: var(--primary-color);
+    color: var(--gold-400);
     margin-bottom: 8px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     display: flex;
     align-items: center;
     gap: 8px;
+    font-family: 'Cinzel', serif;
 }
 
 .leader-info h4::before,
 .plan-info h4::before {
-    content: '🔹';
-    font-size: 0.8rem;
+    content: '◆';
+    font-size: 0.6rem;
+    color: var(--gold-500);
 }
 
 .small-btn {
@@ -296,28 +539,31 @@ h2::after {
     display: block;
     width: 100%;
     align-self: center;
-    background: linear-gradient(45deg, transparent 50%, rgba(255, 215, 0, 0.1) 100%);
-    border: 1px solid var(--primary-color);
-    padding: 10px;
+    background: rgba(255, 215, 0, 0.04);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: 600;
+    color: var(--gold-500);
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    transition: all var(--transition-smooth);
 }
 
 .small-btn:hover {
-    background: var(--primary-color);
-    color: #000;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+    background: linear-gradient(135deg, var(--gold-500), var(--gold-700));
+    color: var(--bg-deepest);
+    box-shadow: 0 4px 20px var(--accent-glow);
 }
 
-
-.card h3 {
-    margin-bottom: 15px;
-    font-size: 1.3rem;
-}
-
-/* List Style Section */
+/* ═══════════════════════════════════════════════
+   LIST SECTION
+   ═══════════════════════════════════════════════ */
 .list-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    gap: 24px;
 }
 
 .list-item {
@@ -325,34 +571,54 @@ h2::after {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 20px;
-    background: rgba(0, 0, 0, 0.2);
-    padding: 30px;
-    border-radius: 20px;
-    transition: transform 0.3s ease;
+    gap: 16px;
+    background: var(--bg-glass);
+    padding: 35px 25px;
+    border-radius: var(--card-radius);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    transition: all 0.4s var(--ease-spring);
 }
 
 .list-item:hover {
     transform: translateY(-5px);
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px solid var(--primary-color);
+    background: rgba(255, 215, 0, 0.03);
+    border-color: rgba(255, 215, 0, 0.15);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
 
 .list-item i {
-    font-size: 3rem;
-    color: var(--primary-color);
-    margin-bottom: 10px;
-    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+    font-size: 2.8rem;
+    color: var(--gold-500);
+    margin-bottom: 8px;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.25));
+    transition: all 0.3s ease;
 }
 
-/* Contact Section */
+.list-item:hover i {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 14px rgba(255, 215, 0, 0.5));
+}
+
+.list-item h3 {
+    font-size: 1.15rem;
+    letter-spacing: 1px;
+}
+
+.list-item p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* ═══════════════════════════════════════════════
+   CONTACT SECTION
+   ═══════════════════════════════════════════════ */
 .contact-section {
     text-align: center;
 }
 
 .discord-link {
     font-size: 1.5rem;
-    color: #5865F2;
+    color: var(--discord-color);
     display: inline-block;
     margin-bottom: 30px;
 }
@@ -367,55 +633,78 @@ h2::after {
     font-size: 1.1rem;
 }
 
-/* Footer */
+.discord-link-btn {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Discord DM Buttons */
+.discord-dm-btn {
+    background: rgba(88, 101, 242, 0.08) !important;
+    border: 1px solid rgba(88, 101, 242, 0.3) !important;
+    color: #fff !important;
+    padding: 12px 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    transition: all var(--transition-smooth);
+    font-weight: 500;
+}
+
+.discord-dm-btn:hover {
+    background: rgba(88, 101, 242, 0.2) !important;
+    border-color: var(--discord-color) !important;
+    box-shadow: 0 4px 20px var(--discord-glow);
+    transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════ */
 footer {
     text-align: center;
-    padding: 40px;
-    background: rgba(0, 0, 0, 0.8);
+    padding: 50px 20px;
+    background: linear-gradient(to top, rgba(10, 10, 15, 0.95), rgba(10, 10, 15, 0.7));
     position: relative;
     z-index: 10;
+    border-top: 1px solid rgba(255, 215, 0, 0.06);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    letter-spacing: 1px;
 }
 
 .small-text {
-    font-size: 0.8rem;
-    opacity: 0.5;
+    font-size: 0.75rem;
+    opacity: 0.4;
     margin-top: 10px;
 }
 
-/* Animations */
+/* ═══════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════ */
 .fade-in {
     opacity: 0;
-    animation: fadeIn 1s forwards;
+    transform: translateY(30px);
+    animation: fadeIn 0.8s var(--ease-out-expo) forwards;
 }
 
-.delay-1 {
-    animation-delay: 0.5s;
-}
-
-.delay-2 {
-    animation-delay: 1s;
-}
-
-.delay-3 {
-    animation-delay: 1.5s;
-}
+.delay-1 { animation-delay: 0.3s; }
+.delay-2 { animation-delay: 0.6s; }
+.delay-3 { animation-delay: 0.9s; }
 
 @keyframes fadeIn {
     to {
         opacity: 1;
         transform: translateY(0);
     }
-
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
 }
 
 .scroll-reveal {
     opacity: 0;
-    transform: translateY(50px);
-    transition: all 0.8s ease-out;
+    transform: translateY(40px);
+    transition: all 0.7s var(--ease-out-expo);
 }
 
 .scroll-reveal.visible {
@@ -423,73 +712,48 @@ footer {
     transform: translateY(0);
 }
 
-/* Hero Buttons */
+/* ═══════════════════════════════════════════════
+   HERO BUTTONS
+   ═══════════════════════════════════════════════ */
 .cta-button.big {
     display: inline-block;
-    padding: 15px 40px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: var(--primary-color);
-    background: transparent;
-    border: 2px solid var(--primary-color);
-    border-radius: 30px;
+    padding: 16px 44px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--gold-500);
+    background: rgba(255, 215, 0, 0.04);
+    border: 1.5px solid var(--gold-700);
+    border-radius: 50px;
     margin-right: 20px;
-    transition: all 0.3s ease;
+    transition: all var(--transition-smooth);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 0.95rem;
 }
 
 .cta-button.big:hover {
-    background: var(--primary-color);
-    color: var(--secondary-color);
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+    background: linear-gradient(135deg, var(--gold-500), var(--gold-700));
+    color: var(--bg-deepest);
+    box-shadow: 0 6px 30px var(--accent-glow);
+    transform: translateY(-2px);
+    border-color: var(--gold-500);
 }
 
-@media (max-width: 768px) {
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-
-    nav ul {
-        display: none;
-    }
-
-    /* Simplified for MVP */
-    .grid-container {
-        grid-template-columns: 1fr;
-    }
-
-    .list-item {
-        flex-direction: column;
-        text-align: center;
-    }
-}
-
-/* Discord DM Buttons */
-.discord-dm-btn {
-    background: rgba(88, 101, 242, 0.1);
-    border: 1px solid #5865F2;
-    color: #fff;
-    padding: 10px 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: all 0.3s ease;
-}
-
-/* Kingdom Leadership Specifics */
+/* ═══════════════════════════════════════════════
+   KINGDOM LEADERSHIP
+   ═══════════════════════════════════════════════ */
 .kingdom-card {
-    background: rgba(10, 10, 10, 0.85);
-    /* Darker, more solid background */
-    border: 1px solid rgba(255, 215, 0, 0.3);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    background: rgba(10, 10, 18, 0.85);
+    border: 1px solid rgba(255, 215, 0, 0.15);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
     align-items: flex-start;
-    /* Align contents to top-left generally, but text-center overrides */
 }
 
 .kingdom-card h3 {
     width: 100%;
     margin-bottom: 30px;
-    font-size: 2rem;
-    text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+    font-size: 1.8rem;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -497,56 +761,91 @@ footer {
 }
 
 .kingdom-card h3 i {
-    font-size: 2rem;
-    color: var(--primary-color);
+    font-size: 1.8rem;
+    color: var(--gold-500);
     margin-bottom: 0;
-    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.8));
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
 }
 
 .leadership-list-item {
-    background: linear-gradient(90deg, rgba(255, 215, 0, 0.05) 0%, transparent 100%);
-    border-left: 4px solid var(--primary-color);
+    background: linear-gradient(90deg, rgba(255, 215, 0, 0.04) 0%, transparent 100%);
+    border-left: 3px solid var(--gold-700);
     padding: 20px;
-    margin-bottom: 15px;
-    border-radius: 0 10px 10px 0;
-    transition: transform 0.3s ease, background 0.3s ease;
+    margin-bottom: 12px;
+    border-radius: 0 12px 12px 0;
+    transition: all 0.3s ease;
 }
 
 .leadership-list-item:hover {
-    transform: translateX(10px);
-    background: linear-gradient(90deg, rgba(255, 215, 0, 0.15) 0%, transparent 100%);
+    transform: translateX(8px);
+    background: linear-gradient(90deg, rgba(255, 215, 0, 0.1) 0%, transparent 100%);
+    border-left-color: var(--gold-500);
 }
 
 .leadership-role {
-    color: var(--primary-color);
-    font-weight: bold;
-    font-size: 1.1rem;
+    color: var(--gold-400);
+    font-weight: 700;
+    font-size: 1rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
+    font-family: 'Cinzel', serif;
 }
 
 .leadership-names {
-    color: #fff;
-    font-size: 1.1rem;
+    color: var(--text-primary);
+    font-size: 1.05rem;
 }
 
 .kings-special {
     text-align: center;
     padding: 40px;
-    background: radial-gradient(circle at center, rgba(255, 215, 0, 0.15) 0%, transparent 70%);
-    border: 2px solid var(--primary-color);
-    border-radius: 20px;
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+    background: radial-gradient(circle at center, rgba(255, 215, 0, 0.08) 0%, transparent 70%);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: var(--card-radius);
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.08);
 }
 
 .kings-names {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-family: 'Cinzel', serif;
-    color: var(--primary-color);
+    color: var(--gold-400);
     margin-bottom: 15px;
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    text-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
 }
 
+/* ═══════════════════════════════════════════════
+   RESPONSIVE — DESKTOP OVERRIDE
+   ═══════════════════════════════════════════════ */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+        letter-spacing: 4px;
+    }
+
+    nav ul {
+        display: none;
+    }
+
+    .grid-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        max-width: 100%;
+    }
+
+    .list-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .glass-section {
+        padding: 40px 20px;
+    }
+}
+
+/* Import mobile overrides */
 @import url('mobile.css');

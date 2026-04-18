@@ -149,4 +149,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, 80);
     }
+    // ─── Custom Discord Widget Fetch ───
+    const discordCountEl = document.getElementById('discord-online-count');
+    if (discordCountEl) {
+        // Fetch from Discord's widget API
+        fetch('https://discord.com/api/guilds/1431859727285092403/widget.json')
+            .then(res => res.json())
+            .then(data => {
+                if (data && data.presence_count) {
+                    discordCountEl.textContent = data.presence_count;
+                } else {
+                    discordCountEl.textContent = '0';
+                }
+            })
+            .catch(err => {
+                console.error('Error fetching Discord data', err);
+                discordCountEl.textContent = 'Offline';
+            });
+    }
+
 });

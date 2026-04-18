@@ -816,6 +816,73 @@ footer {
 }
 
 /* ═══════════════════════════════════════════════
+   CUSTOM DISCORD WIDGET
+   ═══════════════════════════════════════════════ */
+.custom-discord-widget {
+    background: linear-gradient(145deg, rgba(15, 15, 25, 0.9), rgba(10, 10, 18, 0.95));
+    border: 1px solid rgba(88, 101, 242, 0.3);
+    padding: 0;
+    max-width: 350px;
+    margin: 30px auto;
+    border-radius: var(--card-radius);
+    text-align: center;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.custom-discord-widget:hover {
+    border-color: rgba(88, 101, 242, 0.6);
+    box-shadow: 0 15px 50px rgba(88, 101, 242, 0.15);
+}
+
+.cdw-header {
+    background: #5865F2;
+    color: #fff;
+    padding: 15px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.cdw-logo {
+    height: 32px;
+    width: auto;
+    filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.4));
+}
+
+.cdw-content {
+    padding: 25px 20px;
+}
+
+.cdw-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    background-color: #23a559;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 8px #23a559;
+    animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(35, 165, 89, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(35, 165, 89, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(35, 165, 89, 0); }
+}
+/* ═══════════════════════════════════════════════
    RESPONSIVE — MOBILE OVERRIDE
    ═══════════════════════════════════════════════ */
 

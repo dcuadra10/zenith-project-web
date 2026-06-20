@@ -1,0 +1,3696 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Tools | Zenith Community</title>
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+    <link rel="stylesheet" href="../style.css?v=16">
+    <link rel="stylesheet" href="../info_nav.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: transparent;
+            color: #f5f2eb;
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        main {
+            max-width: 1100px !important;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .tools-section {
+            max-width: 1100px;
+            margin: 40px auto 60px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tools-header-block {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .tools-header-block h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            color: #fff;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 30%, #ebd5b3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 35px rgba(230, 183, 65, 0.4);
+        }
+
+        .tools-header-block p {
+            color: #a39e93;
+            line-height: 1.6;
+            margin-bottom: 0;
+            font-size: 0.95rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tool-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 4px 20px 10px 20px;
+        }
+
+        @media (max-width: 600px) {
+            .tool-tabs {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                justify-content: flex-start;
+                scrollbar-width: none;
+            }
+            .tool-tabs::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        .tool-tab-btn {
+            background: rgba(14, 11, 8, 0.82);
+            border: 1px solid rgba(230, 183, 65, 0.28);
+            color: #ebd5b3;
+            padding: 8px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            white-space: nowrap;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .tool-tab-btn:hover {
+            background: rgba(230, 183, 65, 0.16);
+            border-color: rgba(230, 183, 65, 0.55);
+            color: #fff;
+            box-shadow: 0 8px 20px rgba(230, 183, 65, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .tool-tab-btn.active {
+            background: linear-gradient(135deg, #e6b741 0%, #c59827 100%);
+            border-color: #ffd60a;
+            color: #0d0a07;
+            box-shadow: 0 10px 25px rgba(230, 183, 65, 0.35);
+            font-weight: 800;
+            transform: translateY(-2px);
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+
+
+        /* Tool Containers */
+        .tool-content-card {
+            background: rgba(18, 14, 10, 0.65);
+            border: 1px solid rgba(230, 183, 65, 0.25);
+            border-radius: 20px;
+            padding: 25px 28px;
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.8),
+                0 0 30px rgba(230, 183, 65, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            display: none;
+            animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .tool-content-card.active {
+            display: block;
+        }
+
+        #tool-crystal.active {
+            display: block;
+            width: 95vw;
+            max-width: 1100px;
+            position: relative;
+            left: 50%;
+            transform: translate(-50%, 0);
+            animation: fadeInCrystal 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Calculator Sub-Tabs styling */
+        .calculator-sub-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .sub-tab-btn {
+            background: rgba(230, 183, 65, 0.03);
+            border: 1px solid rgba(230, 183, 65, 0.15);
+            color: #a39480;
+            padding: 8px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            font-size: 0.78rem;
+            letter-spacing: 0.5px;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+        }
+
+        .sub-tab-btn:hover {
+            background: rgba(230, 183, 65, 0.08);
+            border-color: rgba(230, 183, 65, 0.4);
+            color: #ebd5b3;
+        }
+
+        .sub-tab-btn.active {
+            background: rgba(230, 183, 65, 0.15);
+            border-color: var(--primary-color);
+            color: #fff;
+            box-shadow: 0 0 10px rgba(230, 183, 65, 0.2);
+        }
+
+        /* Calculators Slider Styling */
+        .calculators-slider-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .slider-arrow {
+            position: absolute;
+            top: 280px;
+            transform: translateY(-50%);
+            background: rgba(18, 14, 10, 0.5);
+            border: 1.5px solid rgba(230, 183, 65, 0.35);
+            color: #ebd5b3;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            display: none; /* Controlled by JS */
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .slider-arrow:hover {
+            background: rgba(230, 183, 65, 0.2);
+            border-color: rgba(230, 183, 65, 0.85);
+            color: #fff;
+            box-shadow: 0 0 20px rgba(230, 183, 65, 0.5), 0 10px 30px rgba(0,0,0,0.6);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-arrow:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .slider-arrow i {
+            font-size: 1.3rem;
+        }
+
+        .slider-arrow.prev {
+            left: -85px;
+        }
+
+        .slider-arrow.next {
+            right: -85px;
+        }
+
+        @media (max-width: 1400px) {
+            .slider-arrow.prev {
+                left: -25px;
+            }
+            .slider-arrow.next {
+                right: -25px;
+            }
+        }
+        @media (max-width: 992px) {
+            .slider-arrow {
+                width: 48px;
+                height: 48px;
+            }
+            .slider-arrow.prev {
+                left: -15px;
+            }
+            .slider-arrow.next {
+                right: -15px;
+            }
+        }
+
+        @keyframes fadeInCrystal {
+            from { opacity: 0; transform: translate(-50%, 20px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+
+        .tool-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(230, 183, 65, 0.2);
+            padding-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 1px;
+        }
+
+        .tool-title i {
+            color: var(--primary-color);
+            filter: drop-shadow(0 0 10px rgba(230,183,65,0.5));
+        }
+
+        /* Form Controls */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            text-align: left;
+        }
+
+        .form-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: #e6b741;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Premium Dropdowns and Inputs styling */
+        .form-input, .form-select, .form-textarea {
+            background: rgba(14, 11, 8, 0.8);
+            border: 1px solid rgba(230, 183, 65, 0.3);
+            border-radius: 10px;
+            padding: 10px 14px;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+        }
+
+        /* Custom dropdown arrow representation */
+        select.form-select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e6b741' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 18px center;
+            background-size: 14px;
+            padding-right: 45px;
+        }
+
+        select.form-select option {
+            background-color: #1a1510;
+            color: #fff;
+            padding: 12px;
+        }
+
+        select.form-select optgroup {
+            background-color: #120e0a;
+            color: #e6b741;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            padding: 8px;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            border-color: #ffd60a;
+            box-shadow: 0 0 20px rgba(255, 214, 10, 0.25), inset 0 1px 2px rgba(0,0,0,0.8);
+            background: rgba(22, 18, 14, 0.95);
+            transform: translateY(-1px);
+        }
+
+        /* Input Grid lists */
+        .speedup-input-grid, .ap-input-grid, .material-input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .speedup-input-box, .ap-input-box, .material-input-box {
+            background: rgba(20, 16, 12, 0.7);
+            border: 1px solid rgba(230, 183, 65, 0.18);
+            border-radius: 16px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+
+        .speedup-input-box:hover, .ap-input-box:hover, .material-input-box:hover {
+            border-color: rgba(230, 183, 65, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.4), 0 0 15px rgba(230,183,65,0.05);
+        }
+
+        .speedup-input-box span, .ap-input-box span, .material-input-box span {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #ebd5b3;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        .speedup-input-box input, .ap-input-box input, .material-input-box input {
+            width: 90%;
+            text-align: center;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(230, 183, 65, 0.25);
+            border-radius: 10px;
+            padding: 8px 10px;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .speedup-input-box input:focus, .ap-input-box input:focus, .material-input-box input:focus {
+            border-color: #ffd60a;
+            box-shadow: 0 0 10px rgba(255, 214, 10, 0.2);
+            background: rgba(0,0,0,0.7);
+        }
+
+        /* Result Panel */
+        .result-panel {
+            background: rgba(10, 8, 6, 0.7);
+            border: 1px solid rgba(230, 183, 65, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+            text-align: center;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.6), 0 15px 30px rgba(0,0,0,0.4);
+        }
+
+        .result-panel h4 {
+            font-family: 'Cinzel', serif;
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 1.15rem;
+            letter-spacing: 1.5px;
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #ffd60a;
+            text-shadow: 0 0 20px rgba(255, 214, 10, 0.4);
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+        }
+
+        .result-subtext {
+            color: #a39e93;
+            font-size: 0.95rem;
+            margin-top: 10px;
+            line-height: 1.7;
+        }
+
+        /* Custom buttons */
+        .tool-btn {
+            background: linear-gradient(135deg, #e6b741 0%, #c59827 100%);
+            border: 1px solid #ffd60a;
+            color: #0d0a07;
+            padding: 14px 32px;
+            border-radius: 14px;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-weight: 800;
+            font-size: 0.98rem;
+            letter-spacing: 1px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 8px 20px rgba(230, 183, 65, 0.25);
+        }
+
+        .tool-btn:hover {
+            background: linear-gradient(135deg, #ffd60a 0%, #e6b741 100%);
+            box-shadow: 0 12px 25px rgba(230, 183, 65, 0.45), 0 0 15px rgba(255, 214, 10, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .tool-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 4px 10px rgba(230, 183, 65, 0.2);
+        }
+
+        .tool-btn-secondary {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(230, 183, 65, 0.25);
+            color: #ebd5b3;
+            box-shadow: none;
+        }
+
+        .tool-btn-secondary:hover {
+            background: rgba(230, 183, 65, 0.12);
+            color: #fff;
+            border-color: rgba(230, 183, 65, 0.5);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .tools-container {
+                padding: 25px 15px;
+            }
+            .tools-header-block h1 {
+                font-size: 2.2rem;
+            }
+            .tool-content-card {
+                padding: 25px 15px;
+            }
+            .result-value {
+                font-size: 1.9rem;
+            }
+            .crafting-grid-container {
+                grid-template-columns: 1fr !important;
+                gap: 24px !important;
+            }
+        }
+
+        /* Premium Spending Tracker Styles */
+        .bundle-chips-container {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .bundle-chip {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(230, 183, 65, 0.15);
+            color: #ebd5b3;
+            padding: 10px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bundle-chip:hover {
+            background: rgba(230, 183, 65, 0.08);
+            border-color: rgba(230, 183, 65, 0.4);
+            color: #fff;
+        }
+
+        .bundle-chip.active {
+            background: rgba(230, 183, 65, 0.15);
+            border-color: var(--primary-color);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(230, 183, 65, 0.25);
+        }
+
+        .tier-list-container {
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(230, 183, 65, 0.15);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .tier-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background 0.3s ease;
+        }
+
+        .tier-row:last-child {
+            border-bottom: none;
+        }
+
+        .tier-row:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .tier-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #ebd5b3;
+            font-size: 0.9rem;
+        }
+
+        .tier-info i {
+            color: var(--primary-color);
+        }
+
+        .tier-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .qty-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid rgba(230, 183, 65, 0.3);
+            background: rgba(0, 0, 0, 0.4);
+            color: #ebd5b3;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+        }
+
+        .qty-btn:hover {
+            background: rgba(230, 183, 65, 0.15);
+            border-color: var(--primary-color);
+            color: #fff;
+        }
+
+        .qty-display {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            width: 25px;
+            text-align: center;
+        }
+
+        .tier-price {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            min-width: 60px;
+            text-align: right;
+        }
+    </style>
+    </style>
+</head>
+
+<body>
+    <div class="background-overlay"></div>
+    
+    <header style="height: auto; min-height: 120px; position: relative; z-index: 10;">
+        <nav>
+            <a href="../">
+                <img src="../assets/logo.png" alt="Zenith Logo" class="logo-img">
+            </a>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul>
+                <li><a href="../guides/">Community Guides</a></li>
+                <li><a href="../calendar/">Event Calendar</a></li>
+                <li><a href="../tools/" class="active">Community Tools</a></li>
+                <li><a href="https://discord.gg/projectzenith" target="_blank" class="cta-button">Join Discord</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="tools-section fade-in">
+            <div class="tools-header-block">
+                <h1>
+                    <i class="fas fa-tools" style="color: var(--primary-color); margin-right: 15px; filter: drop-shadow(0 0 8px rgba(230,183,65,0.4));"></i>Kingdom Optimization Tools
+                </h1>
+                <p>
+                    Plan your immigration and calculate your speedup resources with our custom interactive calculator tools designed for Zenith governors.
+                </p>
+            </div>
+
+            <!-- Tab Switchers -->
+            <div class="tool-tabs">
+                <button class="tool-tab-btn active" data-tool="calculators"><i class="fas fa-calculator"></i> Calculators</button>
+                <button class="tool-tab-btn" data-tool="crystal"><i class="fas fa-gem"></i> Crystal Tech</button>
+                <button class="tool-tab-btn" data-tool="crafting"><i class="fas fa-hammer"></i> Crafting Planner</button>
+                <button class="tool-tab-btn" data-tool="training"><i class="fas fa-running"></i> Troop Training</button>
+                <button class="tool-tab-btn" data-tool="healing"><i class="fas fa-heartbeat"></i> KvK Healing</button>
+                <button class="tool-tab-btn" data-tool="flags"><i class="fas fa-flag"></i> Flag Cost</button>
+                <button class="tool-tab-btn" data-tool="spending"><i class="fas fa-wallet"></i> Spending Tracker</button>
+            </div>
+
+            <!-- Calculator Sub-Tabs (Sub-navigation) -->
+            <div class="calculator-sub-tabs" id="calc-sub-tabs">
+                <button class="sub-tab-btn active" data-calc="passports"><i class="fas fa-passport"></i> Passport</button>
+                <button class="sub-tab-btn" data-calc="speedups"><i class="fas fa-hourglass-half"></i> Speedups</button>
+                <button class="sub-tab-btn" data-calc="vip"><i class="fas fa-crown"></i> VIP</button>
+                <button class="sub-tab-btn" data-calc="ap"><i class="fas fa-bolt"></i> Action Points</button>
+                <button class="sub-tab-btn" data-calc="exp"><i class="fas fa-book-open"></i> EXP & Stars</button>
+            </div>
+
+            <div class="calculators-slider-container">
+                <button class="slider-arrow prev" id="slider-prev-btn" aria-label="Previous Calculator">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
+            <!-- 1. PASSPORT CALCULATOR -->
+            <div id="tool-passports" class="tool-content-card active">
+                <h2 class="tool-title"><i class="fas fa-passport"></i> Passport Page Calculator</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="passport-power">Current Power (Millions)</label>
+                        <input type="number" id="passport-power" class="form-input" placeholder="e.g. 45" value="45" min="1" max="500">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="kingdom-rank">Migration Type</label>
+                        <select id="kingdom-rank" class="form-select">
+                            <option value="normal">Normal Migration</option>
+                            <option value="same_kvk">Same KvK / Vacation Mode</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="result-panel">
+                    <h4>Required Passport Pages</h4>
+                    <div id="passport-result" class="result-value">20 Pages</div>
+                    <p id="passport-details" class="result-subtext">
+                        For a governor with 45,000,000 power, you will need 20 Passport Pages to complete immigration.
+                    </p>
+                </div>
+
+                <!-- Days to Acquire by Purchasing -->
+                <div id="passport-days-panel" style="margin-top: 20px; background: rgba(0,0,0,0.3); border: 1px solid rgba(230, 183, 65, 0.15); border-radius: 16px; padding: 20px;">
+                    <h4 class="form-label" style="font-size: 0.8rem; margin-bottom: 15px; color: #ebd5b3; letter-spacing: 1px; display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-shopping-cart" style="color: var(--primary-color);"></i> Days to Acquire by Purchasing
+                    </h4>
+                    <div id="passport-purchase-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px;">
+                        <!-- JS populated -->
+                    </div>
+                    <p style="color: #a39e93; font-size: 0.72rem; margin-top: 12px; font-style: italic;">
+                        <i class="fas fa-info-circle"></i> Based on buying one New World Chest per day. Each chest gives 1 Passport Page per key.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 2. SPEEDUP CALCULATOR -->
+            <div id="tool-speedups" class="tool-content-card">
+                <h2 class="tool-title"><i class="fas fa-hourglass-half"></i> Speedup Counter</h2>
+                
+                <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                    <div class="form-group">
+                        <label class="form-label" for="speedup-type">Speedup Category</label>
+                        <select id="speedup-type" class="form-select">
+                            <option value="universal">Universal / General Speedup</option>
+                            <option value="training">Training Speedup</option>
+                            <option value="research">Research Speedup</option>
+                            <option value="building">Building Speedup</option>
+                            <option value="healing">Healing Speedup</option>
+                        </select>
+                    </div>
+                </div>
+
+                <label class="form-label" style="display: block; margin-bottom: 10px; text-align: left;">Enter Amount of Speedups:</label>
+                
+                <div class="speedup-input-grid">
+                    <div class="speedup-input-box"><span>1m</span><input type="number" class="sp-in" data-min="1" value="0" min="0"></div>
+                    <div class="speedup-input-box"><span>5m</span><input type="number" class="sp-in" data-min="5" value="0" min="0"></div>
+                    <div class="speedup-input-box"><span>10m</span><input type="number" class="sp-in" data-min="10" value="0" min="0"></div>
+                    <div class="speedup-input-box"><span>15m</span><input type="number" class="sp-in" data-min="15" value="0" min="0"></div>
+                    <div class="speedup-input-box"><span>30m</span><input type="number" class="sp-in" data-min="30" value="0" min="0"></div>
+                    <div class="speedup-input-box"><span>1h</span><input type="number" class="sp-in" data-min="60" value="0" min="0"></div>
+                    <div class="speedup-input-box"><span>3h</span><input type="number" class="sp-in" data-min="180" value="0" min="0"></div>
+                    <div class="speedup-input-box"><span>8h</span><input type="number" class="sp-in" data-min="480" value="0" min="0"></div>
+                    <div class="speedup-input-box"><span>15h</span><input type="number" class="sp-in" data-min="900" value="0" min="0"></div>
+                    <div class="speedup-input-box"><span>24h</span><input type="number" class="sp-in" data-min="1440" value="0" min="0"></div>
+                    <div class="speedup-input-box"><span>3d</span><input type="number" class="sp-in" data-min="4320" value="0" min="0"></div>
+                    <div class="speedup-input-box"><span>7d</span><input type="number" class="sp-in" data-min="10080" value="0" min="0"></div>
+                    <div class="speedup-input-box"><span>30d</span><input type="number" class="sp-in" data-min="43200" value="0" min="0"></div>
+                </div>
+
+                <div class="result-panel">
+                    <h4>Total Speedup Value</h4>
+                    <div id="speedup-result" class="result-value">0d 0h 0m</div>
+                    <p id="speedup-minutes" class="result-subtext">Total time: 0 minutes.</p>
+                    <button id="clear-speedups" class="tool-btn tool-btn-secondary" style="margin-top: 15px;"><i class="fas fa-trash-alt"></i> Clear All</button>
+                </div>
+            </div>
+
+            <!-- 3. VIP CALCULATOR -->
+            <div id="tool-vip" class="tool-content-card">
+                <h2 class="tool-title"><i class="fas fa-crown"></i> VIP Level Progression Calculator</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="vip-current-lvl">Current VIP Level</label>
+                        <select id="vip-current-lvl" class="form-select">
+                            <!-- JS Filled -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="vip-current-pts">Current VIP Points</label>
+                        <input type="number" id="vip-current-pts" class="form-input" value="0" min="0" placeholder="e.g. 15000">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="vip-target-lvl">Target VIP Level</label>
+                        <select id="vip-target-lvl" class="form-select">
+                            <!-- JS Filled -->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="result-panel">
+                    <h4>Required VIP Points & Gems</h4>
+                    <div id="vip-result" class="result-value">0 Points</div>
+                    <p id="vip-details" class="result-subtext">
+                        Calculate the gap between your current progress and target VIP level.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 4. AP CALCULATOR -->
+            <div id="tool-ap" class="tool-content-card">
+                <h2 class="tool-title"><i class="fas fa-bolt"></i> Action Points (AP) Calculator</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="ap-current">Current AP</label>
+                        <input type="number" id="ap-current" class="form-input" value="100" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="ap-max">Max AP Capacity</label>
+                        <input type="number" id="ap-max" class="form-input" value="1500" min="100">
+                    </div>
+                </div>
+
+                <label class="form-label" style="display: block; margin-bottom: 10px; text-align: left;">AP Potions Inventory:</label>
+                <div class="ap-input-grid">
+                    <div class="ap-input-box"><span>50 AP Potion</span><input type="number" class="ap-in" data-val="50" value="0" min="0"></div>
+                    <div class="ap-input-box"><span>100 AP Potion</span><input type="number" class="ap-in" data-val="100" value="0" min="0"></div>
+                    <div class="ap-input-box"><span>500 AP Potion</span><input type="number" class="ap-in" data-val="500" value="0" min="0"></div>
+                    <div class="ap-input-box"><span>1000 AP Potion</span><input type="number" class="ap-in" data-val="1000" value="0" min="0"></div>
+                </div>
+
+                <div class="result-panel">
+                    <h4>AP Regeneration & Inventory Summary</h4>
+                    <div id="ap-result" class="result-value">0 AP Total</div>
+                    <p id="ap-details" class="result-subtext">
+                        Time to fully regenerate: --<br>Total AP stored in potions: 0 AP
+                    </p>
+                </div>
+            </div>
+
+            <!-- 5. COMMANDER EXP & STARS -->
+            <div id="tool-exp" class="tool-content-card">
+                <h2 class="tool-title"><i class="fas fa-book-open"></i> Commander EXP & Star Calculator</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="exp-current-lvl">Current Level</label>
+                        <input type="number" id="exp-current-lvl" class="form-input" value="1" min="1" max="60">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="exp-target-lvl">Target Level</label>
+                        <input type="number" id="exp-target-lvl" class="form-input" value="60" min="1" max="60">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="star-current">Current Star Tier</label>
+                        <select id="star-current" class="form-select">
+                            <option value="1">1 Star</option>
+                            <option value="2">2 Stars</option>
+                            <option value="3">3 Stars</option>
+                            <option value="4">4 Stars</option>
+                            <option value="5">5 Stars</option>
+                            <option value="6">6 Stars</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="star-target">Target Star Tier</label>
+                        <select id="star-target" class="form-select">
+                            <option value="1">1 Star</option>
+                            <option value="2">2 Stars</option>
+                            <option value="3">3 Stars</option>
+                            <option value="4">4 Stars</option>
+                            <option value="5">5 Stars</option>
+                            <option value="6" selected>6 Stars</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="result-panel">
+                    <h4>Required Resources</h4>
+                    <div id="exp-result" class="result-value">0 EXP</div>
+                    <p id="exp-details" class="result-subtext">
+                        Calculates tomes of knowledge and star sculptures required for leveling legendary commanders.
+                    </p>
+                </div>
+            </div>
+
+            <button class="slider-arrow next" id="slider-next-btn" aria-label="Next Calculator">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+            <!-- 6. CRYSTAL TECH KVK CALCULATOR -->
+            <div id="tool-crystal" class="tool-content-card" style="padding: 25px 15px;">
+                <h2 class="tool-title" style="margin-left: 15px;"><i class="fas fa-gem"></i> Interactive Crystal Tech Simulator</h2>
+                <div style="width: 100%; border-radius: 18px; overflow: hidden; border: 1px solid rgba(230, 183, 65, 0.25); background: rgba(0,0,0,0.6); box-shadow: 0 15px 40px rgba(0,0,0,0.7); position: relative;">
+                    <iframe src="../game-simulator-of-technology-upgrade-main/index.html" style="width: 100%; height: 860px; border: none; display: block;" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- 7. CRAFTING PLANNER -->
+            <div id="tool-crafting" class="tool-content-card">
+                <h2 class="tool-title"><i class="fas fa-hammer"></i> Equipment Crafting Calculator</h2>
+
+
+                <div class="crafting-grid-container" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 30px; align-items: start;">
+                    <!-- Left Column: inputs and calculations -->
+                    <div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label" for="craft-item">Select Target Equipment</label>
+                                <select id="craft-item" class="form-select">
+                                    <optgroup label="Legendary Weapons">
+                                        <option value="sacred-dominion">Sacred Dominion (70 Leather, 10 Iron, 10 Ebony)</option>
+                                        <option value="hammer-sun-moon">Hammer of the Sun and Moon (10 Leather, 70 Iron, 10 Ebony)</option>
+                                        <option value="dragons-breath-bow">Dragon's Breath Bow (15 Leather, 15 Iron, 60 Ebony)</option>
+                                        <option value="sacred-shield" selected>Shield of the Eternal Empire (15 Leather, 60 Iron, 15 Ebony)</option>
+                                    </optgroup>
+                                    <optgroup label="Legendary Helmets">
+                                        <option value="pride-of-khan">Pride of the Khan (50 Leather, 10 Ebony)</option>
+                                        <option value="helm-of-conqueror">Helm of the Conqueror (10 Leather, 50 Iron)</option>
+                                        <option value="eternal-empire-helm">Gold Helm of the Eternal Empire (10 Leather, 40 Iron, 10 Ebony)</option>
+                                        <option value="dragons-breath-helm">Dragon's Breath Helm (10 Leather, 10 Iron, 40 Ebony)</option>
+                                    </optgroup>
+                                    <optgroup label="Legendary Chestplates">
+                                        <option value="hope-cloak">Hope Cloak (10 Leather, 40 Iron, 10 Ebony)</option>
+                                        <option value="dragons-breath-plate">Dragon's Breath Plate (10 Leather, 10 Iron, 40 Ebony)</option>
+                                    </optgroup>
+                                    <optgroup label="Legendary Gloves">
+                                        <option value="navars-control">Navar's Control (30 Leather, 10 Iron)</option>
+                                        <option value="sacred-grips">Sacred Grips (30 Iron, 10 Ebony)</option>
+                                        <option value="dragons-breath-bracers">Dragon's Breath Vambraces (10 Iron, 30 Ebony)</option>
+                                    </optgroup>
+                                    <optgroup label="Legendary Pants">
+                                        <option value="tassets-war-god">Tassets of the War God (10 Leather, 10 Iron, 40 Ebony)</option>
+                                        <option value="eternal-night">Eternal Night (10 Leather, 40 Iron, 10 Ebony)</option>
+                                        <option value="dragons-breath-trousers">Dragon's Breath Tassets (10 Leather, 10 Iron, 40 Ebony)</option>
+                                    </optgroup>
+                                    <optgroup label="Legendary Boots">
+                                        <option value="ash-of-dawn">Ash of the Dawn (40 Leather, 10 Iron, 10 Ebony)</option>
+                                        <option value="shios-return">Shio's Return (30 Iron, 10 Ebony)</option>
+                                        <option value="dragons-breath-boots">Dragon's Breath Boots (10 Iron, 30 Ebony)</option>
+                                    </optgroup>
+                                    <optgroup label="Legendary Accessories">
+                                        <option value="horn-of-fury">Horn of Fury (40 Leather, 40 Iron, 40 Ebony)</option>
+                                        <option value="ring-of-doom">Ring of Doom (40 Leather, 40 Iron, 40 Ebony)</option>
+                                        <option value="lucky-coin">Scola's Lucky Coin (40 Leather, 40 Iron, 40 Ebony)</option>
+                                        <option value="vengeance">Vengeance (40 Leather, 40 Iron, 40 Ebony)</option>
+                                    </optgroup>
+                                    <optgroup label="Epic/Special Equipment">
+                                        <option value="sakura-fubuki">Sakura Fubuki (Weapon — 15 Leather, 70 Iron, 15 Ebony)</option>
+                                        <option value="heart-of-saint">Heart of the Saint (Chest — 70 Leather, 15 Iron, 15 Ebony)</option>
+                                        <option value="heart-of-forest">Scepter of the Forest Guardian (Weapon — 35 Bone)</option>
+                                        <option value="gatekeeper-shield">Gatekeeper's Shield (Weapon — 20 Leather, 50 Iron, 20 Ebony)</option>
+                                        <option value="witchs-gaze">Witch's Deadwood Crown (Helmet — 25 Bone)</option>
+                                        <option value="sacred-fire-quis">Witch's Hexed Cloak (Chest — 25 Bone)</option>
+                                        <option value="revival-gloves">Revival Gauntlets (Gloves — 10 Iron, 30 Ebony)</option>
+                                        <option value="karuak-humility">Karuak's Humility (Pants — 20 Leather, 40 Iron)</option>
+                                        <option value="windswept-boots">Windswept Boots (Boots — 20 Leather, 20 Iron)</option>
+                                        <option value="revival-boots">Revival Greaves (Legs — 20 Leather, 40 Ebony)</option>
+                                        <option value="silent-trial">Silent Trial (Accessory — 20 Leather, 20 Iron, 30 Ebony)</option>
+                                        <option value="delane-amulet">Delane's Amulet (Accessory — 30 Leather, 20 Iron, 20 Ebony)</option>
+                                    </optgroup>
+                                 </select>
+                            </div>
+                        </div>
+
+                        <!-- Recipe Details (Dynamic Display) -->
+                        <div style="background: rgba(0,0,0,0.25); border: 1px dashed rgba(230,183,65,0.2); border-radius: 16px; padding: 20px; margin-bottom: 25px;">
+                            <h4 class="form-label" style="margin-bottom: 12px; font-size: 0.85rem;"><i class="fas fa-scroll"></i> Required Materials for Crafting:</h4>
+                            <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 15px; text-align: center;">
+                                <div style="background: rgba(255,255,255,0.02); padding: 10px; border-radius: 12px;">
+                                    <span class="form-label" style="font-size: 0.75rem; color: #ebd5b3;">Leather</span>
+                                    <div id="recipe-leather" style="font-size: 1.3rem; font-weight: 700; color: var(--primary-color); margin-top: 5px;">0</div>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.02); padding: 10px; border-radius: 12px;">
+                                    <span class="form-label" style="font-size: 0.75rem; color: #ebd5b3;">Iron</span>
+                                    <div id="recipe-iron" style="font-size: 1.3rem; font-weight: 700; color: var(--primary-color); margin-top: 5px;">0</div>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.02); padding: 10px; border-radius: 12px;">
+                                    <span class="form-label" style="font-size: 0.75rem; color: #ebd5b3;">Ebony</span>
+                                    <div id="recipe-ebony" style="font-size: 1.3rem; font-weight: 700; color: var(--primary-color); margin-top: 5px;">0</div>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.02); padding: 10px; border-radius: 12px;">
+                                    <span class="form-label" style="font-size: 0.75rem; color: #ebd5b3;">Animal Bone</span>
+                                    <div id="recipe-bone" style="font-size: 1.3rem; font-weight: 700; color: var(--primary-color); margin-top: 5px;">0</div>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.02); padding: 10px; border-radius: 12px;">
+                                    <span class="form-label" style="font-size: 0.75rem; color: #ffd60a;">Gold Cost</span>
+                                    <div id="recipe-gold" style="font-size: 1.3rem; font-weight: 700; color: #ffd60a; margin-top: 5px;">0</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <label class="form-label" style="display: block; margin-bottom: 15px; text-align: left;">Enter Current Material Inventory:</label>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 20px;">
+                            <div style="background: rgba(14, 11, 8, 0.3); border: 1px solid rgba(255,255,255,0.03); border-radius: 16px; padding: 15px;">
+                                <h4 class="form-label" style="font-size: 0.8rem; margin-bottom: 10px; color: #ebd5b3;"><i class="fas fa-leaf"></i> Leather</h4>
+                                <div class="material-input-grid">
+                                    <div class="material-input-box"><span>Legendary</span><input type="number" class="mat-in" data-mat="leather" data-tier="4" value="0" min="0"></div>
+                                    <div class="material-input-box"><span>Epic</span><input type="number" class="mat-in" data-mat="leather" data-tier="3" value="0" min="0"></div>
+                                    <div class="material-input-box"><span>Elite</span><input type="number" class="mat-in" data-mat="leather" data-tier="2" value="0" min="0"></div>
+                                    <div class="material-input-box"><span>Advanced</span><input type="number" class="mat-in" data-mat="leather" data-tier="1" value="0" min="0"></div>
+                                    <div class="material-input-box"><span>Normal</span><input type="number" class="mat-in" data-mat="leather" data-tier="0" value="0" min="0"></div>
+                                </div>
+                            </div>
+
+                            <div style="background: rgba(14, 11, 8, 0.3); border: 1px solid rgba(255,255,255,0.03); border-radius: 16px; padding: 15px;">
+                                <h4 class="form-label" style="font-size: 0.8rem; margin-bottom: 10px; color: #ebd5b3;"><i class="fas fa-cubes"></i> Iron</h4>
+                                <div class="material-input-grid">
+                                    <div class="material-input-box"><span>Legendary</span><input type="number" class="mat-in" data-mat="iron" data-tier="4" value="0" min="0"></div>
+                                    <div class="material-input-box"><span>Epic</span><input type="number" class="mat-in" data-mat="iron" data-tier="3" value="0" min="0"></div>
+                                    <div class="material-input-box"><span>Elite</span><input type="number" class="mat-in" data-mat="iron" data-tier="2" value="0" min="0"></div>
+                                    <div class="material-input-box"><span>Advanced</span><input type="number" class="mat-in" data-mat="iron" data-tier="1" value="0" min="0"></div>
+                                    <div class="material-input-box"><span>Normal</span><input type="number" class="mat-in" data-mat="iron" data-tier="0" value="0" min="0"></div>
+                                </div>
+                            </div>
+
+                            <div style="background: rgba(14, 11, 8, 0.3); border: 1px solid rgba(255,255,255,0.03); border-radius: 16px; padding: 15px;">
+                                <h4 class="form-label" style="font-size: 0.8rem; margin-bottom: 10px; color: #ebd5b3;"><i class="fas fa-tree"></i> Ebony</h4>
+                                <div class="material-input-grid">
+                                    <div class="material-input-box"><span>Legendary</span><input type="number" class="mat-in" data-mat="ebony" data-tier="4" value="0" min="0"></div>
+                                    <div class="material-input-box"><span>Epic</span><input type="number" class="mat-in" data-mat="ebony" data-tier="3" value="0" min="0"></div>
+                                    <div class="material-input-box"><span>Elite</span><input type="number" class="mat-in" data-mat="ebony" data-tier="2" value="0" min="0"></div>
+                                    <div class="material-input-box"><span>Advanced</span><input type="number" class="mat-in" data-mat="ebony" data-tier="1" value="0" min="0"></div>
+                                    <div class="material-input-box"><span>Normal</span><input type="number" class="mat-in" data-mat="ebony" data-tier="0" value="0" min="0"></div>
+                                </div>
+                            </div>
+
+                            <div style="background: rgba(14, 11, 8, 0.3); border: 1px solid rgba(255,255,255,0.03); border-radius: 16px; padding: 15px;">
+                                <h4 class="form-label" style="font-size: 0.8rem; margin-bottom: 10px; color: #ebd5b3;"><i class="fas fa-bone"></i> Animal Bone</h4>
+                                <div class="material-input-grid">
+                                    <div class="material-input-box"><span>Legendary</span><input type="number" class="mat-in" data-mat="bone" data-tier="4" value="0" min="0"></div>
+                                    <div class="material-input-box"><span>Epic</span><input type="number" class="mat-in" data-mat="bone" data-tier="3" value="0" min="0"></div>
+                                    <div class="material-input-box"><span>Elite</span><input type="number" class="mat-in" data-mat="bone" data-tier="2" value="0" min="0"></div>
+                                    <div class="material-input-box"><span>Advanced</span><input type="number" class="mat-in" data-mat="bone" data-tier="1" value="0" min="0"></div>
+                                    <div class="material-input-box"><span>Normal</span><input type="number" class="mat-in" data-mat="bone" data-tier="0" value="0" min="0"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="result-panel">
+                            <h4>Materials Gap Analysis</h4>
+                            <div id="crafting-result" class="result-value">--</div>
+                            <p id="crafting-details" class="result-subtext">
+                                Insert your material tokens to check eligibility.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Equipment Details Preview Card -->
+                    <div id="equipment-preview-card" style="width: 100%; background: rgba(14, 11, 8, 0.5); border: 2px solid #ff9500; border-radius: 20px; padding: 25px; box-shadow: 0 15px 35px rgba(255, 149, 0, 0.15); display: flex; flex-direction: column; gap: 15px; position: sticky; top: 20px; transition: all 0.4s ease; box-sizing: border-box;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span id="equip-slot-label" class="form-label" style="font-size: 0.75rem; color:#a39e93;">WEAPON</span>
+                            <span id="equip-rarity-badge" style="background: linear-gradient(135deg, #ff9500, #ff5e00); color: #fff; font-size: 0.65rem; font-weight: 900; padding: 3px 8px; border-radius: 6px; letter-spacing: 0.5px;">LEGENDARY</span>
+                        </div>
+
+                        <!-- Equipment Stylized Dynamic Icon/Image -->
+                        <div style="background: rgba(0,0,0,0.4); border-radius: 12px; height: 160px; display: flex; justify-content: center; align-items: center; border: 1px solid rgba(255,255,255,0.05); position: relative; overflow: hidden;">
+                            <div id="equip-glow" style="position: absolute; width: 140px; height: 140px; background: radial-gradient(circle, rgba(255, 149, 0, 0.25) 0%, transparent 70%); transition: all 0.4s ease;"></div>
+                            <img id="equip-img" src="" alt="Equipment Image" style="height: 110px; width: auto; object-fit: contain; z-index: 1; display: none; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5)); transition: all 0.3s ease;">
+                            <div id="equip-icon-svg" style="font-size: 4.5rem; color:#ebd5b3; z-index: 1;">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 id="equip-name" style="font-family: 'Cinzel', serif; font-size: 1.35rem; color: #fff; margin-bottom: 5px;">Sacred Shield</h3>
+                            <div id="equip-level" style="font-size: 0.75rem; color:#a39e93; font-weight: 700;">Equipment Level 50</div>
+                        </div>
+
+                        <div style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 15px;">
+                            <span class="form-label" style="font-size: 0.7rem; color:#ebd5b3; letter-spacing: 0.5px; display: block; margin-bottom: 8px;">EQUIPMENT ATTRIBUTES</span>
+                            <div id="equip-attributes" style="font-size: 0.85rem; color: #fff; display: flex; flex-direction: column; gap: 6px;">
+                                <!-- Attributes populated by JS -->
+                            </div>
+                        </div>
+
+                        <div id="equip-set-container" style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 15px; display: none;">
+                            <div id="equip-set-name" style="background: rgba(230,183,65,0.06); border: 1px solid rgba(230,183,65,0.15); color: var(--primary-color); font-size: 0.75rem; font-weight: bold; padding: 6px 12px; border-radius: 8px; text-align: center;">
+                                Eternal Empire Set
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. TROOP TRAINING CALCULATOR -->
+            <div id="tool-training" class="tool-content-card">
+                <h2 class="tool-title"><i class="fas fa-running"></i> Troop Training Calculator</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="train-tier">Target Troop Tier</label>
+                        <select id="train-tier" class="form-select">
+                            <option value="1">Tier 1 (T1)</option>
+                            <option value="2">Tier 2 (T2)</option>
+                            <option value="3">Tier 3 (T3)</option>
+                            <option value="4" selected>Tier 4 (T4)</option>
+                            <option value="5">Tier 5 (T5)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="train-type">Troop Type</label>
+                        <select id="train-type" class="form-select">
+                            <option value="infantry">Infantry</option>
+                            <option value="cavalry">Cavalry</option>
+                            <option value="archer">Archer</option>
+                            <option value="siege">Siege</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="train-qty">Quantity to Train</label>
+                        <input type="number" id="train-qty" class="form-input" value="20000" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="train-buff">Training Speed Buff (%)</label>
+                        <input type="number" id="train-buff" class="form-input" value="100" min="0">
+                    </div>
+                </div>
+                <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 25px;">
+                    <div class="form-group">
+                        <label class="form-label" for="train-upgrade-mode">Upgrade Mode</label>
+                        <select id="train-upgrade-mode" class="form-select">
+                            <option value="none">Train from Scratch</option>
+                            <option value="1">Upgrade from T1</option>
+                            <option value="2">Upgrade from T2</option>
+                            <option value="3">Upgrade from T3</option>
+                            <option value="4">Upgrade from T4 (T5 target only)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="result-panel">
+                    <h4>Training Requirements & Gain</h4>
+                    <div id="train-time" class="result-value">0d 0h 0m</div>
+                    <div id="train-resources" class="result-subtext" style="font-size: 1.1rem; margin-top: 15px; color: #fff; line-height: 1.8;">
+                        <!-- Resources list -->
+                    </div>
+                    <p id="train-points" class="result-subtext" style="color: var(--primary-color); font-weight: bold; margin-top: 10px;">
+                        MGE Points Gained: 0
+                    </p>
+                </div>
+            </div>
+
+            <!-- 9. KVK HEALING CALCULATOR -->
+            <div id="tool-healing" class="tool-content-card">
+                <h2 class="tool-title"><i class="fas fa-heartbeat"></i> KvK Hospital Healing Calculator</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="heal-tier">Troop Tier</label>
+                        <select id="heal-tier" class="form-select">
+                            <option value="4" selected>Tier 4 (T4)</option>
+                            <option value="5">Tier 5 (T5)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="heal-qty">Severely Wounded Count</label>
+                        <input type="number" id="heal-qty" class="form-input" value="50000" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="heal-buff">Healing Speed Buff (%)</label>
+                        <input type="number" id="heal-buff" class="form-input" value="100" min="0">
+                    </div>
+                </div>
+
+                <div class="result-panel">
+                    <h4>Healing Resources & Speedups Cost</h4>
+                    <div id="heal-time" class="result-value">0d 0h 0m</div>
+                    <div id="heal-resources" class="result-subtext" style="font-size: 1.1rem; margin-top: 15px; color: #fff; line-height: 1.8;">
+                        <!-- Resources list -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10. ALLIANCE FLAG CALCULATOR -->
+            <div id="tool-flags" class="tool-content-card">
+                <h2 class="tool-title"><i class="fas fa-flag"></i> Alliance Flag Cost Calculator</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label" for="flag-current">Current Flag Number</label>
+                        <input type="number" id="flag-current" class="form-input" value="50" min="0" max="500">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="flag-target">Target Flag Number</label>
+                        <input type="number" id="flag-target" class="form-input" value="100" min="1" max="500">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="flag-discount">Territory Research Discount (%)</label>
+                        <input type="number" id="flag-discount" class="form-input" value="10" min="0" max="20">
+                    </div>
+                </div>
+
+                <div class="result-panel">
+                    <h4>Total Flag Construction Cost</h4>
+                    <div id="flag-credits" class="result-value">0 Credits</div>
+                    <div id="flag-resources" class="result-subtext" style="font-size: 1.1rem; margin-top: 15px; color: #fff; line-height: 1.8;">
+                        <!-- Resources list -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 11. SPENDING & BUNDLE TRACKER -->
+            <div id="tool-spending" class="tool-content-card">
+                <h2 class="tool-title"><i class="fas fa-wallet"></i> Spending & Bundle Tracker</h2>
+                <p style="color: #a39e93; font-size: 0.9rem; margin-top: -15px; margin-bottom: 25px;">Log and analyze your bundle spending history.</p>
+
+                <!-- Metadata Row: Date, Status, Currency -->
+                <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-bottom: 20px;">
+                    <div class="form-group">
+                        <label class="form-label" for="spend-date">Date (UTC)</label>
+                        <input type="date" id="spend-date" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="spend-status">Status</label>
+                        <select id="spend-status" class="form-select">
+                            <option value="Purchased" selected>Purchased</option>
+                            <option value="Planned">Planned</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="spend-currency">Currency</label>
+                        <select id="spend-currency" class="form-select">
+                            <option value="USD" selected>USD ($)</option>
+                            <option value="EUR">EUR (€)</option>
+                            <option value="GBP">GBP (£)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Bundles Header and Search -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+                    <span class="form-label" style="margin-bottom: 0;">Bundles</span>
+                    <div style="position: relative; max-width: 250px; width: 100%;">
+                        <i class="fas fa-search" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #a39e93; font-size: 0.85rem;"></i>
+                        <input type="text" id="bundle-search" placeholder="Search..." class="form-input" style="padding-left: 32px; height: 36px; font-size: 0.85rem;">
+                    </div>
+                </div>
+
+                <!-- Bundle Chips Container -->
+                <div class="bundle-chips-container" id="bundle-chips-container">
+                    <!-- Populated dynamically by JS -->
+                </div>
+
+                <!-- Selected Bundle Tier List Panel -->
+                <div class="tier-list-container" id="tier-list-panel" style="display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid rgba(230, 183, 65, 0.15); padding-bottom: 10px;">
+                        <h4 id="selected-bundle-title" style="font-family: 'Cinzel', serif; font-size: 1.1rem; color: #fff; margin: 0;">Geared Up <span style="font-size: 0.75rem; color: #a39e93; font-family: 'Inter', sans-serif;">Weekly</span></h4>
+                        <span id="selected-bundle-cost" style="font-weight: 700; color: var(--primary-color); font-size: 1.1rem;">$0.00</span>
+                    </div>
+                    
+                    <div id="tier-rows-wrapper">
+                        <!-- Dynamic Tier Rows populated by JS -->
+                    </div>
+
+                    <!-- Custom Items Section inside the Panel -->
+                    <div style="margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span style="font-size: 0.85rem; color: #ebd5b3; font-weight: 600;">Custom Items (optional)</span>
+                            <button id="add-custom-item-btn" style="background: none; border: none; color: var(--primary-color); cursor: pointer; font-size: 0.85rem; display: flex; align-items: center; gap: 5px;"><i class="fas fa-plus"></i> Add Item</button>
+                        </div>
+                        <div id="custom-items-wrapper">
+                            <!-- Custom inputs appended here dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Notes Section inside the Panel -->
+                    <div style="margin-top: 15px;">
+                        <label class="form-label" style="font-size: 0.8rem; margin-bottom: 8px;">Notes (optional)</label>
+                        <textarea id="spend-notes" class="form-input" style="height: 60px; resize: none; font-size: 0.85rem;" placeholder="Any notes about this spending..."></textarea>
+                    </div>
+
+                    <!-- Action buttons for the selected bundle selection -->
+                    <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px;">
+                        <button id="cancel-selection-btn" class="tool-btn tool-btn-secondary" style="padding: 8px 16px; font-size: 0.85rem;">Cancel</button>
+                        <button id="add-entry-btn" class="tool-btn" style="padding: 8px 20px; font-size: 0.85rem; background: linear-gradient(135deg, #ff2d55 0%, #ff3b30 100%); border-color: #ff2d55;"><i class="fas fa-plus"></i> Add Entry</button>
+                    </div>
+                </div>
+
+                <!-- Monthly Budget Input -->
+                <div class="form-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 25px;">
+                    <div class="form-group">
+                        <label class="form-label" for="spend-budget">Monthly Budget ($)</label>
+                        <input type="number" id="spend-budget" class="form-input" value="100" min="0">
+                    </div>
+                </div>
+
+                <!-- Budget Usage Bar -->
+                <div style="margin-bottom: 25px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span class="form-label" style="font-size: 0.75rem; color: #ebd5b3;">Budget Usage</span>
+                        <span id="budget-ratio" style="font-size: 0.75rem; font-weight: bold; color: var(--primary-color);">0% ($0.00 / $100.00)</span>
+                    </div>
+                    <div style="width: 100%; height: 12px; background: rgba(0,0,0,0.5); border-radius: 6px; overflow: hidden; border: 1px solid rgba(230,183,65,0.15);">
+                        <div id="budget-progress-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #E6B741, #F1CB6C); box-shadow: 0 0 10px rgba(230,183,65,0.6); transition: width 0.4s ease;"></div>
+                    </div>
+                </div>
+
+                <!-- Spending Pace Estimator -->
+                <div id="spending-pace-panel" style="margin-bottom: 25px; background: rgba(0,0,0,0.3); border: 1px solid rgba(230, 183, 65, 0.15); border-radius: 16px; padding: 16px 18px; display: none;">
+                    <h4 class="form-label" style="font-size: 0.75rem; margin-bottom: 12px; color: #ebd5b3; letter-spacing: 1px; display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-chart-line" style="color: var(--primary-color);"></i> Spending Pace
+                    </h4>
+                    <div id="spending-pace-stats" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+                        <!-- JS populated -->
+                    </div>
+                </div>
+
+                <!-- Scrollable Table -->
+                <div style="max-height: 250px; overflow-y: auto; background: rgba(0,0,0,0.25); border: 1px solid rgba(230,183,65,0.1); border-radius: 16px; margin-bottom: 25px; padding: 10px;">
+                    <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.85rem;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid rgba(230, 183, 65, 0.15); color: var(--primary-color);">
+                                <th style="padding: 10px;">Date</th>
+                                <th style="padding: 10px;">Bundle / Items</th>
+                                <th style="padding: 10px; text-align: center;">Status</th>
+                                <th style="padding: 10px; text-align: right;">Cost</th>
+                                <th style="padding: 10px; text-align: center;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="spend-log-table">
+                            <!-- JS populated -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="result-panel">
+                    <h4>Finances Summary</h4>
+                    <div id="spend-total" class="result-value">$0.00</div>
+                    
+                    <div style="margin-top: 25px; border-top: 1px solid rgba(230,183,65,0.15); padding-top: 20px;">
+                        <h5 class="form-label" style="font-size: 0.85rem; margin-bottom: 15px; color:#ebd5b3; letter-spacing: 1px;"><i class="fas fa-cubes"></i> Total Accumulated Rewards</h5>
+                        <div id="spend-rewards-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; justify-content: center; text-align: left;">
+                            <!-- JS populated premium cards -->
+                        </div>
+                    </div>
+
+                    <button id="clear-spending" class="tool-btn tool-btn-secondary" style="margin-top: 25px;"><i class="fas fa-trash-alt"></i> Reset Log</button>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Project Zenith. All Rights Reserved.</p>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script>
+        // Tab switching and slider logic
+        const calculatorTools = ['passports', 'speedups', 'vip', 'ap', 'exp'];
+        let activeCalculatorId = 'passports';
+        const prevBtn = document.getElementById('slider-prev-btn');
+        const nextBtn = document.getElementById('slider-next-btn');
+        const subTabsContainer = document.getElementById('calc-sub-tabs');
+
+        function updateSliderVisibility(toolId) {
+            if (toolId === 'calculators') {
+                subTabsContainer.style.display = 'flex';
+                prevBtn.style.display = 'flex';
+                nextBtn.style.display = 'flex';
+            } else {
+                subTabsContainer.style.display = 'none';
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+            }
+        }
+
+        document.querySelectorAll('.tool-tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tool-tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tool-content-card').forEach(c => c.classList.remove('active'));
+                
+                btn.classList.add('active');
+                const toolId = btn.getAttribute('data-tool');
+                
+                if (toolId === 'calculators') {
+                    document.getElementById(`tool-${activeCalculatorId}`).classList.add('active');
+                } else {
+                    document.getElementById(`tool-${toolId}`).classList.add('active');
+                }
+                
+                updateSliderVisibility(toolId);
+            });
+        });
+
+        // Sub-tabs switching
+        document.querySelectorAll('.sub-tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tool-content-card').forEach(c => c.classList.remove('active'));
+                
+                btn.classList.add('active');
+                activeCalculatorId = btn.getAttribute('data-calc');
+                document.getElementById(`tool-${activeCalculatorId}`).classList.add('active');
+            });
+        });
+
+        // Initialize visibility
+        const activeTab = document.querySelector('.tool-tab-btn.active');
+        if (activeTab) {
+            updateSliderVisibility(activeTab.getAttribute('data-tool'));
+        }
+
+        // Cycle function
+        function cycleCalculator(direction) {
+            let currentIndex = calculatorTools.indexOf(activeCalculatorId);
+            if (currentIndex === -1) currentIndex = 0;
+            
+            if (direction === 'next') {
+                currentIndex = (currentIndex + 1) % calculatorTools.length;
+            } else {
+                currentIndex = (currentIndex - 1 + calculatorTools.length) % calculatorTools.length;
+            }
+            
+            // Hide all active content cards
+            document.querySelectorAll('.tool-content-card').forEach(c => c.classList.remove('active'));
+            
+            activeCalculatorId = calculatorTools[currentIndex];
+            document.getElementById(`tool-${activeCalculatorId}`).classList.add('active');
+            
+            // Sync sub-tabs active class
+            document.querySelectorAll('.sub-tab-btn').forEach(b => {
+                if (b.getAttribute('data-calc') === activeCalculatorId) {
+                    b.classList.add('active');
+                } else {
+                    b.classList.remove('active');
+                }
+            });
+        }
+
+        prevBtn.addEventListener('click', () => cycleCalculator('prev'));
+        nextBtn.addEventListener('click', () => cycleCalculator('next'));
+
+        // 1. PASSPORT CALCULATOR ENGINE
+        const powerInput = document.getElementById('passport-power');
+        const rankSelect = document.getElementById('kingdom-rank');
+        const passportResult = document.getElementById('passport-result');
+        const passportDetails = document.getElementById('passport-details');
+
+        function calculatePassports() {
+            const power = parseFloat(powerInput.value) || 0;
+            const migrationType = rankSelect.value;
+            
+            let pages = 1;
+            
+            if (migrationType === 'normal') {
+                if (power < 10) pages = 1;
+                else if (power < 15) pages = 2;
+                else if (power < 20) pages = 3;
+                else if (power < 25) pages = 4;
+                else if (power < 30) pages = 6;
+                else if (power < 35) pages = 9;
+                else if (power < 40) pages = 12;
+                else if (power < 45) pages = 15;
+                else if (power < 50) pages = 20;
+                else if (power < 55) pages = 25;
+                else if (power < 60) pages = 30;
+                else if (power < 65) pages = 35;
+                else if (power < 70) pages = 40;
+                else if (power < 75) pages = 45;
+                else if (power < 80) pages = 50;
+                else if (power < 85) pages = 55;
+                else if (power < 90) pages = 60;
+                else if (power < 95) pages = 65;
+                else if (power < 100) pages = 70;
+                else pages = 75;
+            } else { // same_kvk
+                if (power < 30) pages = 1;
+                else if (power < 35) pages = 2;
+                else if (power < 40) pages = 3;
+                else if (power < 45) pages = 5;
+                else if (power < 50) pages = 8;
+                else if (power < 55) pages = 12;
+                else if (power < 60) pages = 15;
+                else if (power < 65) pages = 20;
+                else if (power < 70) pages = 25;
+                else if (power < 75) pages = 32;
+                else if (power < 80) pages = 40;
+                else if (power < 85) pages = 47;
+                else if (power < 90) pages = 54;
+                else if (power < 95) pages = 61;
+                else if (power < 100) pages = 67;
+                else pages = 73;
+            }
+
+            const typeLabel = migrationType === 'normal' ? "Normal Migration" : "Same KvK / Vacation Mode Migration";
+            passportResult.innerText = `${pages} Page${pages > 1 ? 's' : ''}`;
+            
+            let warningText = "";
+            if (migrationType === 'normal' && power >= 100) {
+                warningText = " <br><strong style='color:#ff453a;'>Warning:</strong> Governors at 100M+ power fall into special migration brackets and require leadership oversight.";
+            }
+
+            passportDetails.innerHTML = `For a governor with <strong>${power.toLocaleString()}M</strong> power, you will need <strong>${pages} Passport Page${pages > 1 ? 's' : ''}</strong> to complete immigration via <strong>${typeLabel}</strong>.${warningText}`;
+
+            // Update purchase days panel
+            updatePassportPurchaseDays(pages);
+        }
+
+        function updatePassportPurchaseDays(pagesNeeded) {
+            const purchaseGrid = document.getElementById('passport-purchase-grid');
+            purchaseGrid.innerHTML = "";
+
+            // New World Chest tiers - each purchase gives keys = passport pages
+            const chestTiers = [
+                { name: "New World Chest", tier: "$4.99", price: 4.99, keysPerBuy: 1, color: "#5ac8fa" },
+                { name: "New World Chest", tier: "$9.99", price: 9.99, keysPerBuy: 2, color: "#4cd964" },
+                { name: "New World Chest", tier: "$19.99", price: 19.99, keysPerBuy: 4, color: "#ff9500" }
+            ];
+
+            chestTiers.forEach(chest => {
+                const daysNeeded = Math.ceil(pagesNeeded / chest.keysPerBuy);
+                const totalCost = (daysNeeded * chest.price).toFixed(2);
+                const costPerPage = (chest.price / chest.keysPerBuy).toFixed(2);
+
+                const card = document.createElement('div');
+                card.style.cssText = `background: rgba(14, 11, 8, 0.6); border: 1px solid rgba(230, 183, 65, 0.12); border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; gap: 14px;`;
+                card.innerHTML = `
+                    <div style="width: 40px; height: 40px; border-radius: 10px; background: ${chest.color}15; border: 1px solid ${chest.color}30; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <i class="fas fa-box-open" style="color: ${chest.color}; font-size: 1rem;"></i>
+                    </div>
+                    <div style="flex: 1; min-width: 0;">
+                        <div style="font-size: 0.75rem; color: #a39e93; margin-bottom: 2px;">${chest.name} <span style="color: ${chest.color}; font-weight: 700;">${chest.tier}</span></div>
+                        <div style="font-size: 1.1rem; font-weight: 800; color: #fff; font-family: 'Cinzel', serif;">${daysNeeded} Day${daysNeeded !== 1 ? 's' : ''}</div>
+                        <div style="font-size: 0.68rem; color: #a39e93; margin-top: 2px;">
+                            ${chest.keysPerBuy} key${chest.keysPerBuy > 1 ? 's' : ''}/day · $${costPerPage}/page · <span style="color: var(--primary-color); font-weight: 700;">$${totalCost} total</span>
+                        </div>
+                    </div>
+                `;
+                purchaseGrid.appendChild(card);
+            });
+        }
+
+        powerInput.addEventListener('input', calculatePassports);
+        rankSelect.addEventListener('change', calculatePassports);
+        calculatePassports(); // Initial run
+
+
+        // 2. SPEEDUP CALCULATOR ENGINE
+        const speedupInputs = document.querySelectorAll('.sp-in');
+        const speedupResult = document.getElementById('speedup-result');
+        const speedupMinutes = document.getElementById('speedup-minutes');
+        const clearBtn = document.getElementById('clear-speedups');
+
+        function calculateSpeedups() {
+            let totalMins = 0;
+            
+            speedupInputs.forEach(input => {
+                const val = parseInt(input.value) || 0;
+                const minVal = parseInt(input.getAttribute('data-min'));
+                totalMins += val * minVal;
+            });
+
+            // Convert to Days, Hours, Minutes
+            const d = Math.floor(totalMins / 1440);
+            const h = Math.floor((totalMins % 1440) / 60);
+            const m = totalMins % 60;
+
+            speedupResult.innerText = `${d}d ${h}h ${m}m`;
+            speedupMinutes.innerText = `Total time: ${totalMins.toLocaleString()} minutes.`;
+        }
+
+        speedupInputs.forEach(input => {
+            input.addEventListener('input', calculateSpeedups);
+        });
+
+        clearBtn.addEventListener('click', () => {
+            speedupInputs.forEach(input => input.value = 0);
+            calculateSpeedups();
+        });
+
+
+        // 3. VIP CALCULATOR ENGINE
+        const vipPointsNeeded = [
+            0, 200, 500, 1200, 2500, 5800, 12000, 22000, 38000, 75000,
+            140000, 240000, 350000, 750000, 1000000, 1500000, 2500000, 3500000, 5000000, 7000000
+        ];
+        
+        const currentVipSelect = document.getElementById('vip-current-lvl');
+        const targetVipSelect = document.getElementById('vip-target-lvl');
+        const vipPointsInput = document.getElementById('vip-current-pts');
+        const vipResult = document.getElementById('vip-result');
+        const vipDetails = document.getElementById('vip-details');
+
+        // Populate VIP dropdowns
+        for(let i = 1; i <= 20; i++) {
+            const opt1 = document.createElement('option');
+            opt1.value = i;
+            opt1.innerText = `VIP ${i}`;
+            if (i === 10) opt1.selected = true;
+            currentVipSelect.appendChild(opt1);
+
+            const opt2 = document.createElement('option');
+            opt2.value = i;
+            opt2.innerText = `VIP ${i}`;
+            if (i === 14) opt2.selected = true;
+            targetVipSelect.appendChild(opt2);
+        }
+
+        function calculateVip() {
+            const currentLvl = parseInt(currentVipSelect.value);
+            const targetLvl = parseInt(targetVipSelect.value);
+            const currentPoints = parseInt(vipPointsInput.value) || 0;
+
+            if (currentLvl >= targetLvl) {
+                vipResult.innerText = "0 Points";
+                vipDetails.innerText = "Your target VIP level must be higher than your current VIP level.";
+                return;
+            }
+
+            const targetPointsTotal = vipPointsNeeded[targetLvl - 1];
+            const currentLevelMinPoints = vipPointsNeeded[currentLvl - 1];
+
+            // Total points required from start of current VIP level to target
+            const deltaPoints = targetPointsTotal - (currentLevelMinPoints + currentPoints);
+            const pointsNeeded = Math.max(0, deltaPoints);
+
+            vipResult.innerText = `${pointsNeeded.toLocaleString()} Pts`;
+            vipDetails.innerHTML = `You need <strong>${pointsNeeded.toLocaleString()}</strong> more VIP points to reach VIP <strong>${targetLvl}</strong>.<br>This is equivalent to purchasing <strong>${pointsNeeded.toLocaleString()} Gems</strong> (1 Gem = 1 VIP Point).`;
+        }
+
+        currentVipSelect.addEventListener('change', calculateVip);
+        targetVipSelect.addEventListener('change', calculateVip);
+        vipPointsInput.addEventListener('input', calculateVip);
+        calculateVip(); // initial run
+
+
+        // 4. AP CALCULATOR ENGINE
+        const apCurrentInput = document.getElementById('ap-current');
+        const apMaxInput = document.getElementById('ap-max');
+        const apPotionInputs = document.querySelectorAll('.ap-in');
+        const apResult = document.getElementById('ap-result');
+        const apDetails = document.getElementById('ap-details');
+
+        function calculateAp() {
+            const currentAp = parseInt(apCurrentInput.value) || 0;
+            const maxAp = parseInt(apMaxInput.value) || 1500;
+
+            let potionAp = 0;
+            apPotionInputs.forEach(input => {
+                const count = parseInt(input.value) || 0;
+                const value = parseInt(input.getAttribute('data-val'));
+                potionAp += count * value;
+            });
+
+            const totalAp = currentAp + potionAp;
+            apResult.innerText = `${totalAp.toLocaleString()} AP`;
+
+            // Calculate regeneration time (1 AP = 36 seconds)
+            let regenText = "Already at max capacity.";
+            if (currentAp < maxAp) {
+                const diff = maxAp - currentAp;
+                const totalSeconds = diff * 36;
+                const hours = Math.floor(totalSeconds / 3600);
+                const minutes = Math.floor((totalSeconds % 3600) / 60);
+                regenText = `${hours}h ${minutes}m to regenerate to maximum capacity naturally.`;
+            }
+
+            apDetails.innerHTML = `Natural Regen Time: <strong>${regenText}</strong><br>Total AP stored in inventory potions: <strong>${potionAp.toLocaleString()} AP</strong>`;
+        }
+
+        apCurrentInput.addEventListener('input', calculateAp);
+        apMaxInput.addEventListener('input', calculateAp);
+        apPotionInputs.forEach(input => input.addEventListener('input', calculateAp));
+        calculateAp();
+
+
+        // 5. EXP & STARS CALCULATOR ENGINE
+        // Total cumulative EXP required per level
+        const levelExp = [
+            0, 100, 300, 600, 1000, 1500, 2100, 2800, 3600, 4500,
+            6000, 8000, 11000, 15000, 20000, 26000, 33000, 41000, 50000, 60000,
+            75000, 95000, 120000, 150000, 185000, 225000, 270000, 320000, 375000, 435000,
+            505000, 585000, 680000, 790000, 920000, 1070000, 1240000, 1430000, 1640000, 1870000,
+            2130000, 2430000, 2770000, 3160000, 3600000, 4100000, 4670000, 5320000, 6060000, 6900000,
+            7850000, 8930000, 10150000, 11520000, 13060000, 14780000, 16700000, 18840000, 21220000, 24000000
+        ];
+
+        // Cumulative star requirements for Legendary Commanders (cumulative values)
+        const starsNeeded = [0, 5, 25, 75, 175, 575];
+
+        const expCurrentLvl = document.getElementById('exp-current-lvl');
+        const expTargetLvl = document.getElementById('exp-target-lvl');
+        const starCurrent = document.getElementById('star-current');
+        const starTarget = document.getElementById('star-target');
+        const expResult = document.getElementById('exp-result');
+        const expDetails = document.getElementById('exp-details');
+
+        function calculateExp() {
+            const currentLvl = Math.min(60, Math.max(1, parseInt(expCurrentLvl.value) || 1));
+            const targetLvl = Math.min(60, Math.max(1, parseInt(expTargetLvl.value) || 60));
+            const curStar = parseInt(starCurrent.value);
+            const tarStar = parseInt(starTarget.value);
+
+            let totalExpNeeded = 0;
+            if (targetLvl > currentLvl) {
+                // Sum levels exp
+                for(let i = currentLvl; i < targetLvl; i++) {
+                    totalExpNeeded += levelExp[i];
+                }
+            }
+
+            let totalStarsNeeded = 0;
+            if (tarStar > curStar) {
+                totalStarsNeeded = starsNeeded[tarStar - 1] - starsNeeded[curStar - 1];
+            }
+
+            // Express in Level 5 Tomes of Knowledge (100,000 EXP each)
+            const tomesLvl5 = Math.ceil(totalExpNeeded / 100000);
+
+            expResult.innerText = `${totalExpNeeded.toLocaleString()} EXP`;
+            expDetails.innerHTML = `To reach Level <strong>${targetLvl}</strong>, you need <strong>${totalExpNeeded.toLocaleString()} EXP</strong>, which is equivalent to <strong>${tomesLvl5}</strong> Level 5 Tomes of Knowledge (100k EXP).<br>Stars required for tier upgrade: <strong>${totalStarsNeeded} Legendary Star Sculptures</strong>.`;
+        }
+
+        expCurrentLvl.addEventListener('input', calculateExp);
+        expTargetLvl.addEventListener('input', calculateExp);
+        starCurrent.addEventListener('change', calculateExp);
+        starTarget.addEventListener('change', calculateExp);
+        calculateExp();
+
+
+        // 6. CRYSTAL TECH KVK CALCULATOR ENGINE (Delegated to interactive iframe)
+
+
+        // 7. CRAFTING PLANNER ENGINE
+        const craftItemSelect = document.getElementById('craft-item');
+        const customRecipeEditor = document.getElementById('custom-recipe-editor');
+        const matInputs = document.querySelectorAll('.mat-in');
+        const craftingResult = document.getElementById('crafting-result');
+        const craftingDetails = document.getElementById('crafting-details');
+
+        // Target Recipe Display Elements
+        const recipeLeatherEl = document.getElementById('recipe-leather');
+        const recipeIronEl = document.getElementById('recipe-iron');
+        const recipeEbonyEl = document.getElementById('recipe-ebony');
+        const recipeBoneEl = document.getElementById('recipe-bone');
+        const recipeGoldEl = document.getElementById('recipe-gold');
+
+
+
+        // Recipes Definitions
+        const recipes = {
+            "sacred-dominion": {
+                        "rarity": "orange",
+                        "leather": 70,
+                        "iron": 10,
+                        "ebony": 10,
+                        "bone": 0,
+                        "gold": 30000000
+            },
+            "hammer-sun-moon": {
+                        "rarity": "orange",
+                        "leather": 10,
+                        "iron": 70,
+                        "ebony": 10,
+                        "bone": 0,
+                        "gold": 30000000
+            },
+            "dragons-breath-bow": {
+                        "rarity": "orange",
+                        "leather": 15,
+                        "iron": 15,
+                        "ebony": 60,
+                        "bone": 0,
+                        "gold": 20000000
+            },
+            "sacred-shield": {
+                        "rarity": "orange",
+                        "leather": 15,
+                        "iron": 60,
+                        "ebony": 15,
+                        "bone": 0,
+                        "gold": 20000000
+            },
+            "sakura-fubuki": {
+                        "rarity": "purple",
+                        "leather": 15,
+                        "iron": 70,
+                        "ebony": 15,
+                        "bone": 0,
+                        "gold": 5000000
+            },
+            "pride-of-khan": {
+                        "rarity": "orange",
+                        "leather": 50,
+                        "iron": 0,
+                        "ebony": 10,
+                        "bone": 0,
+                        "gold": 30000000
+            },
+            "helm-of-conqueror": {
+                        "rarity": "orange",
+                        "leather": 10,
+                        "iron": 50,
+                        "ebony": 0,
+                        "bone": 0,
+                        "gold": 30000000
+            },
+            "eternal-empire-helm": {
+                        "rarity": "orange",
+                        "leather": 10,
+                        "iron": 40,
+                        "ebony": 10,
+                        "bone": 0,
+                        "gold": 20000000
+            },
+            "dragons-breath-helm": {
+                        "rarity": "orange",
+                        "leather": 10,
+                        "iron": 10,
+                        "ebony": 40,
+                        "bone": 0,
+                        "gold": 20000000
+            },
+            "hope-cloak": {
+                        "rarity": "orange",
+                        "leather": 10,
+                        "iron": 40,
+                        "ebony": 10,
+                        "bone": 0,
+                        "gold": 15000000
+            },
+            "dragons-breath-plate": {
+                        "rarity": "orange",
+                        "leather": 10,
+                        "iron": 10,
+                        "ebony": 40,
+                        "bone": 0,
+                        "gold": 20000000
+            },
+            "heart-of-saint": {
+                        "rarity": "purple",
+                        "leather": 70,
+                        "iron": 15,
+                        "ebony": 15,
+                        "bone": 0,
+                        "gold": 5000000
+            },
+            "navars-control": {
+                        "rarity": "orange",
+                        "leather": 30,
+                        "iron": 10,
+                        "ebony": 0,
+                        "bone": 0,
+                        "gold": 15000000
+            },
+            "sacred-grips": {
+                        "rarity": "orange",
+                        "leather": 0,
+                        "iron": 30,
+                        "ebony": 10,
+                        "bone": 0,
+                        "gold": 15000000
+            },
+            "dragons-breath-bracers": {
+                        "rarity": "orange",
+                        "leather": 0,
+                        "iron": 10,
+                        "ebony": 30,
+                        "bone": 0,
+                        "gold": 20000000
+            },
+            "tassets-war-god": {
+                        "rarity": "orange",
+                        "leather": 10,
+                        "iron": 10,
+                        "ebony": 40,
+                        "bone": 0,
+                        "gold": 15000000
+            },
+            "eternal-night": {
+                        "rarity": "orange",
+                        "leather": 10,
+                        "iron": 40,
+                        "ebony": 10,
+                        "bone": 0,
+                        "gold": 15000000
+            },
+            "dragons-breath-trousers": {
+                        "rarity": "orange",
+                        "leather": 10,
+                        "iron": 10,
+                        "ebony": 40,
+                        "bone": 0,
+                        "gold": 20000000
+            },
+            "ash-of-dawn": {
+                        "rarity": "orange",
+                        "leather": 40,
+                        "iron": 10,
+                        "ebony": 10,
+                        "bone": 0,
+                        "gold": 15000000
+            },
+            "shios-return": {
+                        "rarity": "orange",
+                        "leather": 0,
+                        "iron": 30,
+                        "ebony": 10,
+                        "bone": 0,
+                        "gold": 15000000
+            },
+            "dragons-breath-boots": {
+                        "rarity": "orange",
+                        "leather": 0,
+                        "iron": 10,
+                        "ebony": 30,
+                        "bone": 0,
+                        "gold": 20000000
+            },
+            "horn-of-fury": {
+                        "rarity": "orange",
+                        "leather": 40,
+                        "iron": 40,
+                        "ebony": 40,
+                        "bone": 0,
+                        "gold": 5000000
+            },
+            "ring-of-doom": {
+                        "rarity": "orange",
+                        "leather": 40,
+                        "iron": 40,
+                        "ebony": 40,
+                        "bone": 0,
+                        "gold": 5000000
+            },
+            "lucky-coin": {
+                        "rarity": "orange",
+                        "leather": 40,
+                        "iron": 40,
+                        "ebony": 40,
+                        "bone": 0,
+                        "gold": 50000000
+            },
+            "vengeance": {
+                        "rarity": "orange",
+                        "leather": 40,
+                        "iron": 40,
+                        "ebony": 40,
+                        "bone": 0,
+                        "gold": 50000000
+            },
+            "heart-of-forest": {
+                        "rarity": "purple",
+                        "leather": 0,
+                        "iron": 0,
+                        "ebony": 0,
+                        "bone": 35,
+                        "gold": 6000000
+            },
+            "gatekeeper-shield": {
+                        "rarity": "blue",
+                        "leather": 20,
+                        "iron": 50,
+                        "ebony": 20,
+                        "bone": 0,
+                        "gold": 2000000
+            },
+            "witchs-gaze": {
+                        "rarity": "purple",
+                        "leather": 0,
+                        "iron": 0,
+                        "ebony": 0,
+                        "bone": 25,
+                        "gold": 5000000
+            },
+            "sacred-fire-quis": {
+                        "rarity": "purple",
+                        "leather": 0,
+                        "iron": 0,
+                        "ebony": 0,
+                        "bone": 25,
+                        "gold": 5000000
+            },
+            "revival-gloves": {
+                        "rarity": "purple",
+                        "leather": 0,
+                        "iron": 10,
+                        "ebony": 30,
+                        "bone": 0,
+                        "gold": 6000000
+            },
+            "karuak-humility": {
+                        "rarity": "purple",
+                        "leather": 20,
+                        "iron": 40,
+                        "ebony": 0,
+                        "bone": 0,
+                        "gold": 5000000
+            },
+            "windswept-boots": {
+                        "rarity": "blue",
+                        "leather": 20,
+                        "iron": 20,
+                        "ebony": 0,
+                        "bone": 0,
+                        "gold": 3000000
+            },
+            "revival-boots": {
+                        "rarity": "purple",
+                        "leather": 20,
+                        "iron": 0,
+                        "ebony": 40,
+                        "bone": 0,
+                        "gold": 6000000
+            },
+            "silent-trial": {
+                        "rarity": "purple",
+                        "leather": 20,
+                        "iron": 20,
+                        "ebony": 30,
+                        "bone": 0,
+                        "gold": 8000000
+            },
+            "delane-amulet": {
+                        "rarity": "purple",
+                        "leather": 30,
+                        "iron": 20,
+                        "ebony": 20,
+                        "bone": 0,
+                        "gold": 8000000
+            }
+        };
+
+        const equipmentInfo = {
+            "sacred-dominion": {
+                        "name": "Sacred Dominion",
+                        "level": 50,
+                        "rarity": "legendary",
+                        "slot": "WEAPON",
+                        "icon": "fa-sword",
+                        "image": "sacred_dominion.webp",
+                        "attributes": [
+                                    "Cavalry Attack +25%",
+                                    "Archer Defense +5%"
+                        ],
+                        "set": null
+            },
+            "hammer-sun-moon": {
+                        "name": "Hammer of the Sun and Moon",
+                        "level": 50,
+                        "rarity": "legendary",
+                        "slot": "WEAPON",
+                        "icon": "fa-sword",
+                        "image": "hammer_of_the_sun_and_moon.webp",
+                        "attributes": [
+                                    "Infantry Attack +25%",
+                                    "Archer Health +5%"
+                        ],
+                        "set": null
+            },
+            "dragons-breath-bow": {
+                        "name": "Dragon's Breath Bow",
+                        "level": 50,
+                        "rarity": "legendary",
+                        "slot": "WEAPON",
+                        "icon": "fa-sword",
+                        "image": "dragons_breath_bow.webp",
+                        "attributes": [
+                                    "Cavalry Health +5%",
+                                    "Infantry Health +5%",
+                                    "Archer Defense +20%"
+                        ],
+                        "set": "Dragon's Breath Set"
+            },
+            "sacred-shield": {
+                        "name": "Shield of the Eternal Empire",
+                        "level": 50,
+                        "rarity": "legendary",
+                        "slot": "WEAPON",
+                        "icon": "fa-sword",
+                        "image": "shield_of_the_eternal_empire.webp",
+                        "attributes": [
+                                    "Cavalry Attack +5%",
+                                    "Infantry Attack +20%",
+                                    "Archer Attack +5%"
+                        ],
+                        "set": "Eternal Empire Set"
+            },
+            "sakura-fubuki": {
+                        "name": "Sakura Fubuki",
+                        "level": 40,
+                        "rarity": "epic",
+                        "slot": "WEAPON",
+                        "icon": "fa-sword",
+                        "image": "sakura_fubuki.webp",
+                        "attributes": [
+                                    "Cavalry Health +6%",
+                                    "Infantry Attack +13%",
+                                    "Archer Attack +4%"
+                        ],
+                        "set": null
+            },
+            "pride-of-khan": {
+                        "name": "Pride of the Khan",
+                        "level": 50,
+                        "rarity": "legendary",
+                        "slot": "HELMET",
+                        "icon": "fa-crown",
+                        "image": "pride_of_the_khan.webp",
+                        "attributes": [
+                                    "Cavalry Defense +15%",
+                                    "Archer Health +8%"
+                        ],
+                        "set": null
+            },
+            "helm-of-conqueror": {
+                        "name": "Helm of the Conqueror",
+                        "level": 50,
+                        "rarity": "legendary",
+                        "slot": "HELMET",
+                        "icon": "fa-crown",
+                        "image": "helm_of_the_conqueror.webp",
+                        "attributes": [
+                                    "Cavalry Health +8%",
+                                    "Infantry Defense +15%"
+                        ],
+                        "set": null
+            },
+            "eternal-empire-helm": {
+                        "name": "Gold Helm of the Eternal Empire",
+                        "level": 50,
+                        "rarity": "legendary",
+                        "slot": "HELMET",
+                        "icon": "fa-crown",
+                        "image": "gold_helm_of_the_eternal_empire.webp",
+                        "attributes": [
+                                    "Cavalry Health +3%",
+                                    "Infantry Defense +11%",
+                                    "Archer Health +4%"
+                        ],
+                        "set": "Eternal Empire Set"
+            },
+            "dragons-breath-helm": {
+                        "name": "Dragon's Breath Helm",
+                        "level": 50,
+                        "rarity": "legendary",
+                        "slot": "HELMET",
+                        "icon": "fa-crown",
+                        "image": "dragons_breath_helm.webp",
+                        "attributes": [
+                                    "Cavalry Attack +3%",
+                                    "Infantry Defense +4%",
+                                    "Archer Attack +11%"
+                        ],
+                        "set": "Dragon's Breath Set"
+            },
+            "hope-cloak": {
+                        "name": "Hope Cloak",
+                        "level": 50,
+                        "rarity": "legendary",
+                        "slot": "CHEST",
+                        "icon": "fa-user-shield",
+                        "image": "hope_cloak.webp",
+                        "attributes": [
+                                    "Cavalry Defense +5%",
+                                    "Infantry Defense +12%",
+                                    "Archer Defense +5%"
+                        ],
+                        "set": null
+            },
+            "dragons-breath-plate": {
+                        "name": "Dragon's Breath Plate",
+                        "level": 50,
+                        "rarity": "legendary",
+                        "slot": "CHEST",
+                        "icon": "fa-user-shield",
+                        "image": "dragons_breath_plate.webp",
+                        "attributes": [
+                                    "Cavalry Defense +5%",
+                                    "Archer Health +11%"
+                        ],
+                        "set": "Dragon's Breath Set"
+            },
+            "heart-of-saint": {
+                        "name": "Heart of the Saint",
+                        "level": 40,
+                        "rarity": "epic",
+                        "slot": "WEAPON",
+                        "icon": "fa-sword",
+                        "image": "heart_of_the_saint.webp",
+                        "attributes": [
+                                    "Cavalry Defense +13%",
+                                    "Infantry Health +4%",
+                                    "Archer Health +6%"
+                        ],
+                        "set": null
+            },
+            "navars-control": {
+                        "name": "Navar's Control",
+                        "level": 50,
+                        "rarity": "legendary",
+                        "slot": "GLOVES",
+                        "icon": "fa-mitten",
+                        "image": "navars_control.webp",
+                        "attributes": [
+                                    "Cavalry Health +8%",
+                                    "Infantry Defense +5%"
+                        ],
+                        "set": null
+            },
+            "sacred-grips": {
+                        "name": "Sacred Grips",
+                        "level": 50,
+                        "rarity": "legendary",
+                        "slot": "GLOVES",
+                        "icon": "fa-mitten",
+                        "image": "sacred_grips.webp",
+                        "attributes": [
+                                    "Infantry Defense +8%",
+                                    "Archer Attack +5%"
+                        ],
+                        "set": "Eternal Empire Set"
+            },
+            "dragons-breath-bracers": {
+                        "name": "Dragon's Breath Vambraces",
+                        "level": 50,
+                        "rarity": "legendary",
+                        "slot": "GLOVES",
+                        "icon": "fa-mitten",
+                        "image": "dragons_breath_vambraces.webp",
+                        "attributes": [
+                                    "Infantry Attack +3%",
+                                    "Archer Attack +7.5%"
+                        ],
+                        "set": "Dragon's Breath Set"
+            },
+            "tassets-war-god": {
+                        "name": "Tassets of the War God",
+                        "level": 50,
+                        "rarity": "legendary",
+                        "slot": "LEGS",
+                        "icon": "fa-shield-alt",
+                        "image": "tassets_of_the_war_god.webp",
+                        "attributes": [
+                                    "Cavalry Attack +5%",
+                                    "Infantry Attack +5%",
+                                    "Archer Attack +12%"
+                        ],
+                        "set": null
+            },
+            "eternal-night": {
+                        "name": "Eternal Night",
+                        "level": 50,
+                        "rarity": "legendary",
+                        "slot": "LEGS",
+                        "icon": "fa-shield-alt",
+                        "image": "eternal_night.webp",
+                        "attributes": [
+                                    "Cavalry Defense +5%",
+                                    "Infantry Defense +12%",
+                                    "Archer Defense +5%"
+                        ],
+                        "set": null
+            },
+            "dragons-breath-trousers": {
+                        "name": "Dragon's Breath Tassets",
+                        "level": 50,
+                        "rarity": "legendary",
+                        "slot": "LEGS",
+                        "icon": "fa-shield-alt",
+                        "image": "dragons_breath_tassets.webp",
+                        "attributes": [
+                                    "Cavalry Attack +5%",
+                                    "Archer Attack +11%"
+                        ],
+                        "set": "Dragon's Breath Set"
+            },
+            "ash-of-dawn": {
+                        "name": "Ash of the Dawn",
+                        "level": 50,
+                        "rarity": "legendary",
+                        "slot": "LEGS",
+                        "icon": "fa-shield-alt",
+                        "image": "ash_of_the_dawn.webp",
+                        "attributes": [
+                                    "Cavalry Health +12%",
+                                    "Infantry Health +5%",
+                                    "Special: Commander EXP Gain 5%"
+                        ],
+                        "set": null
+            },
+            "shios-return": {
+                        "name": "Shio's Return",
+                        "level": 50,
+                        "rarity": "legendary",
+                        "slot": "BOOTS",
+                        "icon": "fa-boot",
+                        "image": "shios_return.webp",
+                        "attributes": [
+                                    "Infantry Defense +8%",
+                                    "Archer Health +5%"
+                        ],
+                        "set": "Eternal Empire Set"
+            },
+            "dragons-breath-boots": {
+                        "name": "Dragon's Breath Boots",
+                        "level": 50,
+                        "rarity": "legendary",
+                        "slot": "BOOTS",
+                        "icon": "fa-boot",
+                        "image": "dragons_breath_boots.webp",
+                        "attributes": [
+                                    "Infantry Defense +3%",
+                                    "Archer Defense +7.5%"
+                        ],
+                        "set": "Dragon's Breath Set"
+            },
+            "horn-of-fury": {
+                        "name": "Horn of Fury",
+                        "level": 50,
+                        "rarity": "legendary",
+                        "slot": "ACCESSORY",
+                        "icon": "fa-gem",
+                        "image": "horn_of_fury.webp",
+                        "attributes": [
+                                    "Special: 30% Chance to gain 50 Extra Rage"
+                        ],
+                        "set": null
+            },
+            "ring-of-doom": {
+                        "name": "Ring of Doom",
+                        "level": 50,
+                        "rarity": "legendary",
+                        "slot": "ACCESSORY",
+                        "icon": "fa-gem",
+                        "image": "ring_of_doom.webp",
+                        "attributes": [
+                                    "Special: 10% Chance to gain 50% Bonus Damage"
+                        ],
+                        "set": null
+            },
+            "lucky-coin": {
+                        "name": "Scola's Lucky Coin",
+                        "level": 50,
+                        "rarity": "legendary",
+                        "slot": "ACCESSORY",
+                        "icon": "fa-gem",
+                        "image": "scolas_lucky_coin.webp",
+                        "attributes": [
+                                    "Special: 10% Chance to gain Shield"
+                        ],
+                        "set": null
+            },
+            "vengeance": {
+                        "name": "Vengeance",
+                        "level": 50,
+                        "rarity": "legendary",
+                        "slot": "ACCESSORY",
+                        "icon": "fa-gem",
+                        "image": "vengeance.webp",
+                        "attributes": [
+                                    "Special: Counterattack Damage 8%"
+                        ],
+                        "set": null
+            },
+            "heart-of-forest": {
+                        "name": "Scepter of the Forest Guardian",
+                        "level": 40,
+                        "rarity": "epic",
+                        "slot": "WEAPON",
+                        "icon": "fa-sword",
+                        "image": "scepter_of_the_forest_guardian.webp",
+                        "attributes": [
+                                    "Cavalry Attack +6%",
+                                    "Siege Defense +6%",
+                                    "Special: Gathering Speed 10%"
+                        ],
+                        "set": null
+            },
+            "gatekeeper-shield": {
+                        "name": "Gatekeeper's Shield",
+                        "level": 30,
+                        "rarity": "rare",
+                        "slot": "WEAPON",
+                        "icon": "fa-sword",
+                        "image": "gatekeepers_shield.webp",
+                        "attributes": [
+                                    "Cavalry Health +5%",
+                                    "Infantry Health +8%",
+                                    "Special: Commander EXP Gain 3%"
+                        ],
+                        "set": null
+            },
+            "witchs-gaze": {
+                        "name": "Witch's Deadwood Crown",
+                        "level": 40,
+                        "rarity": "epic",
+                        "slot": "HELMET",
+                        "icon": "fa-crown",
+                        "image": "witchs_deadwood_crown.webp",
+                        "attributes": [
+                                    "Siege Attack +4%",
+                                    "Siege March Speed +2%",
+                                    "Special: Gathering Speed 12%"
+                        ],
+                        "set": null
+            },
+            "sacred-fire-quis": {
+                        "name": "Witch's Hexed Cloak",
+                        "level": 40,
+                        "rarity": "epic",
+                        "slot": "CHEST",
+                        "icon": "fa-user-shield",
+                        "image": "witchs_hexed_cloak.webp",
+                        "attributes": [
+                                    "Siege Defense +4%",
+                                    "Siege March Speed +2%",
+                                    "Special: Gathering Speed 12%"
+                        ],
+                        "set": null
+            },
+            "revival-gloves": {
+                        "name": "Revival Gauntlets",
+                        "level": 40,
+                        "rarity": "epic",
+                        "slot": "GLOVES",
+                        "icon": "fa-mitten",
+                        "image": "revival_gauntlets.webp",
+                        "attributes": [
+                                    "Cavalry Attack +3%",
+                                    "Infantry Attack +3%",
+                                    "Archer Attack +4.5%"
+                        ],
+                        "set": "Revival Set"
+            },
+            "karuak-humility": {
+                        "name": "Karuak's Humility",
+                        "level": 40,
+                        "rarity": "epic",
+                        "slot": "LEGS",
+                        "icon": "fa-shield-alt",
+                        "image": "karuaks_humility.webp",
+                        "attributes": [
+                                    "Cavalry Attack +5%",
+                                    "Infantry Health +8%"
+                        ],
+                        "set": null
+            },
+            "windswept-boots": {
+                        "name": "Windswept Boots",
+                        "level": 30,
+                        "rarity": "rare",
+                        "slot": "BOOTS",
+                        "icon": "fa-boot",
+                        "image": "windswept_boots.webp",
+                        "attributes": [
+                                    "Cavalry Health +2.5%",
+                                    "Infantry Defense +2.5%",
+                                    "Troop March Speed +3%"
+                        ],
+                        "set": "Windswept Set"
+            },
+            "revival-boots": {
+                        "name": "Revival Greaves",
+                        "level": 40,
+                        "rarity": "epic",
+                        "slot": "LEGS",
+                        "icon": "fa-shield-alt",
+                        "image": "revival_greaves.webp",
+                        "attributes": [
+                                    "Cavalry Attack +5%",
+                                    "Archer Defense +7.5%"
+                        ],
+                        "set": "Revival Set"
+            },
+            "silent-trial": {
+                        "name": "Silent Trial",
+                        "level": 40,
+                        "rarity": "epic",
+                        "slot": "ACCESSORY",
+                        "icon": "fa-gem",
+                        "image": "silent_trial.webp",
+                        "attributes": [
+                                    "Special: Basic Attack, target loses 10 Rage"
+                        ],
+                        "set": null
+            },
+            "delane-amulet": {
+                        "name": "Delane's Amulet",
+                        "level": 40,
+                        "rarity": "epic",
+                        "slot": "ACCESSORY",
+                        "icon": "fa-gem",
+                        "image": "delanes_amulet.webp",
+                        "attributes": [
+                                    "Special: Less Counterattack Damage 5%"
+                        ],
+                        "set": null
+            }
+        };
+
+        function updateEquipmentPreview() {
+            const itemKey = craftItemSelect.value;
+            const info = equipmentInfo[itemKey];
+            if (!info) return;
+
+            const card = document.getElementById('equipment-preview-card');
+            const slotLabel = document.getElementById('equip-slot-label');
+            const rarityBadge = document.getElementById('equip-rarity-badge');
+            const glow = document.getElementById('equip-glow');
+            const imgEl = document.getElementById('equip-img');
+            const iconSvg = document.getElementById('equip-icon-svg');
+            const nameEl = document.getElementById('equip-name');
+            const levelEl = document.getElementById('equip-level');
+            const attrsEl = document.getElementById('equip-attributes');
+            const setContainer = document.getElementById('equip-set-container');
+            const setName = document.getElementById('equip-set-name');
+
+            // Set content
+            slotLabel.innerText = info.slot;
+            rarityBadge.innerText = info.rarity.toUpperCase();
+            nameEl.innerText = info.name;
+            levelEl.innerText = `Equipment Level ${info.level}`;
+
+            // Rarity colors & styles
+            let borderCol = "#ff9500";
+            let shadowCol = "rgba(255, 149, 0, 0.15)";
+            let badgeBg = "linear-gradient(135deg, #ff9500, #ff5e00)";
+            let glowBg = "radial-gradient(circle, rgba(255, 149, 0, 0.25) 0%, transparent 70%)";
+
+            if (info.rarity === "epic") {
+                borderCol = "#af52de";
+                shadowCol = "rgba(175, 82, 222, 0.15)";
+                badgeBg = "linear-gradient(135deg, #af52de, #5856d6)";
+                glowBg = "radial-gradient(circle, rgba(175, 82, 222, 0.25) 0%, transparent 70%)";
+            } else if (info.rarity === "elite") {
+                borderCol = "#007aff";
+                shadowCol = "rgba(0, 122, 255, 0.15)";
+                badgeBg = "linear-gradient(135deg, #007aff, #0040ff)";
+                glowBg = "radial-gradient(circle, rgba(0, 122, 255, 0.25) 0%, transparent 70%)";
+            }
+
+            card.style.border = `2px solid ${borderCol}`;
+            card.style.boxShadow = `0 15px 35px ${shadowCol}`;
+            rarityBadge.style.background = badgeBg;
+            glow.style.background = glowBg;
+
+            // Set image or fallback icon
+            if (info.image) {
+                imgEl.src = `../assets/equipment/${info.image}`;
+                imgEl.style.display = "block";
+                iconSvg.style.display = "none";
+            } else {
+                imgEl.style.display = "none";
+                iconSvg.style.display = "block";
+                iconSvg.innerHTML = `<i class="fas ${info.icon}"></i>`;
+            }
+
+            // Attributes rendering
+            attrsEl.innerHTML = "";
+            let finalAttrs = info.attributes;
+
+            finalAttrs.forEach(attr => {
+                const div = document.createElement('div');
+                div.style.display = 'flex';
+                div.style.justifyContent = 'space-between';
+                div.style.borderBottom = '1px solid rgba(255,255,255,0.03)';
+                div.style.paddingBottom = '4px';
+
+                // Highlight the numeric values
+                const parts = attr.split(/([+-]?\d+(?:\.\d+)?%?)/);
+                let htmlStr = "";
+                parts.forEach((part, index) => {
+                    if (index % 2 === 1) { // It's the number part
+                        htmlStr += `<span style="color: #ffd60a; font-weight: bold;">${part}</span>`;
+                    } else {
+                        htmlStr += `<span style="color: #ebd5b3;">${part}</span>`;
+                    }
+                });
+                div.innerHTML = htmlStr;
+                attrsEl.appendChild(div);
+            });
+
+            // Set bonus
+            if (info.set) {
+                setContainer.style.display = "block";
+                setName.innerText = info.set;
+            } else {
+                setContainer.style.display = "none";
+            }
+        }
+
+        function updateRecipeDisplay() {
+            const itemKey = craftItemSelect.value;
+            const recipe = recipes[itemKey];
+            if (!recipe) return;
+
+            if (recipe.custom) {
+                if (customRecipeEditor) customRecipeEditor.style.display = 'grid';
+                recipeLeatherEl.innerText = typeof customReqLeather !== 'undefined' ? customReqLeather.value || 0 : 0;
+                recipeIronEl.innerText = typeof customReqIron !== 'undefined' ? customReqIron.value || 0 : 0;
+                recipeEbonyEl.innerText = typeof customReqEbony !== 'undefined' ? customReqEbony.value || 0 : 0;
+                recipeBoneEl.innerText = typeof customReqBone !== 'undefined' ? customReqBone.value || 0 : 0;
+                recipeGoldEl.innerText = "0";
+            } else {
+                if (customRecipeEditor) customRecipeEditor.style.display = 'none';
+                recipeLeatherEl.innerText = recipe.leather;
+                recipeIronEl.innerText = recipe.iron;
+                recipeEbonyEl.innerText = recipe.ebony;
+                recipeBoneEl.innerText = recipe.bone;
+                recipeGoldEl.innerText = (recipe.gold || 0).toLocaleString();
+            }
+        }
+
+        function calculateCrafting() {
+            updateRecipeDisplay();
+            updateEquipmentPreview();
+
+            const itemKey = craftItemSelect.value;
+            const recipe = recipes[itemKey];
+            if (!recipe) return;
+            const rarity = recipe.rarity;
+
+            let reqLeather = recipe.leather || 0;
+            let reqIron = recipe.iron || 0;
+            let reqEbony = recipe.ebony || 0;
+            let reqBone = recipe.bone || 0;
+
+            if (recipe.custom) {
+                reqLeather = typeof customReqLeather !== 'undefined' ? parseInt(customReqLeather.value) || 0 : 0;
+                reqIron = typeof customReqIron !== 'undefined' ? parseInt(customReqIron.value) || 0 : 0;
+                reqEbony = typeof customReqEbony !== 'undefined' ? parseInt(customReqEbony.value) || 0 : 0;
+                reqBone = typeof customReqBone !== 'undefined' ? parseInt(customReqBone.value) || 0 : 0;
+            }
+
+            // Material rarity base tier: Blue = 2 (16x), Purple = 3 (64x), Orange/Legendary = 4 (256x)
+            let baseTier = 4; // gold default
+            let tierName = "Legendary Material(s)";
+            if (rarity === 'purple') {
+                baseTier = 3;
+                tierName = "Epic Material(s)";
+            } else if (rarity === 'blue') {
+                baseTier = 2;
+                tierName = "Elite Material(s)";
+            }
+
+            // Targets in White units (4^baseTier)
+            const conversionFactor = Math.pow(4, baseTier);
+            const targetWhite = {
+                leather: reqLeather * conversionFactor,
+                iron: reqIron * conversionFactor,
+                ebony: reqEbony * conversionFactor,
+                bone: reqBone * conversionFactor
+            };
+
+            // Sum inventory in White units per material type
+            const inventoryWhite = { leather: 0, iron: 0, ebony: 0, bone: 0 };
+            matInputs.forEach(input => {
+                const count = parseInt(input.value) || 0;
+                const tier = parseInt(input.getAttribute('data-tier'));
+                const mat = input.getAttribute('data-mat');
+                inventoryWhite[mat] += count * Math.pow(4, tier);
+            });
+
+            // Calculate gaps
+            const gaps = {};
+            let isCraftable = true;
+            let gapHtml = "";
+
+            for (const mat in targetWhite) {
+                const diffWhite = targetWhite[mat] - inventoryWhite[mat];
+                if (diffWhite > 0) {
+                    isCraftable = false;
+                    const missingUnits = (diffWhite / conversionFactor).toFixed(1);
+                    gaps[mat] = missingUnits;
+                    
+                    const matLabel = mat.charAt(0).toUpperCase() + mat.slice(1);
+                    gapHtml += `• <strong>${matLabel}</strong>: Missing <strong>${missingTargetFormatted(diffWhite, baseTier)}</strong> (${missingUnits} target mats)<br>`;
+                }
+            }
+
+            if (isCraftable) {
+                craftingResult.innerText = "Ready to Craft!";
+                craftingResult.style.color = "var(--primary-color)";
+                craftingDetails.innerHTML = `You have gathered all required materials to forge the selected equipment. Go craft it!`;
+            } else {
+                craftingResult.innerText = "Materials Missing";
+                craftingResult.style.color = "#ebd5b3";
+                craftingDetails.innerHTML = `<div style="text-align: left; max-width: 400px; margin: 10px auto 0 auto; line-height: 1.6;">` +
+                    `You do not have enough materials to forge this item. Details:<br>${gapHtml}</div>`;
+            }
+        }
+
+        // Helper to format missing materials nicely
+        function missingTargetFormatted(whiteMins, baseTier) {
+            // Converts white units back into Gold (4), Purple (3), Blue (2), Green (1), White (0)
+            let remaining = whiteMins;
+            const parts = [];
+            const tierNames = ["White", "Green", "Blue", "Purple", "Gold"];
+
+            for (let t = 4; t >= 0; t--) {
+                const unitVal = Math.pow(4, t);
+                const count = Math.floor(remaining / unitVal);
+                if (count > 0) {
+                    parts.push(`${count} ${tierNames[t]}`);
+                    remaining %= unitVal;
+                }
+            }
+            return parts.length > 0 ? parts.join(', ') : "0 White";
+        }
+
+        // Add event listeners
+        craftItemSelect.addEventListener('change', calculateCrafting);
+
+        matInputs.forEach(input => {
+            input.addEventListener('input', calculateCrafting);
+        });
+
+        calculateCrafting(); // Initial run
+
+        // 8. TROOP TRAINING CALCULATOR ENGINE
+        const trainTier = document.getElementById('train-tier');
+        const trainType = document.getElementById('train-type');
+        const trainQty = document.getElementById('train-qty');
+        const trainBuff = document.getElementById('train-buff');
+        const trainUpgradeMode = document.getElementById('train-upgrade-mode');
+        const trainTimeResult = document.getElementById('train-time');
+        const trainResourcesResult = document.getElementById('train-resources');
+        const trainPointsResult = document.getElementById('train-points');
+
+        // Base costs for training 1 troop (T1-T5)
+        // [Food, Wood, Stone, Gold]
+        const troopCosts = {
+            1: { infantry: [50, 50, 0, 0], cavalry: [50, 0, 50, 0], archer: [0, 50, 50, 0], siege: [50, 50, 0, 0] },
+            2: { infantry: [80, 80, 0, 0], cavalry: [80, 0, 80, 0], archer: [0, 80, 80, 0], siege: [80, 80, 0, 0] },
+            3: { infantry: [120, 120, 0, 5], cavalry: [120, 0, 120, 10], archer: [0, 120, 120, 8], siege: [120, 120, 0, 5] },
+            4: { infantry: [160, 160, 0, 10], cavalry: [160, 0, 160, 20], archer: [0, 160, 160, 15], siege: [160, 160, 0, 10] },
+            5: { infantry: [320, 320, 0, 40], cavalry: [320, 0, 320, 80], archer: [0, 320, 320, 60], siege: [320, 320, 0, 40] }
+        };
+
+        // Base training times (seconds per unit)
+        const baseTrainTime = { 1: 20, 2: 40, 3: 80, 4: 240, 5: 480 };
+
+        // MGE point values
+        const mgePoints = { 1: 5, 2: 10, 3: 20, 4: 40, 5: 100 };
+
+        function calculateTraining() {
+            const tier = parseInt(trainTier.value);
+            const type = trainType.value;
+            const qty = Math.max(0, parseInt(trainQty.value) || 0);
+            const buff = parseFloat(trainBuff.value) || 0;
+            const upgradeMode = trainUpgradeMode.value;
+
+            // Handle invalid upgrade selection (can't upgrade from same or higher tier)
+            let upgradeTier = 0;
+            if (upgradeMode !== 'none') {
+                upgradeTier = parseInt(upgradeMode);
+                if (upgradeTier >= tier) {
+                    trainResourcesResult.innerHTML = `<span style="color:#ff453a;">Error: Upgrade tier must be lower than target tier!</span>`;
+                    trainTimeResult.innerText = "--";
+                    trainPointsResult.innerText = "MGE Points Gained: --";
+                    return;
+                }
+            }
+
+            // Calculate costs
+            let totalFood = 0;
+            let totalWood = 0;
+            let totalStone = 0;
+            let totalGold = 0;
+            let totalSeconds = 0;
+            let points = 0;
+
+            const targetCost = troopCosts[tier][type];
+            const baseSecsTarget = baseTrainTime[tier];
+
+            if (upgradeTier === 0) {
+                // Train from scratch
+                totalFood = targetCost[0] * qty;
+                totalWood = targetCost[1] * qty;
+                totalStone = targetCost[2] * qty;
+                totalGold = targetCost[3] * qty;
+                totalSeconds = (baseSecsTarget * qty) / (1 + buff / 100);
+                points = mgePoints[tier] * qty;
+            } else {
+                // Upgrade from lower tier (cost is target - source)
+                const sourceCost = troopCosts[upgradeTier][type];
+                const baseSecsSource = baseTrainTime[upgradeTier];
+
+                totalFood = Math.max(0, targetCost[0] - sourceCost[0]) * qty;
+                totalWood = Math.max(0, targetCost[1] - sourceCost[1]) * qty;
+                totalStone = Math.max(0, targetCost[2] - sourceCost[2]) * qty;
+                totalGold = Math.max(0, targetCost[3] - sourceCost[3]) * qty;
+                
+                totalSeconds = ((baseSecsTarget - baseSecsSource) * qty) / (1 + buff / 100);
+                points = Math.max(0, mgePoints[tier] - mgePoints[upgradeTier]) * qty;
+            }
+
+            // Format time
+            const d = Math.floor(totalSeconds / 86400);
+            const h = Math.floor((totalSeconds % 86400) / 3600);
+            const m = Math.floor((totalSeconds % 3600) / 60);
+
+            trainTimeResult.innerText = `${d}d ${h}h ${m}m`;
+
+            trainResourcesResult.innerHTML = `
+                Food: <strong>${totalFood.toLocaleString()}</strong> | 
+                Wood: <strong>${totalWood.toLocaleString()}</strong><br>
+                Stone: <strong>${totalStone.toLocaleString()}</strong> | 
+                Gold: <strong>${totalGold.toLocaleString()}</strong>
+            `;
+
+            trainPointsResult.innerText = `MGE Points Gained: ${points.toLocaleString()}`;
+        }
+
+        trainTier.addEventListener('change', () => {
+            // Update upgrade options based on chosen tier
+            const tier = parseInt(trainTier.value);
+            const opts = trainUpgradeMode.options;
+            for(let i = 0; i < opts.length; i++) {
+                if (opts[i].value === 'none') continue;
+                const optVal = parseInt(opts[i].value);
+                if (optVal >= tier) {
+                    opts[i].disabled = true;
+                } else {
+                    opts[i].disabled = false;
+                }
+            }
+            if (parseInt(trainUpgradeMode.value) >= tier) {
+                trainUpgradeMode.value = 'none';
+            }
+            calculateTraining();
+        });
+
+        trainType.addEventListener('change', calculateTraining);
+        trainQty.addEventListener('input', calculateTraining);
+        trainBuff.addEventListener('input', calculateTraining);
+        trainUpgradeMode.addEventListener('change', calculateTraining);
+
+        // 9. KVK HEALING CALCULATOR ENGINE
+        const healTier = document.getElementById('heal-tier');
+        const healQty = document.getElementById('heal-qty');
+        const healBuff = document.getElementById('heal-buff');
+        const healTimeResult = document.getElementById('heal-time');
+        const healResourcesResult = document.getElementById('heal-resources');
+
+        // Healing costs per troop [Food, Wood, Stone, Gold]
+        const healCosts = {
+            4: [80, 80, 60, 8],
+            5: [213.33, 213.33, 160, 160]
+        };
+
+        // Base healing time in seconds per unit
+        const baseHealTime = { 4: 10, 5: 20 };
+
+        function calculateHealing() {
+            const tier = parseInt(healTier.value);
+            const qty = Math.max(0, parseInt(healQty.value) || 0);
+            const buff = parseFloat(healBuff.value) || 0;
+
+            const costPerUnit = healCosts[tier];
+            const totalFood = costPerUnit[0] * qty;
+            const totalWood = costPerUnit[1] * qty;
+            const totalStone = costPerUnit[2] * qty;
+            const totalGold = costPerUnit[3] * qty;
+
+            const totalSeconds = (baseHealTime[tier] * qty) / (1 + buff / 100);
+
+            // Format time
+            const d = Math.floor(totalSeconds / 86400);
+            const h = Math.floor((totalSeconds % 86400) / 3600);
+            const m = Math.floor((totalSeconds % 3600) / 60);
+
+            healTimeResult.innerText = `${d}d ${h}h ${m}m`;
+
+            healResourcesResult.innerHTML = `
+                Food: <strong>${totalFood.toLocaleString()}</strong> | 
+                Wood: <strong>${totalWood.toLocaleString()}</strong><br>
+                Stone: <strong>${totalStone.toLocaleString()}</strong> | 
+                Gold: <strong>${totalGold.toLocaleString()}</strong>
+            `;
+        }
+
+        healTier.addEventListener('change', calculateHealing);
+        healQty.addEventListener('input', calculateHealing);
+        healBuff.addEventListener('input', calculateHealing);
+
+        // 10. ALLIANCE FLAG CALCULATOR ENGINE
+        const flagCurrent = document.getElementById('flag-current');
+        const flagTarget = document.getElementById('flag-target');
+        const flagDiscount = document.getElementById('flag-discount');
+        const flagCreditsResult = document.getElementById('flag-credits');
+        const flagResourcesResult = document.getElementById('flag-resources');
+
+        function getSingleFlagCost(flagIndex) {
+            const bracket = Math.floor((flagIndex - 1) / 10);
+            const credits = Math.min(375000, 10000 + bracket * 5000);
+            let foodWood = 0;
+            let stone = 0;
+            let gold = 0;
+
+            if (flagIndex > 10) {
+                foodWood = Math.min(1500000, bracket * 25000);
+            }
+            if (flagIndex > 20) {
+                stone = Math.min(1100000, (bracket - 1) * 20000);
+            }
+            if (flagIndex > 50) {
+                gold = Math.min(750000, (bracket - 4) * 15000);
+            }
+
+            return { credits, foodWood, stone, gold };
+        }
+
+        function calculateFlags() {
+            const current = Math.max(0, parseInt(flagCurrent.value) || 0);
+            const target = Math.max(current, parseInt(flagTarget.value) || 0);
+            const discount = parseFloat(flagDiscount.value) || 0;
+
+            if (current >= target) {
+                flagCreditsResult.innerText = "0 Credits";
+                flagResourcesResult.innerHTML = "Target flag number must be higher than current flag number.";
+                return;
+            }
+
+            let totalCredits = 0;
+            let totalFoodWood = 0;
+            let totalStone = 0;
+            let totalGold = 0;
+
+            for (let i = current + 1; i <= target; i++) {
+                const cost = getSingleFlagCost(i);
+                totalCredits += cost.credits;
+                totalFoodWood += cost.foodWood;
+                totalStone += cost.stone;
+                totalGold += cost.gold;
+            }
+
+            const discountFactor = 1 - (discount / 100);
+            totalFoodWood = Math.round(totalFoodWood * discountFactor);
+            totalStone = Math.round(totalStone * discountFactor);
+            totalGold = Math.round(totalGold * discountFactor);
+
+            flagCreditsResult.innerText = `${totalCredits.toLocaleString()} Credits`;
+            flagResourcesResult.innerHTML = `
+                Alliance Food: <strong>${totalFoodWood.toLocaleString()}</strong> | 
+                Alliance Wood: <strong>${totalFoodWood.toLocaleString()}</strong><br>
+                Alliance Stone: <strong>${totalStone.toLocaleString()}</strong> | 
+                Alliance Gold: <strong>${totalGold.toLocaleString()}</strong>
+            `;
+        }
+
+        flagCurrent.addEventListener('input', calculateFlags);
+        flagTarget.addEventListener('input', calculateFlags);
+        flagDiscount.addEventListener('input', calculateFlags);
+
+        // 11. SPENDING & BUNDLE TRACKER ENGINE
+        const spendBudget = document.getElementById('spend-budget');
+        const budgetRatio = document.getElementById('budget-ratio');
+        const budgetProgressBar = document.getElementById('budget-progress-bar');
+        const spendLogTable = document.getElementById('spend-log-table');
+        const spendTotal = document.getElementById('spend-total');
+        const clearSpendingBtn = document.getElementById('clear-spending');
+
+        const spendDate = document.getElementById('spend-date');
+        const spendStatus = document.getElementById('spend-status');
+        const spendCurrency = document.getElementById('spend-currency');
+        const bundleSearch = document.getElementById('bundle-search');
+        const bundleChipsContainer = document.getElementById('bundle-chips-container');
+        const tierListPanel = document.getElementById('tier-list-panel');
+        const selectedBundleTitle = document.getElementById('selected-bundle-title');
+        const selectedBundleCost = document.getElementById('selected-bundle-cost');
+        const tierRowsWrapper = document.getElementById('tier-rows-wrapper');
+        const customItemsWrapper = document.getElementById('custom-items-wrapper');
+        const addCustomItemBtn = document.getElementById('add-custom-item-btn');
+        const spendNotes = document.getElementById('spend-notes');
+        const cancelSelectionBtn = document.getElementById('cancel-selection-btn');
+        const addEntryBtn = document.getElementById('add-entry-btn');
+
+        // Set default UTC date
+        if (spendDate) {
+            spendDate.value = new Date().toISOString().split('T')[0];
+        }
+
+        // Legacy definitions mapping (for compatibility/backward safety)
+        const legacyBundleDefinitions = {
+            "supply-depot": { name: "30-Day Gem Supply", price: 9.99, gems: 19500, vip: 1000, speedup: 0, food: 0, wood: 0, stone: 0, gold: 0, keys: 0, commonMat: 0, uncommonMat: 0, rareMat: 0, epicMat: 0, legendaryMat: 0, sculptures: 0 },
+            "growth-fund": { name: "Growth Fund", price: 14.99, gems: 81000, vip: 1500, speedup: 0, food: 0, wood: 0, stone: 0, gold: 0, keys: 0, commonMat: 0, uncommonMat: 0, rareMat: 0, epicMat: 0, legendaryMat: 0, sculptures: 0 },
+            "writer-history": { name: "Writer of History", price: 4.99, gems: 1050, vip: 500, speedup: 480, food: 2500000, wood: 2500000, stone: 1875000, gold: 1250000, keys: 0, commonMat: 0, uncommonMat: 0, rareMat: 0, epicMat: 0, legendaryMat: 0, sculptures: 10 },
+            "daily-1": { name: "Daily Special Offer ($0.99)", price: 0.99, gems: 200, vip: 100, speedup: 60, food: 500000, wood: 500000, stone: 375000, gold: 250000, keys: 1, commonMat: 0, uncommonMat: 0, rareMat: 0, epicMat: 1, legendaryMat: 0, sculptures: 0 },
+            "daily-2": { name: "Daily Special Offer ($1.99)", price: 1.99, gems: 400, vip: 200, speedup: 180, food: 1000000, wood: 1000000, stone: 750000, gold: 500000, keys: 2, commonMat: 0, uncommonMat: 0, rareMat: 0, epicMat: 2, legendaryMat: 0, sculptures: 0 },
+            "daily-3": { name: "Daily Special Offer ($2.99)", price: 2.99, gems: 600, vip: 300, speedup: 300, food: 1500000, wood: 1500000, stone: 1125000, gold: 750000, keys: 3, commonMat: 0, uncommonMat: 0, rareMat: 0, epicMat: 3, legendaryMat: 0, sculptures: 0 },
+            "coronation-1": { name: "King's Coronation ($4.99)", price: 4.99, gems: 1050, vip: 500, speedup: 480, food: 2500000, wood: 2500000, stone: 1875000, gold: 1250000, keys: 2, commonMat: 10, uncommonMat: 5, rareMat: 2, epicMat: 1, legendaryMat: 0, sculptures: 0 },
+            "coronation-2": { name: "King's Coronation ($9.99)", price: 9.99, gems: 2200, vip: 1000, speedup: 1200, food: 5000000, wood: 5000000, stone: 3750000, gold: 2500000, keys: 4, commonMat: 20, uncommonMat: 10, rareMat: 4, epicMat: 2, legendaryMat: 0, sculptures: 0 },
+            "coronation-3": { name: "King's Coronation ($19.99)", price: 19.99, gems: 4600, vip: 2000, speedup: 2880, food: 10000000, wood: 10000000, stone: 7500000, gold: 5000000, keys: 8, commonMat: 40, uncommonMat: 20, rareMat: 8, epicMat: 4, legendaryMat: 0, sculptures: 0 },
+            "coronation-4": { name: "King's Coronation ($49.99)", price: 49.99, gems: 12000, vip: 5000, speedup: 7200, food: 25000000, wood: 25000000, stone: 18750000, gold: 12500000, keys: 20, commonMat: 100, uncommonMat: 50, rareMat: 20, epicMat: 10, legendaryMat: 2, sculptures: 0 },
+            "coronation-5": { name: "King's Coronation ($99.99)", price: 99.99, gems: 25000, vip: 10000, speedup: 17280, food: 50000000, wood: 50000000, stone: 37500000, gold: 25000000, keys: 40, commonMat: 200, uncommonMat: 100, rareMat: 40, epicMat: 20, legendaryMat: 5, sculptures: 0 },
+            "passport-1": { name: "New World Chest ($4.99)", price: 4.99, gems: 1050, vip: 500, speedup: 480, food: 2500000, wood: 2500000, stone: 1875000, gold: 1250000, keys: 1, commonMat: 5, uncommonMat: 2, rareMat: 1, epicMat: 0, legendaryMat: 0, sculptures: 0 },
+            "passport-2": { name: "New World Chest ($9.99)", price: 9.99, gems: 2200, vip: 1000, speedup: 1200, food: 5000000, wood: 5000000, stone: 3750000, gold: 2500000, keys: 2, commonMat: 10, uncommonMat: 4, rareMat: 2, epicMat: 0, legendaryMat: 0, sculptures: 0 },
+            "passport-3": { name: "New World Chest ($19.99)", price: 19.99, gems: 4600, vip: 2000, speedup: 2880, food: 10000000, wood: 10000000, stone: 7500000, gold: 5000000, keys: 4, commonMat: 20, uncommonMat: 8, rareMat: 4, epicMat: 0, legendaryMat: 0, sculptures: 0 },
+            "geared-up-1": { name: "Geared Up ($4.99)", price: 4.99, gems: 1050, vip: 500, speedup: 300, food: 750000, wood: 800000, stone: 575000, gold: 250000, keys: 1, commonMat: 2, uncommonMat: 1, rareMat: 0, epicMat: 0, legendaryMat: 0, sculptures: 0 },
+            "geared-up-2": { name: "Geared Up ($9.99)", price: 9.99, gems: 2200, vip: 1000, speedup: 600, food: 1500000, wood: 1600000, stone: 1200000, gold: 500000, keys: 2, commonMat: 4, uncommonMat: 2, rareMat: 1, epicMat: 0, legendaryMat: 0, sculptures: 0 },
+            "geared-up-3": { name: "Geared Up ($19.99)", price: 19.99, gems: 4600, vip: 2000, speedup: 1200, food: 3000000, wood: 3200000, stone: 2400000, gold: 1000000, keys: 3, commonMat: 8, uncommonMat: 4, rareMat: 1, epicMat: 1, legendaryMat: 0, sculptures: 0 },
+            "geared-up-4": { name: "Geared Up ($49.99)", price: 49.99, gems: 12000, vip: 5000, speedup: 3000, food: 8750000, wood: 9400000, stone: 6600000, gold: 3200000, keys: 8, commonMat: 16, uncommonMat: 5, rareMat: 2, epicMat: 1, legendaryMat: 1, sculptures: 0 },
+            "geared-up-5": { name: "Geared Up ($99.99)", price: 99.99, gems: 25000, vip: 5025, speedup: 5975, food: 19000000, wood: 20000000, stone: 15000000, gold: 6000000, keys: 12, commonMat: 22, uncommonMat: 8, rareMat: 4, epicMat: 3, legendaryMat: 2, sculptures: 0 },
+            "geared-up-all": { name: "Geared Up Max ($184.95)", price: 184.95, gems: 44850, vip: 13525, speedup: 11075, food: 33000000, wood: 35000000, stone: 25775000, gold: 10950000, keys: 26, commonMat: 52, uncommonMat: 20, rareMat: 8, epicMat: 5, legendaryMat: 3, sculptures: 0 }
+        };
+
+        const bundleGroupDefinitions = {
+            "geared-up": {
+                name: "Geared Up",
+                period: "Weekly",
+                color: "#ff2d55",
+                tiers: [
+                    { id: "geared-up-1", name: "Sure Shot", price: 4.99, gems: 1050, vip: 500, speedup: 300, food: 750000, wood: 800000, stone: 575000, gold: 250000, keys: 1, commonMat: 2, uncommonMat: 1, rareMat: 0, epicMat: 0, legendaryMat: 0, sculptures: 0 },
+                    { id: "geared-up-2", name: "Iron Chest", price: 9.99, gems: 2200, vip: 1000, speedup: 600, food: 1500000, wood: 1600000, stone: 1200000, gold: 500000, keys: 2, commonMat: 4, uncommonMat: 2, rareMat: 1, epicMat: 0, legendaryMat: 0, sculptures: 0 },
+                    { id: "geared-up-3", name: "Bronze Chest", price: 19.99, gems: 4600, vip: 2000, speedup: 1200, food: 3000000, wood: 3200000, stone: 2400000, gold: 1000000, keys: 3, commonMat: 8, uncommonMat: 4, rareMat: 1, epicMat: 1, legendaryMat: 0, sculptures: 0 },
+                    { id: "geared-up-4", name: "Silver Chest", price: 49.99, gems: 12000, vip: 5000, speedup: 3000, food: 8750000, wood: 9400000, stone: 6600000, gold: 3200000, keys: 8, commonMat: 16, uncommonMat: 5, rareMat: 2, epicMat: 1, legendaryMat: 1, sculptures: 0 },
+                    { id: "geared-up-5", name: "$100 Chest", price: 99.99, gems: 25000, vip: 5025, speedup: 5975, food: 19000000, wood: 20000000, stone: 15000000, gold: 6000000, keys: 12, commonMat: 22, uncommonMat: 8, rareMat: 4, epicMat: 3, legendaryMat: 2, sculptures: 0 }
+                ]
+            },
+            "coronation": {
+                name: "King's Coronation",
+                period: "Monthly",
+                color: "#ffcc00",
+                tiers: [
+                    { id: "coronation-1", name: "Tier 1", price: 4.99, gems: 1050, vip: 500, speedup: 480, food: 2500000, wood: 2500000, stone: 1875000, gold: 1250000, keys: 2, commonMat: 10, uncommonMat: 5, rareMat: 2, epicMat: 1, legendaryMat: 0, sculptures: 0 },
+                    { id: "coronation-2", name: "Tier 2", price: 9.99, gems: 2200, vip: 1000, speedup: 1200, food: 5000000, wood: 5000000, stone: 3750000, gold: 2500000, keys: 4, commonMat: 20, uncommonMat: 10, rareMat: 4, epicMat: 2, legendaryMat: 0, sculptures: 0 },
+                    { id: "coronation-3", name: "Tier 3", price: 19.99, gems: 4600, vip: 2000, speedup: 2880, food: 10000000, wood: 10000000, stone: 7500000, gold: 5000000, keys: 8, commonMat: 40, uncommonMat: 20, rareMat: 8, epicMat: 4, legendaryMat: 0, sculptures: 0 },
+                    { id: "coronation-4", name: "Tier 4", price: 49.99, gems: 12000, vip: 5000, speedup: 7200, food: 25000000, wood: 25000000, stone: 18750000, gold: 12500000, keys: 20, commonMat: 100, uncommonMat: 50, rareMat: 20, epicMat: 10, legendaryMat: 2, sculptures: 0 },
+                    { id: "coronation-5", name: "Tier 5", price: 99.99, gems: 25000, vip: 10000, speedup: 17280, food: 50000000, wood: 50000000, stone: 37500000, gold: 25000000, keys: 40, commonMat: 200, uncommonMat: 100, rareMat: 40, epicMat: 20, legendaryMat: 5, sculptures: 0 }
+                ]
+            },
+            "passport": {
+                name: "New World Chest",
+                period: "Daily",
+                color: "#5ac8fa",
+                tiers: [
+                    { id: "passport-1", name: "Tier 1", price: 4.99, gems: 1050, vip: 500, speedup: 480, food: 2500000, wood: 2500000, stone: 1875000, gold: 1250000, keys: 1, commonMat: 5, uncommonMat: 2, rareMat: 1, epicMat: 0, legendaryMat: 0, sculptures: 0 },
+                    { id: "passport-2", name: "Tier 2", price: 9.99, gems: 2200, vip: 1000, speedup: 1200, food: 5000000, wood: 5000000, stone: 3750000, gold: 2500000, keys: 2, commonMat: 10, uncommonMat: 4, rareMat: 2, epicMat: 0, legendaryMat: 0, sculptures: 0 },
+                    { id: "passport-3", name: "Tier 3", price: 19.99, gems: 4600, vip: 2000, speedup: 2880, food: 10000000, wood: 10000000, stone: 7500000, gold: 5000000, keys: 4, commonMat: 20, uncommonMat: 8, rareMat: 4, epicMat: 0, legendaryMat: 0, sculptures: 0 }
+                ]
+            },
+            "daily-special": {
+                name: "Daily Special Offer",
+                period: "Daily",
+                color: "#4cd964",
+                tiers: [
+                    { id: "daily-1", name: "Daily Offer $0.99", price: 0.99, gems: 200, vip: 100, speedup: 60, food: 500000, wood: 500000, stone: 375000, gold: 250000, keys: 1, commonMat: 0, uncommonMat: 0, rareMat: 0, epicMat: 1, legendaryMat: 0, sculptures: 0 },
+                    { id: "daily-2", name: "Daily Offer $1.99", price: 1.99, gems: 400, vip: 200, speedup: 180, food: 1000000, wood: 1000000, stone: 750000, gold: 500000, keys: 2, commonMat: 0, uncommonMat: 0, rareMat: 0, epicMat: 2, legendaryMat: 0, sculptures: 0 },
+                    { id: "daily-3", name: "Daily Offer $2.99", price: 2.99, gems: 600, vip: 300, speedup: 300, food: 1500000, wood: 1500000, stone: 1125000, gold: 750000, keys: 3, commonMat: 0, uncommonMat: 0, rareMat: 0, epicMat: 3, legendaryMat: 0, sculptures: 0 }
+                ]
+            },
+            "war-machine": {
+                name: "War Machine",
+                period: "Daily",
+                color: "#ff3b30",
+                tiers: [
+                    { id: "war-machine-1", name: "Tier 1", price: 4.99, gems: 1050, vip: 500, speedup: 300, food: 750000, wood: 800000, stone: 575000, gold: 250000, keys: 1, commonMat: 2, uncommonMat: 1, rareMat: 0, epicMat: 0, legendaryMat: 0, sculptures: 0 },
+                    { id: "war-machine-2", name: "Tier 2", price: 9.99, gems: 2200, vip: 1000, speedup: 600, food: 1500000, wood: 1600000, stone: 1200000, gold: 500000, keys: 2, commonMat: 4, uncommonMat: 2, rareMat: 1, epicMat: 0, legendaryMat: 0, sculptures: 0 },
+                    { id: "war-machine-3", name: "Tier 3", price: 19.99, gems: 4600, vip: 2000, speedup: 1200, food: 3000000, wood: 3200000, stone: 2400000, gold: 1000000, keys: 3, commonMat: 8, uncommonMat: 4, rareMat: 1, epicMat: 1, legendaryMat: 0, sculptures: 0 },
+                    { id: "war-machine-4", name: "Tier 4", price: 49.99, gems: 12000, vip: 5000, speedup: 3000, food: 8750000, wood: 9400000, stone: 6600000, gold: 3200000, keys: 8, commonMat: 16, uncommonMat: 5, rareMat: 2, epicMat: 1, legendaryMat: 1, sculptures: 0 },
+                    { id: "war-machine-5", name: "Tier 5", price: 99.99, gems: 25000, vip: 10000, speedup: 6000, food: 19000000, wood: 20000000, stone: 15000000, gold: 6000000, keys: 12, commonMat: 22, uncommonMat: 8, rareMat: 4, epicMat: 3, legendaryMat: 2, sculptures: 0 }
+                ]
+            },
+            "circle-of-life": {
+                name: "Circle of Life",
+                period: "Daily",
+                color: "#ff9500",
+                tiers: [
+                    { id: "circle-life-1", name: "Tier 1", price: 4.99, gems: 1050, vip: 500, speedup: 300, food: 750000, wood: 800000, stone: 575000, gold: 250000, keys: 1, commonMat: 2, uncommonMat: 1, rareMat: 0, epicMat: 0, legendaryMat: 0, sculptures: 0 },
+                    { id: "circle-life-2", name: "Tier 2", price: 9.99, gems: 2200, vip: 1000, speedup: 600, food: 1500000, wood: 1600000, stone: 1200000, gold: 500000, keys: 2, commonMat: 4, uncommonMat: 2, rareMat: 1, epicMat: 0, legendaryMat: 0, sculptures: 0 },
+                    { id: "circle-life-3", name: "Tier 3", price: 19.99, gems: 4600, vip: 2000, speedup: 1200, food: 3000000, wood: 3200000, stone: 2400000, gold: 1000000, keys: 3, commonMat: 8, uncommonMat: 4, rareMat: 1, epicMat: 1, legendaryMat: 0, sculptures: 0 },
+                    { id: "circle-life-4", name: "Tier 4", price: 49.99, gems: 12000, vip: 5000, speedup: 3000, food: 8750000, wood: 9400000, stone: 6600000, gold: 3200000, keys: 8, commonMat: 16, uncommonMat: 5, rareMat: 2, epicMat: 1, legendaryMat: 1, sculptures: 0 },
+                    { id: "circle-life-5", name: "Tier 5", price: 99.99, gems: 25000, vip: 10000, speedup: 6000, food: 19000000, wood: 20000000, stone: 15000000, gold: 6000000, keys: 12, commonMat: 22, uncommonMat: 8, rareMat: 4, epicMat: 3, legendaryMat: 2, sculptures: 0 }
+                ]
+            },
+            "city-of-hope": {
+                name: "City of Hope",
+                period: "Daily",
+                color: "#ffcc00",
+                tiers: [
+                    { id: "city-hope-1", name: "Tier 1", price: 4.99, gems: 1050, vip: 500, speedup: 300, food: 750000, wood: 800000, stone: 575000, gold: 250000, keys: 1, commonMat: 2, uncommonMat: 1, rareMat: 0, epicMat: 0, legendaryMat: 0, sculptures: 0 },
+                    { id: "city-hope-2", name: "Tier 2", price: 9.99, gems: 2200, vip: 1000, speedup: 600, food: 1500000, wood: 1600000, stone: 1200000, gold: 500000, keys: 2, commonMat: 4, uncommonMat: 2, rareMat: 1, epicMat: 0, legendaryMat: 0, sculptures: 0 },
+                    { id: "city-hope-3", name: "Tier 3", price: 19.99, gems: 4600, vip: 2000, speedup: 1200, food: 3000000, wood: 3200000, stone: 2400000, gold: 1000000, keys: 3, commonMat: 8, uncommonMat: 4, rareMat: 1, epicMat: 1, legendaryMat: 0, sculptures: 0 },
+                    { id: "city-hope-4", name: "Tier 4", price: 49.99, gems: 12000, vip: 5000, speedup: 3000, food: 8750000, wood: 9400000, stone: 6600000, gold: 3200000, keys: 8, commonMat: 16, uncommonMat: 5, rareMat: 2, epicMat: 1, legendaryMat: 1, sculptures: 0 },
+                    { id: "city-hope-5", name: "Tier 5", price: 99.99, gems: 25000, vip: 10000, speedup: 6000, food: 19000000, wood: 20000000, stone: 15000000, gold: 6000000, keys: 12, commonMat: 22, uncommonMat: 8, rareMat: 4, epicMat: 3, legendaryMat: 2, sculptures: 0 }
+                ]
+            },
+            "fountain-wisdom": {
+                name: "Fountain of Wisdom",
+                period: "Daily",
+                color: "#4cd964",
+                tiers: [
+                    { id: "fountain-wisdom-1", name: "Tier 1", price: 4.99, gems: 1050, vip: 500, speedup: 300, food: 750000, wood: 800000, stone: 575000, gold: 250000, keys: 1, commonMat: 2, uncommonMat: 1, rareMat: 0, epicMat: 0, legendaryMat: 0, sculptures: 0 },
+                    { id: "fountain-wisdom-2", name: "Tier 2", price: 9.99, gems: 2200, vip: 1000, speedup: 600, food: 1500000, wood: 1600000, stone: 1200000, gold: 500000, keys: 2, commonMat: 4, uncommonMat: 2, rareMat: 1, epicMat: 0, legendaryMat: 0, sculptures: 0 },
+                    { id: "fountain-wisdom-3", name: "Tier 3", price: 19.99, gems: 4600, vip: 2000, speedup: 1200, food: 3000000, wood: 3200000, stone: 2400000, gold: 1000000, keys: 3, commonMat: 8, uncommonMat: 4, rareMat: 1, epicMat: 1, legendaryMat: 0, sculptures: 0 },
+                    { id: "fountain-wisdom-4", name: "Tier 4", price: 49.99, gems: 12000, vip: 5000, speedup: 3000, food: 8750000, wood: 9400000, stone: 6600000, gold: 3200000, keys: 8, commonMat: 16, uncommonMat: 5, rareMat: 2, epicMat: 1, legendaryMat: 1, sculptures: 0 },
+                    { id: "fountain-wisdom-5", name: "Tier 5", price: 99.99, gems: 25000, vip: 10000, speedup: 6000, food: 19000000, wood: 20000000, stone: 15000000, gold: 6000000, keys: 12, commonMat: 22, uncommonMat: 8, rareMat: 4, epicMat: 3, legendaryMat: 2, sculptures: 0 }
+                ]
+            },
+            "bumper-harvest": {
+                name: "Bumper Harvest",
+                period: "Weekly",
+                color: "#af52de",
+                tiers: [
+                    { id: "bumper-harvest-1", name: "Tier 1", price: 4.99, gems: 1050, vip: 500, speedup: 300, food: 750000, wood: 800000, stone: 575000, gold: 250000, keys: 1, commonMat: 2, uncommonMat: 1, rareMat: 0, epicMat: 0, legendaryMat: 0, sculptures: 0 },
+                    { id: "bumper-harvest-2", name: "Tier 2", price: 9.99, gems: 2200, vip: 1000, speedup: 600, food: 1500000, wood: 1600000, stone: 1200000, gold: 500000, keys: 2, commonMat: 4, uncommonMat: 2, rareMat: 1, epicMat: 0, legendaryMat: 0, sculptures: 0 },
+                    { id: "bumper-harvest-3", name: "Tier 3", price: 19.99, gems: 4600, vip: 2000, speedup: 1200, food: 3000000, wood: 3200000, stone: 2400000, gold: 1000000, keys: 3, commonMat: 8, uncommonMat: 4, rareMat: 1, epicMat: 1, legendaryMat: 0, sculptures: 0 },
+                    { id: "bumper-harvest-4", name: "Tier 4", price: 49.99, gems: 12000, vip: 5000, speedup: 3000, food: 8750000, wood: 9400000, stone: 6600000, gold: 3200000, keys: 8, commonMat: 16, uncommonMat: 5, rareMat: 2, epicMat: 1, legendaryMat: 1, sculptures: 0 },
+                    { id: "bumper-harvest-5", name: "Tier 5", price: 99.99, gems: 25000, vip: 10000, speedup: 6000, food: 19000000, wood: 20000000, stone: 15000000, gold: 6000000, keys: 12, commonMat: 22, uncommonMat: 8, rareMat: 4, epicMat: 3, legendaryMat: 2, sculptures: 0 }
+                ]
+            },
+            "royal-armaments": {
+                name: "Royal Armaments",
+                period: "Weekly",
+                color: "#ff2d55",
+                tiers: [
+                    { id: "royal-armaments-1", name: "Tier 1", price: 4.99, gems: 1050, vip: 500, speedup: 300, food: 750000, wood: 800000, stone: 575000, gold: 250000, keys: 1, commonMat: 2, uncommonMat: 1, rareMat: 0, epicMat: 0, legendaryMat: 0, sculptures: 0 },
+                    { id: "royal-armaments-2", name: "Tier 2", price: 9.99, gems: 2200, vip: 1000, speedup: 600, food: 1500000, wood: 1600000, stone: 1200000, gold: 500000, keys: 2, commonMat: 4, uncommonMat: 2, rareMat: 1, epicMat: 0, legendaryMat: 0, sculptures: 0 },
+                    { id: "royal-armaments-3", name: "Tier 3", price: 19.99, gems: 4600, vip: 2000, speedup: 1200, food: 3000000, wood: 3200000, stone: 2400000, gold: 1000000, keys: 3, commonMat: 8, uncommonMat: 4, rareMat: 1, epicMat: 1, legendaryMat: 0, sculptures: 0 },
+                    { id: "royal-armaments-4", name: "Tier 4", price: 49.99, gems: 12000, vip: 5000, speedup: 3000, food: 8750000, wood: 9400000, stone: 6600000, gold: 3200000, keys: 8, commonMat: 16, uncommonMat: 5, rareMat: 2, epicMat: 1, legendaryMat: 1, sculptures: 0 },
+                    { id: "royal-armaments-5", name: "Tier 5", price: 99.99, gems: 25000, vip: 10000, speedup: 6000, food: 19000000, wood: 20000000, stone: 15000000, gold: 6000000, keys: 12, commonMat: 22, uncommonMat: 8, rareMat: 4, epicMat: 3, legendaryMat: 2, sculptures: 0 }
+                ]
+            },
+            "ancient-legacy": {
+                name: "Ancient Legacy",
+                period: "Daily",
+                color: "#5ac8fa",
+                tiers: [
+                    { id: "ancient-legacy-1", name: "Tier 1", price: 4.99, gems: 1050, vip: 500, speedup: 300, food: 750000, wood: 800000, stone: 575000, gold: 250000, keys: 1, commonMat: 2, uncommonMat: 1, rareMat: 0, epicMat: 0, legendaryMat: 0, sculptures: 0 },
+                    { id: "ancient-legacy-2", name: "Tier 2", price: 9.99, gems: 2200, vip: 1000, speedup: 600, food: 1500000, wood: 1600000, stone: 1200000, gold: 500000, keys: 2, commonMat: 4, uncommonMat: 2, rareMat: 1, epicMat: 0, legendaryMat: 0, sculptures: 0 },
+                    { id: "ancient-legacy-3", name: "Tier 3", price: 19.99, gems: 4600, vip: 2000, speedup: 1200, food: 3000000, wood: 3200000, stone: 2400000, gold: 1000000, keys: 3, commonMat: 8, uncommonMat: 4, rareMat: 1, epicMat: 1, legendaryMat: 0, sculptures: 0 },
+                    { id: "ancient-legacy-4", name: "Tier 4", price: 49.99, gems: 12000, vip: 5000, speedup: 3000, food: 8750000, wood: 9400000, stone: 6600000, gold: 3200000, keys: 8, commonMat: 16, uncommonMat: 5, rareMat: 2, epicMat: 1, legendaryMat: 1, sculptures: 0 },
+                    { id: "ancient-legacy-5", name: "Tier 5", price: 99.99, gems: 25000, vip: 10000, speedup: 6000, food: 19000000, wood: 20000000, stone: 15000000, gold: 6000000, keys: 12, commonMat: 22, uncommonMat: 8, rareMat: 4, epicMat: 3, legendaryMat: 2, sculptures: 0 }
+                ]
+            },
+            "supply-depot": {
+                name: "30-Day Gem Supply",
+                period: "Monthly",
+                color: "#ff9500",
+                tiers: [
+                    { id: "supply-depot", name: "Gem Supply", price: 9.99, gems: 19500, vip: 1000, speedup: 0, food: 0, wood: 0, stone: 0, gold: 0, keys: 0, commonMat: 0, uncommonMat: 0, rareMat: 0, epicMat: 0, legendaryMat: 0, sculptures: 0 }
+                ]
+            },
+            "growth-fund": {
+                name: "Growth Fund",
+                period: "One-time",
+                color: "#ffd60a",
+                tiers: [
+                    { id: "growth-fund", name: "Growth Fund", price: 14.99, gems: 81000, vip: 1500, speedup: 0, food: 0, wood: 0, stone: 0, gold: 0, keys: 0, commonMat: 0, uncommonMat: 0, rareMat: 0, epicMat: 0, legendaryMat: 0, sculptures: 0 }
+                ]
+            },
+            "writer-history": {
+                name: "Writer of History",
+                period: "Trigger",
+                color: "#af52de",
+                tiers: [
+                    { id: "writer-history", name: "Writer of History", price: 4.99, gems: 1050, vip: 500, speedup: 480, food: 2500000, wood: 2500000, stone: 1875000, gold: 1250000, keys: 0, commonMat: 0, uncommonMat: 0, rareMat: 0, epicMat: 0, legendaryMat: 0, sculptures: 10 }
+                ]
+            }
+        };
+
+        let spendLog = [];
+        let selectedBundleId = null;
+        let selectedQuantities = {};
+        let customItemsList = [];
+
+        if (localStorage.getItem('zenith_spend_log')) {
+            try {
+                spendLog = JSON.parse(localStorage.getItem('zenith_spend_log'));
+            } catch (e) {
+                spendLog = [];
+            }
+        }
+        if (localStorage.getItem('zenith_spend_budget')) {
+            spendBudget.value = localStorage.getItem('zenith_spend_budget');
+        }
+
+        function saveSpendingData() {
+            localStorage.setItem('zenith_spend_log', JSON.stringify(spendLog));
+            localStorage.setItem('zenith_spend_budget', spendBudget.value);
+        }
+
+        function formatSpeedupMins(totalMins) {
+            const d = Math.floor(totalMins / 1440);
+            const h = Math.floor((totalMins % 1440) / 60);
+            const m = totalMins % 60;
+            if (d > 0) return `${(totalMins / 1440).toFixed(2)} Days`;
+            if (h > 0) return `${h}h ${m}m`;
+            return `${m}m`;
+        }
+
+        function formatResource(val) {
+            if (val >= 1000000) return (val / 1000000).toLocaleString() + "M";
+            if (val >= 1000) return (val / 1000).toLocaleString() + "K";
+            return val.toLocaleString();
+        }
+
+        // Render Bundle Chips
+        function renderBundleChips(filter = "") {
+            bundleChipsContainer.innerHTML = "";
+            const query = filter.toLowerCase().trim();
+
+            for (const key in bundleGroupDefinitions) {
+                const bundle = bundleGroupDefinitions[key];
+                if (query && !bundle.name.toLowerCase().includes(query)) {
+                    continue;
+                }
+
+                const chip = document.createElement('div');
+                chip.className = `bundle-chip ${selectedBundleId === key ? 'active' : ''}`;
+                if (selectedBundleId === key) {
+                    chip.style.borderColor = bundle.color;
+                    chip.style.boxShadow = `0 0 10px ${bundle.color}40`;
+                }
+                chip.innerHTML = `<i class="fas fa-box" style="color: ${bundle.color};"></i> ${bundle.name} <span style="font-size: 0.65rem; opacity: 0.7;">(${bundle.period})</span>`;
+                
+                chip.addEventListener('click', () => {
+                    selectBundle(key);
+                });
+                bundleChipsContainer.appendChild(chip);
+            }
+        }
+
+        // Select Bundle and Render Panel
+        function selectBundle(bundleId) {
+            selectedBundleId = bundleId;
+            selectedQuantities = {};
+            customItemsList = [];
+            
+            // Initialize quantities to 0
+            const bundle = bundleGroupDefinitions[bundleId];
+            bundle.tiers.forEach(tier => {
+                selectedQuantities[tier.id] = 0;
+            });
+
+            // Update chips active states
+            renderBundleChips(bundleSearch.value);
+            
+            // Show list panel
+            tierListPanel.style.display = 'block';
+            selectedBundleTitle.innerHTML = `${bundle.name} <span style="font-size: 0.75rem; color: #a39e93; font-family: 'Inter', sans-serif;">${bundle.period}</span>`;
+            selectedBundleTitle.parentElement.firstElementChild.style.color = '#fff';
+            
+            renderTierRows();
+            renderCustomItems();
+            updateSelectedBundleTotal();
+        }
+
+        // Render individual tier rows
+        function renderTierRows() {
+            tierRowsWrapper.innerHTML = "";
+            const bundle = bundleGroupDefinitions[selectedBundleId];
+            if (!bundle) return;
+
+            bundle.tiers.forEach(tier => {
+                const qty = selectedQuantities[tier.id] || 0;
+                const row = document.createElement('div');
+                row.className = "tier-row";
+                row.innerHTML = `
+                    <div class="tier-info">
+                        <i class="fas fa-gift" style="color: ${bundle.color}"></i>
+                        <div>
+                            <div style="font-weight: 600;">${tier.name}</div>
+                            <div style="font-size: 0.75rem; color: #a39e93;">$${tier.price.toFixed(2)} each</div>
+                        </div>
+                    </div>
+                    <div class="tier-controls">
+                        <button class="qty-btn" onclick="adjustTierQty('${tier.id}', -1)">-</button>
+                        <span class="qty-display">${qty}</span>
+                        <button class="qty-btn" onclick="adjustTierQty('${tier.id}', 1)">+</button>
+                        <span class="tier-price">$${(tier.price * qty).toFixed(2)}</span>
+                    </div>
+                `;
+                tierRowsWrapper.appendChild(row);
+            });
+        }
+
+        window.adjustTierQty = function(tierId, delta) {
+            if (selectedQuantities[tierId] !== undefined) {
+                selectedQuantities[tierId] = Math.max(0, selectedQuantities[tierId] + delta);
+                renderTierRows();
+                updateSelectedBundleTotal();
+            }
+        };
+
+        // Render Custom Items rows
+        function renderCustomItems() {
+            customItemsWrapper.innerHTML = "";
+            customItemsList.forEach((item, index) => {
+                const row = document.createElement('div');
+                row.style.display = "flex";
+                row.style.gap = "10px";
+                row.style.alignItems = "center";
+                row.style.marginBottom = "10px";
+                row.innerHTML = `
+                    <input type="text" class="form-input" style="flex: 2; height: 34px; font-size: 0.85rem;" placeholder="Item Name" value="${item.name}" oninput="updateCustomItem(${index}, 'name', this.value)">
+                    <input type="number" class="form-input" style="flex: 1; height: 34px; font-size: 0.85rem;" placeholder="Price ($)" value="${item.price || ''}" min="0" step="0.01" oninput="updateCustomItem(${index}, 'price', this.value)">
+                    <div class="tier-controls" style="gap: 8px;">
+                        <button class="qty-btn" style="width: 28px; height: 28px;" onclick="adjustCustomQty(${index}, -1)">-</button>
+                        <span class="qty-display" style="font-size: 0.95rem; width: 18px;">${item.qty}</span>
+                        <button class="qty-btn" style="width: 28px; height: 28px;" onclick="adjustCustomQty(${index}, 1)">+</button>
+                    </div>
+                    <button onclick="removeCustomItem(${index})" style="background: none; border: none; color: #ff453a; cursor: pointer; font-size: 0.95rem;"><i class="fas fa-trash"></i></button>
+                `;
+                customItemsWrapper.appendChild(row);
+            });
+        }
+
+        window.updateCustomItem = function(index, field, val) {
+            if (field === 'price') {
+                customItemsList[index].price = parseFloat(val) || 0;
+            } else {
+                customItemsList[index].name = val;
+            }
+            updateSelectedBundleTotal();
+        };
+
+        window.adjustCustomQty = function(index, delta) {
+            customItemsList[index].qty = Math.max(1, customItemsList[index].qty + delta);
+            renderCustomItems();
+            updateSelectedBundleTotal();
+        };
+
+        window.removeCustomItem = function(index) {
+            customItemsList.splice(index, 1);
+            renderCustomItems();
+            updateSelectedBundleTotal();
+        };
+
+        addCustomItemBtn.addEventListener('click', () => {
+            customItemsList.push({ name: "", price: 0, qty: 1 });
+            renderCustomItems();
+            updateSelectedBundleTotal();
+        });
+
+        // Calculate current total cost of the selected state
+        function updateSelectedBundleTotal() {
+            let total = 0;
+            const bundle = bundleGroupDefinitions[selectedBundleId];
+            if (bundle) {
+                bundle.tiers.forEach(tier => {
+                    const qty = selectedQuantities[tier.id] || 0;
+                    total += tier.price * qty;
+                });
+            }
+            customItemsList.forEach(item => {
+                total += (item.price || 0) * item.qty;
+            });
+
+            selectedBundleCost.innerText = `$${total.toFixed(2)}`;
+        }
+
+        // Cancel selection
+        cancelSelectionBtn.addEventListener('click', () => {
+            selectedBundleId = null;
+            selectedQuantities = {};
+            customItemsList = [];
+            spendNotes.value = "";
+            tierListPanel.style.display = 'none';
+            renderBundleChips(bundleSearch.value);
+        });
+
+        // Add spending entry to database
+        addEntryBtn.addEventListener('click', () => {
+            const dateVal = spendDate.value || new Date().toISOString().split('T')[0];
+            const statusVal = spendStatus.value;
+            const currencyVal = spendCurrency.value;
+            const notesVal = spendNotes.value.trim();
+
+            const itemsLogged = [];
+            const bundle = bundleGroupDefinitions[selectedBundleId];
+            if (bundle) {
+                bundle.tiers.forEach(tier => {
+                    const qty = selectedQuantities[tier.id] || 0;
+                    if (qty > 0) {
+                        itemsLogged.push({ id: tier.id, qty });
+                    }
+                });
+            }
+
+            const customLogged = customItemsList.filter(item => item.qty > 0 && item.name.trim() !== "");
+
+            if (itemsLogged.length === 0 && customLogged.length === 0) {
+                alert("Please select at least one bundle tier quantity or add a custom item.");
+                return;
+            }
+
+            // Calculate total cost for entry
+            let entryTotal = 0;
+            if (bundle) {
+                itemsLogged.forEach(item => {
+                    const tierDef = bundle.tiers.find(t => t.id === item.id);
+                    if (tierDef) entryTotal += tierDef.price * item.qty;
+                });
+            }
+            customLogged.forEach(c => {
+                entryTotal += c.price * c.qty;
+            });
+
+            const newEntry = {
+                date: dateVal,
+                status: statusVal,
+                currency: currencyVal,
+                bundleId: selectedBundleId,
+                items: itemsLogged,
+                customItems: customLogged,
+                notes: notesVal,
+                total: entryTotal
+            };
+
+            spendLog.push(newEntry);
+            saveSpendingData();
+            
+            // Reset selection state
+            selectedBundleId = null;
+            selectedQuantities = {};
+            customItemsList = [];
+            spendNotes.value = "";
+            tierListPanel.style.display = 'none';
+            
+            renderBundleChips(bundleSearch.value);
+            updateSpendingUI();
+        });
+
+        // Search filtering logic
+        bundleSearch.addEventListener('input', () => {
+            renderBundleChips(bundleSearch.value);
+        });
+
+        function updateSpendingUI() {
+            spendLogTable.innerHTML = "";
+            let totalUSD = 0;
+            
+            const accumulated = {
+                gems: 0, vip: 0, speedup: 0, food: 0, wood: 0, stone: 0, gold: 0,
+                keys: 0, commonMat: 0, uncommonMat: 0, rareMat: 0, epicMat: 0, legendaryMat: 0, sculptures: 0
+            };
+
+            spendLog.forEach((entry, index) => {
+                // Check if legacy flat log or rich object
+                if (typeof entry.total === 'undefined') {
+                    // Legacy flat entry support
+                    const bundle = legacyBundleDefinitions[entry.id];
+                    if (!bundle) return;
+
+                    const itemCost = bundle.price * entry.qty;
+                    totalUSD += itemCost;
+
+                    for (const key in accumulated) {
+                        if (bundle[key] !== undefined) {
+                            accumulated[key] += bundle[key] * entry.qty;
+                        }
+                    }
+
+                    const tr = document.createElement('tr');
+                    tr.style.borderBottom = "1px solid rgba(255,255,255,0.03)";
+                    tr.innerHTML = `
+                        <td style="padding: 10px; color:#ebd5b3; white-space: nowrap;">N/A</td>
+                        <td style="padding: 10px; color:#ebd5b3;">${bundle.name} <span style="font-size:0.75rem; opacity: 0.7;">(Qty: ${entry.qty})</span></td>
+                        <td style="padding: 10px; text-align: center;"><span style="background: rgba(76,217,100,0.15); color: #4cd964; font-size: 0.7rem; font-weight: bold; padding: 2px 6px; border-radius: 4px;">Purchased</span></td>
+                        <td style="padding: 10px; text-align: right; font-weight: bold; color: var(--primary-color);">$${itemCost.toFixed(2)}</td>
+                        <td style="padding: 10px; text-align: center;">
+                            <button onclick="removeSpendItem(${index})" style="background: none; border: none; color: #ff453a; cursor: pointer; font-size: 0.9rem;"><i class="fas fa-trash"></i></button>
+                        </td>
+                    `;
+                    spendLogTable.appendChild(tr);
+                } else {
+                    // Rich entry object
+                    totalUSD += entry.total;
+
+                    // Compile items naming description
+                    const names = [];
+                    
+                    // Standard bundle items
+                    if (entry.bundleId) {
+                        const bundleDef = bundleGroupDefinitions[entry.bundleId];
+                        if (bundleDef) {
+                            entry.items.forEach(item => {
+                                const tierDef = bundleDef.tiers.find(t => t.id === item.id);
+                                if (tierDef) {
+                                    names.push(`${bundleDef.name} (${tierDef.name}) x${item.qty}`);
+                                    
+                                    // Add accumulated rewards
+                                    for (const rewardKey in accumulated) {
+                                        if (tierDef[rewardKey] !== undefined) {
+                                            accumulated[rewardKey] += tierDef[rewardKey] * item.qty;
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    }
+
+                    // Custom items
+                    if (entry.customItems && entry.customItems.length > 0) {
+                        entry.customItems.forEach(c => {
+                            names.push(`${c.name} x${c.qty}`);
+                        });
+                    }
+
+                    const itemsText = names.join(', ');
+                    const notesTooltip = entry.notes ? `<div style="font-size:0.75rem; color:#a39e93; margin-top:3px; font-style:italic;"><i class="far fa-comment-dots"></i> ${entry.notes}</div>` : "";
+                    
+                    const statusColor = entry.status === 'Purchased' ? '#4cd964' : '#ff9500';
+                    const statusBg = entry.status === 'Purchased' ? 'rgba(76,217,100,0.12)' : 'rgba(255,149,0,0.12)';
+
+                    const tr = document.createElement('tr');
+                    tr.style.borderBottom = "1px solid rgba(255,255,255,0.03)";
+                    tr.innerHTML = `
+                        <td style="padding: 10px; color:#ebd5b3; white-space: nowrap;">${entry.date}</td>
+                        <td style="padding: 10px; color:#ebd5b3;">
+                            <div style="font-weight: 500;">${itemsText}</div>
+                            ${notesTooltip}
+                        </td>
+                        <td style="padding: 10px; text-align: center;">
+                            <span style="background: ${statusBg}; color: ${statusColor}; font-size: 0.7rem; font-weight: bold; padding: 3px 7px; border-radius: 6px;">${entry.status}</span>
+                        </td>
+                        <td style="padding: 10px; text-align: right; font-weight: bold; color: var(--primary-color);">$${entry.total.toFixed(2)}</td>
+                        <td style="padding: 10px; text-align: center;">
+                            <button onclick="removeSpendItem(${index})" style="background: none; border: none; color: #ff453a; cursor: pointer; font-size: 0.9rem;"><i class="fas fa-trash"></i></button>
+                        </td>
+                    `;
+                    spendLogTable.appendChild(tr);
+                }
+            });
+
+            if (spendLog.length === 0) {
+                spendLogTable.innerHTML = `<tr><td colspan="5" style="padding: 20px; text-align: center; color: #a39e93;">No purchases logged yet.</td></tr>`;
+            }
+
+            spendTotal.innerText = `$${totalUSD.toFixed(2)}`;
+
+            const rewardsGrid = document.getElementById('spend-rewards-grid');
+            rewardsGrid.innerHTML = "";
+
+            const rewardMeta = [
+                { key: 'gems', name: 'Gems', icon: 'fas fa-gem', color: '#ff3b30' },
+                { key: 'vip', name: 'VIP Points', icon: 'fas fa-crown', color: '#ffcc00' },
+                { key: 'speedup', name: 'Universal Speedup', icon: 'fas fa-hourglass-half', color: '#5ac8fa', isTime: true },
+                { key: 'food', name: 'Food', icon: 'fas fa-seedling', color: '#ff9500', isRes: true },
+                { key: 'wood', name: 'Wood', icon: 'fas fa-tree', color: '#4cd964', isRes: true },
+                { key: 'stone', name: 'Stone', icon: 'fas fa-cubes', color: '#8e8e93', isRes: true },
+                { key: 'gold', name: 'Gold', icon: 'fas fa-coins', color: '#ffd60a', isRes: true },
+                { key: 'keys', name: 'Crystal Key', icon: 'fas fa-key', color: '#af52de' },
+                { key: 'commonMat', name: 'Normal Mat Chest', icon: 'fas fa-box', color: '#34c759' },
+                { key: 'uncommonMat', name: 'Advanced Mat Chest', icon: 'fas fa-box', color: '#007aff' },
+                { key: 'rareMat', name: 'Elite Mat Chest', icon: 'fas fa-box', color: '#5856d6' },
+                { key: 'epicMat', name: 'Epic Mat Chest', icon: 'fas fa-box', color: '#ff2d55' },
+                { key: 'legendaryMat', name: 'Legendary Mat Chest', icon: 'fas fa-box', color: '#ff9500' },
+                { key: 'sculptures', name: 'Leg. Sculptures', icon: 'fas fa-award', color: '#ffcc00' }
+            ];
+
+            let hasRewards = false;
+            rewardMeta.forEach(reward => {
+                const value = accumulated[reward.key];
+                if (value > 0) {
+                    hasRewards = true;
+                    let displayValue = value.toLocaleString();
+                    if (reward.isTime) {
+                        displayValue = formatSpeedupMins(value);
+                    } else if (reward.isRes) {
+                        displayValue = formatResource(value);
+                    }
+
+                    const chip = document.createElement('div');
+                    chip.style.background = 'rgba(255, 255, 255, 0.03)';
+                    chip.style.border = '1px solid rgba(255, 255, 255, 0.08)';
+                    chip.style.borderRadius = '12px';
+                    chip.style.padding = '8px 12px';
+                    chip.style.display = 'flex';
+                    chip.style.alignItems = 'center';
+                    chip.style.gap = '10px';
+                    chip.style.fontSize = '0.8rem';
+                    chip.style.color = '#ebd5b3';
+
+                    chip.innerHTML = `
+                        <i class="${reward.icon}" style="color: ${reward.color}; font-size: 1rem; filter: drop-shadow(0 0 5px ${reward.color}40);"></i>
+                        <div>
+                            <div style="font-size: 0.65rem; color:#a39e93; text-transform: uppercase; letter-spacing:0.5px;">${reward.name}</div>
+                            <div style="font-weight: 700; color: #fff; font-size: 0.9rem; margin-top: 2px;">${displayValue}</div>
+                        </div>
+                    `;
+                    rewardsGrid.appendChild(chip);
+                }
+            });
+
+            if (!hasRewards) {
+                rewardsGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color:#a39e93; font-size:0.85rem; padding: 10px 0;">Accumulated rewards will display here.</div>`;
+            }
+
+            const budget = parseFloat(spendBudget.value) || 0;
+            if (budget > 0) {
+                const pct = Math.min(100, Math.round((totalUSD / budget) * 100));
+                budgetRatio.innerText = `${pct}% ($${totalUSD.toFixed(2)} / $${budget.toFixed(2)})`;
+                budgetProgressBar.style.width = `${pct}%`;
+                
+                if (pct >= 100) {
+                    budgetRatio.style.color = "#ff453a";
+                    budgetProgressBar.style.background = "linear-gradient(90deg, #ff453a, #ff9f0a)";
+                    budgetProgressBar.style.boxShadow = "0 0 10px rgba(255,69,58,0.6)";
+                } else if (pct >= 80) {
+                    budgetRatio.style.color = "#ff9f0a";
+                    budgetProgressBar.style.background = "linear-gradient(90deg, #ff9f0a, #ffd60a)";
+                    budgetProgressBar.style.boxShadow = "0 0 10px rgba(255,159,10,0.6)";
+                } else {
+                    budgetRatio.style.color = "var(--primary-color)";
+                    budgetProgressBar.style.background = "linear-gradient(90deg, #E6B741, #F1CB6C)";
+                    budgetProgressBar.style.boxShadow = "0 0 10px rgba(230,183,65,0.6)";
+                }
+            } else {
+                budgetRatio.innerText = `N/A ($${totalUSD.toFixed(2)})`;
+                budgetProgressBar.style.width = "0%";
+            }
+
+            // Spending Pace Estimator
+            const pacePanel = document.getElementById('spending-pace-panel');
+            const paceStats = document.getElementById('spending-pace-stats');
+
+            if (spendLog.length >= 1 && totalUSD > 0 && budget > 0) {
+                pacePanel.style.display = "block";
+                paceStats.innerHTML = "";
+
+                // Calculate days span from first to last entry
+                const dates = spendLog.map(e => new Date(e.date || new Date())).sort((a, b) => a - b);
+                const firstDate = dates[0];
+                const lastDate = dates[dates.length - 1];
+                const daySpan = Math.max(1, Math.ceil((lastDate - firstDate) / (1000 * 60 * 60 * 24)) + 1);
+                
+                const dailyRate = totalUSD / daySpan;
+                const remaining = Math.max(0, budget - totalUSD);
+                const daysTobudget = remaining > 0 ? Math.ceil(remaining / dailyRate) : 0;
+                
+                const projectedDate = new Date();
+                projectedDate.setDate(projectedDate.getDate() + daysTobudget);
+                const dateStr = projectedDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+                const stats = [
+                    { label: "Daily Rate", value: `$${dailyRate.toFixed(2)}/day`, icon: "fas fa-tachometer-alt", color: "#5ac8fa" },
+                    { label: "Days to Budget", value: remaining > 0 ? `${daysTobudget} day${daysTobudget !== 1 ? 's' : ''}` : "Budget reached!", icon: "fas fa-calendar-day", color: remaining > 0 ? "#4cd964" : "#ff453a" },
+                    { label: "Projected Date", value: remaining > 0 ? dateStr : "—", icon: "fas fa-calendar-check", color: "#ff9500" }
+                ];
+
+                stats.forEach(s => {
+                    const card = document.createElement('div');
+                    card.style.cssText = `background: rgba(14, 11, 8, 0.5); border: 1px solid rgba(230, 183, 65, 0.1); border-radius: 10px; padding: 12px; text-align: center;`;
+                    card.innerHTML = `
+                        <i class="${s.icon}" style="color: ${s.color}; font-size: 1rem; margin-bottom: 6px; display: block; filter: drop-shadow(0 0 5px ${s.color}40);"></i>
+                        <div style="font-size: 0.65rem; color: #a39e93; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px;">${s.label}</div>
+                        <div style="font-size: 0.95rem; font-weight: 700; color: #fff;">${s.value}</div>
+                    `;
+                    paceStats.appendChild(card);
+                });
+            } else {
+                pacePanel.style.display = "none";
+            }
+        }
+
+        window.removeSpendItem = function(index) {
+            spendLog.splice(index, 1);
+            saveSpendingData();
+            updateSpendingUI();
+        };
+
+        spendBudget.addEventListener('input', () => {
+            saveSpendingData();
+            updateSpendingUI();
+        });
+
+        clearSpendingBtn.addEventListener('click', () => {
+            if (confirm("Are you sure you want to reset your entire spending log? This cannot be undone.")) {
+                spendLog = [];
+                saveSpendingData();
+                updateSpendingUI();
+            }
+        });
+
+        // Initialize bundle chips on load
+        renderBundleChips();
+        updateSpendingUI();
+
+        // Initialize calculators
+        calculateTraining();
+        calculateHealing();
+        calculateFlags();
+        updateSpendingUI();
+    </script>
+</body>
+
+</html>

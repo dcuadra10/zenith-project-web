@@ -1,169 +1,453 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Zenith | Rise of Kingdoms</title>
-    <link rel="icon" type="image/png" href="assets/logo.png">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <title>Zenith Portal | Rise of Kingdoms Hub</title>
+    <link rel="icon" type="image/png" href="./project-zenith/assets/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
+    <style>
+        /* ═══════════════════════════════════════════════
+           ZENITH PORTAL — Gateway Design System
+           ═══════════════════════════════════════════════ */
+        :root {
+            --bg-deepest: #000000;
+            --bg-deep: #0e0a05;
+            --bg-glass: rgba(18, 14, 8, 0.65);
+            --bg-glass-border: rgba(230, 183, 65, 0.2);
+            --primary-color: #E6B741;
+            --accent-gold-light: #F1CB6C;
+            --accent-gold-dark: #C5921E;
+            --text-primary: #fffbeb;
+            --text-secondary: #ebd5b3;
+            --text-muted: #a39480;
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-spring: cubic-bezier(0.25, 1, 0.5, 1.2);
+        }
 
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-deepest);
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: transparent;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        /* ─── Background & Ambient Lights ─── */
+        .background-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 60%, rgba(9, 6, 2, 0.95) 100%),
+                url('./project-zenith/assets/golden_dragon_bg.png');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
+        .background-overlay::before {
+            content: '';
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.15) 0%, transparent 70%);
+            filter: blur(130px);
+            animation: driftOne 25s infinite alternate ease-in-out;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .background-overlay::after {
+            content: '';
+            position: fixed;
+            bottom: -10%;
+            right: -10%;
+            width: 65vw;
+            height: 65vw;
+            background: radial-gradient(circle, rgba(255, 140, 0, 0.1) 0%, transparent 70%);
+            filter: blur(150px);
+            animation: driftTwo 30s infinite alternate ease-in-out;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes driftOne {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.8; }
+            50% { transform: translate(5%, 8%) scale(1.1) rotate(180deg); opacity: 1; }
+            100% { transform: translate(2%, -4%) scale(0.95) rotate(360deg); opacity: 0.8; }
+        }
+
+        @keyframes driftTwo {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.7; }
+            50% { transform: translate(-8%, -6%) scale(1.15) rotate(-180deg); opacity: 0.9; }
+            100% { transform: translate(5%, 3%) scale(1) rotate(-360deg); opacity: 0.7; }
+        }
+
+        /* ─── Header / Navigation ─── */
+        header {
+            width: 100%;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .brand-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            height: 80px;
+            width: auto;
+            filter: brightness(1) drop-shadow(0 2px 15px rgba(230, 183, 65, 0.3));
+            transition: all 0.4s var(--ease-spring);
+        }
+
+        .logo-img:hover {
+            transform: scale(1.08) rotate(3deg);
+            filter: brightness(1.1) drop-shadow(0 4px 25px rgba(230, 183, 65, 0.5));
+        }
+
+        h1.brand-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, #F1CB6C 0%, #E6B741 50%, #C5921E 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+
+        .brand-tagline {
+            font-family: 'Cinzel', serif;
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* ─── Main Portal Content ─── */
+        main {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            z-index: 5;
+        }
+
+        .portal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        /* ─── Portal Card ─── */
+        .portal-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            border: 1px solid var(--bg-glass-border);
+            border-radius: 28px;
+            padding: 50px 40px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.5s var(--ease-out-expo);
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.5), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .portal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            padding: 1.5px;
+            background: linear-gradient(135deg, rgba(241, 203, 108, 0.4) 0%, transparent 60%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0.6;
+            transition: opacity 0.5s ease;
+        }
+
+        .portal-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(230, 183, 65, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s var(--ease-out-expo);
+            transform: scale(0.8);
+        }
+
+        .portal-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(230, 183, 65, 0.45);
+            background: rgba(24, 19, 11, 0.75);
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.7),
+                0 0 40px rgba(230, 183, 65, 0.1);
+        }
+
+        .portal-card:hover::before {
+            opacity: 1;
+        }
+
+        .portal-card:hover::after {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .icon-wrapper {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            background: rgba(230, 183, 65, 0.08);
+            border: 1px solid rgba(230, 183, 65, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            transition: all 0.4s var(--ease-spring);
+            box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.05);
+        }
+
+        .icon-wrapper i {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 8px rgba(230, 183, 65, 0.3));
+        }
+
+        .portal-card:hover .icon-wrapper {
+            background: linear-gradient(135deg, var(--accent-gold-light), var(--accent-gold-dark));
+            border-color: transparent;
+            box-shadow: 0 0 25px rgba(230, 183, 65, 0.5);
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .portal-card:hover .icon-wrapper i {
+            color: #000;
+            filter: none;
+        }
+
+        .card-content {
+            flex-grow: 1;
+            margin-bottom: 35px;
+        }
+
+        .card-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .portal-card:hover .card-title {
+            color: var(--accent-gold-light);
+        }
+
+        .card-description {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        .portal-btn {
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 14px 35px;
+            border-radius: 30px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            width: 100%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s var(--ease-out-expo);
+            position: relative;
+            z-index: 2;
+        }
+
+        .portal-btn-primary {
+            background: linear-gradient(135deg, var(--accent-gold-light), var(--accent-gold-dark));
+            color: #000;
+            border: 1px solid transparent;
+            box-shadow: 0 5px 15px rgba(230, 183, 65, 0.3);
+        }
+
+        .portal-card:hover .portal-btn-primary {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(230, 183, 65, 0.5);
+        }
+
+        .portal-btn-secondary {
+            background: rgba(255, 255, 255, 0.03);
+            color: #fff;
+            border: 1px solid rgba(230, 183, 65, 0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        .portal-card:hover .portal-btn-secondary {
+            background: rgba(230, 183, 65, 0.12);
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(230, 183, 65, 0.2);
+        }
+
+        /* ─── Footer ─── */
+        footer {
+            width: 100%;
+            padding: 30px 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.5px;
+            z-index: 10;
+        }
+
+        /* ─── Animations ─── */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s var(--ease-out-expo) forwards;
+        }
+
+        .delay-1 { animation-delay: 0.15s; }
+        .delay-2 { animation-delay: 0.3s; }
+        .delay-3 { animation-delay: 0.45s; }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 768px) {
+            h1.brand-title {
+                font-size: 2rem;
+            }
+            .brand-tagline {
+                font-size: 0.9rem;
+            }
+            .logo-img {
+                height: 65px;
+            }
+            .portal-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            .portal-card {
+                padding: 40px 30px;
+            }
+        }
+    </style>
+</head>
 <body>
     <div class="background-overlay"></div>
-    <header>
-        <nav>
-            <img src="assets/logo.png" alt="Zenith Logo" class="logo-img">
-            <div class="menu-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
+
+    <header class="fade-in">
+        <div class="brand-container">
+            <img src="./project-zenith/assets/logo.png" alt="Zenith Logo" class="logo-img">
+            <div>
+                <h1 class="brand-title">PROJECT ZENITH</h1>
+                <p class="brand-tagline">Rise of Kingdoms Ecosystem</p>
             </div>
-            <ul>
-                <li><a href="#goals">Goals</a></li>
-                <li><a href="#offer">Offer</a></li>
-                <li><a href="#looking-for">Join Us</a></li>
-                <li><a href="#contact" class="cta-button">Contact</a></li>
-            </ul>
-        </nav>
-        <section class="hero">
-            <h1 class="fade-in" data-text="PROJECT ZENITH">PROJECT ZENITH</h1>
-            <p class="subtitle fade-in delay-1">“The sky sets limits—Zenith breaks them.”</p>
-            <div class="hero-stats fade-in delay-2">
-                <span>June 2026</span>
-            </div>
-            <a href="info.html" class="cta-button big fade-in delay-3">More Info</a>
-            <a href="https://discord.gg/projectzenith" target="_blank" class="discord-btn fade-in delay-3"><i
-                    class="fab fa-discord"></i> Join Discord</a>
-        </section>
+        </div>
     </header>
 
-    <main>
-        <section id="goals" class="glass-section scroll-reveal">
-            <h2>📜 Our Goals</h2>
-            <div class="grid-container">
-                <div class="card">
-                    <i class="fas fa-users"></i>
-                    <h3>2500+ Active Members</h3>
-                    <p>We want to have an active community/kingdom.</p>
-                </div>
-                <div class="card">
+    <main class="fade-in delay-1">
+        <div class="portal-grid">
+            <!-- Project Zenith Landing -->
+            <a href="./project-zenith/" class="portal-card">
+                <div class="icon-wrapper">
                     <i class="fas fa-crown"></i>
-                    <h3>Imperium Kingdom</h3>
-                    <p>We strive to become an imperium kingdom after KvK 1 and stay as an imperium kingdom for as long
-                        as possible.</p>
                 </div>
-                <div class="card">
-                    <i class="fas fa-star"></i>
-                    <h3>All Pre-SoC Stars</h3>
-                    <p>Our project desires to win all pre-soc stars.</p>
+                <div class="card-content">
+                    <h2 class="card-title">PROJECT ZENITH</h2>
+                    <p class="card-description">Our primary landing hub. Learn about our summer 2026 goals, kingdoms plans, alliance structure, and leadership teams.</p>
                 </div>
-                <div class="card">
-                    <i class="fas fa-trophy"></i>
-                    <h3>Best Project of 2026</h3>
-                    <p>We are working not to just be the best project of summer 2026, but to be the best project of
-                        2026.</p>
-                </div>
-            </div>
-        </section>
+                <span class="portal-btn portal-btn-primary">
+                    Enter Website <i class="fas fa-arrow-right"></i>
+                </span>
+            </a>
 
-        <section id="offer" class="glass-section scroll-reveal">
-            <h2>🤝 What We Offer You</h2>
-            <div class="grid-container">
-                <div class="card">
-                    <i class="fas fa-chess-king"></i>
-                    <h3>Experienced Leadership</h3>
-                    <p>Our leaders have been past RoK Kings and have years of experience as RoK R4/5s.</p>
+            <!-- Zenith Community Portal -->
+            <a href="./zenith-community/" class="portal-card">
+                <div class="icon-wrapper">
+                    <i class="fas fa-users"></i>
                 </div>
-                <div class="card">
-                    <i class="fas fa-user-shield"></i>
-                    <h3>R4 Positions Available</h3>
-                    <p>R4 spots are available for our main and sub alliances.</p>
+                <div class="card-content">
+                    <h2 class="card-title">ZENITH COMMUNITY</h2>
+                    <p class="card-description">The community hub containing Rise of Kingdoms strategy databases, event calendars, weekly tournaments, and custom discord/web tools.</p>
                 </div>
-                <div class="card">
-                    <i class="fas fa-gem"></i>
-                    <h3>High Spender Activity</h3>
-                    <p>11 confirmed krakens, 15+ confirmed whales, and 10 confirmed T5 before KvK 1.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="looking-for" class="glass-section scroll-reveal">
-            <h2>🔎 Who We’re Looking For</h2>
-            <div class="list-container">
-                <div class="list-item">
-                    <i class="fas fa-gamepad"></i>
-                    <div>
-                        <h3>F2P and P2W</h3>
-                        <p>We care more about your contributions or activity than your spending level.</p>
-                    </div>
-                </div>
-                <div class="list-item">
-                    <i class="fas fa-fist-raised"></i>
-                    <div>
-                        <h3>Fighters, Not Freeloaders</h3>
-                        <p>Strict no-deadweight policy: meet the DKP requirement or risk being zeroed.</p>
-                    </div>
-                </div>
-                <div class="list-item">
-                    <i class="fas fa-bullseye"></i>
-                    <div>
-                        <h3>Dedicated Members</h3>
-                        <p>Members who will be active in our community and alliances/kingdom.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="glass-section contact-section scroll-reveal">
-            <h2>Contact Details & Community</h2>
-            <div class="contact-links" style="margin-bottom: 20px;">
-                <a href="https://discord.gg/projectzenith" target="_blank" class="cta-button big discord-link-btn">
-                    <i class="fab fa-discord"></i> Join Server: discord.gg/projectzenith
-                </a>
-            </div>
-            
-            <div class="custom-discord-widget card tilt-effect">
-                <div class="cdw-header">
-                    <img src="assets/logo.png" alt="Project Zenith Logo" class="cdw-logo"> Project Zenith
-                </div>
-                <div class="cdw-content">
-                    <div class="cdw-status">
-                        <span class="status-dot"></span>
-                        <span id="discord-online-count">Fetching status...</span> Members Online
-                    </div>
-                </div>
-            </div>
-
-            <div class="contacts-list" style="margin-top: 30px;">
-                <p style="font-size: 1.2rem; margin-bottom: 20px;"><strong>Direct Contacts:</strong></p>
-                <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-                    <a href="https://discord.com/users/1211770249200795734" target="_blank"
-                        class="cta-button discord-dm-btn">
-                        <i class="fab fa-discord"></i> dcuadra
-                    </a>
-                    <a href="https://discord.com/users/1063213760782815363" target="_blank"
-                        class="cta-button discord-dm-btn">
-                        <i class="fab fa-discord"></i> Honey TRE
-                    </a>
-                    <a href="https://discord.com/users/1211770249200795734" target="_blank"
-                        class="cta-button discord-dm-btn">
-                        <i class="fab fa-discord"></i> OneHopeWar
-                    </a>
-                </div>
-            </div>
-        </section>
+                <span class="portal-btn portal-btn-secondary">
+                    Enter Community <i class="fas fa-arrow-right"></i>
+                </span>
+            </a>
+        </div>
     </main>
 
-    <footer>
+    <footer class="fade-in delay-2">
         <p>&copy; 2026 Project Zenith. All Rights Reserved.</p>
-
     </footer>
-
-    <script src="script.js"></script>
 </body>
-
 </html>

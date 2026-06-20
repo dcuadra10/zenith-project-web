@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zenith Community | Rise of Kingdoms</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="stylesheet" href="style.css?v=16">
+    <link rel="stylesheet" href="info_nav.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Modern Premium Aesthetics */
+        body {
+            background-color: transparent;
+            color: #f5f2eb;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Glowing Background Elements */
+        .ambient-glow-1 {
+            position: absolute;
+            top: 20%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(230, 183, 65, 0.04) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(50px);
+        }
+
+        .ambient-glow-2 {
+            position: absolute;
+            top: 60%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(197, 146, 30, 0.03) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(60px);
+        }
+
+        .discord-emoji {
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+            display: inline-block;
+        }
+
+        .discord-emoji-large {
+            width: 38px;
+            height: 38px;
+            vertical-align: middle;
+            display: inline-block;
+            filter: drop-shadow(0 0 8px rgba(230, 183, 65, 0.4));
+        }
+
+        .divider-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 25px 0 45px 0;
+        }
+
+        .divider-line .discord-emoji {
+            width: 20px;
+            height: 20px;
+            opacity: 0.85;
+            transition: transform 0.3s ease;
+        }
+
+        .divider-line:hover .discord-emoji {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        .community-hero {
+            text-align: center;
+            padding: 100px 20px 50px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .community-hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.8rem;
+            color: #fff;
+            letter-spacing: 3px;
+            text-shadow: 0 0 40px rgba(230, 183, 65, 0.4);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            flex-wrap: wrap;
+            font-weight: 800;
+        }
+
+        .community-hero .subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.15rem;
+            color: #c9c4b8;
+            line-height: 1.8;
+            max-width: 760px;
+            margin: 0 auto 40px auto;
+        }
+
+        /* Premium Statistics Ribbon */
+        .stats-ribbon {
+            display: flex;
+            justify-content: space-around;
+            max-width: 1000px;
+            margin: 0 auto 80px auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(230, 183, 65, 0.15);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            position: relative;
+            z-index: 1;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        .stat-item {
+            text-align: center;
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .stat-value {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f1cb6c, #e6b741, #c5921e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+            text-shadow: 0 0 15px rgba(230, 183, 65, 0.1);
+        }
+
+        .stat-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: #a39e93;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Staggered Premium Features Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 35px;
+            padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto 100px auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-card {
+            background: rgba(20, 16, 12, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 40px 35px;
+            transition: all 0.4s var(--ease-spring);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        /* Sleek card border glow */
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(230, 183, 65, 0.3) 0%, transparent 60%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0.5;
+            transition: opacity 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(230, 183, 65, 0.35);
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.6),
+                0 0 35px rgba(230, 183, 65, 0.08);
+            background: rgba(28, 22, 16, 0.7);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon-wrapper {
+            align-self: flex-start;
+            margin-bottom: 25px;
+            background: rgba(230, 183, 65, 0.08);
+            border: 1px solid rgba(230, 183, 65, 0.25);
+            border-radius: 14px;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s var(--ease-spring);
+            box-shadow: inset 0 2px 5px rgba(255,255,255,0.05);
+        }
+
+        .feature-icon-wrapper i {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 5px rgba(230, 183, 65, 0.3));
+        }
+
+        .feature-card:hover .feature-icon-wrapper {
+            background: linear-gradient(135deg, var(--accent-gold-light), var(--accent-gold-dark));
+            border-color: transparent;
+            box-shadow: 0 0 20px rgba(230, 183, 65, 0.4);
+            transform: scale(1.1) rotate(3deg);
+        }
+
+        .feature-card:hover .feature-icon-wrapper i {
+            color: #000;
+            filter: none;
+        }
+
+        .feature-card h3 {
+            font-family: 'Cinzel', serif;
+            color: #fff;
+            font-size: 1.35rem;
+            margin-bottom: 15px;
+            letter-spacing: 1.2px;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            font-family: 'Inter', sans-serif;
+            color: #a39e93;
+            font-size: 0.95rem;
+            line-height: 1.75;
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        /* Tools Showcase Dashboard Layout */
+        .showcase-section {
+            max-width: 1200px;
+            margin: 0 auto 100px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .showcase-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            background: rgba(20, 16, 12, 0.5);
+            border: 1px solid rgba(230, 183, 65, 0.2);
+            border-radius: 24px;
+            padding: 50px;
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            align-items: center;
+        }
+
+        .showcase-text h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            color: #fff;
+            margin-bottom: 20px;
+            letter-spacing: 1.5px;
+        }
+
+        .showcase-text p {
+            color: #a39e93;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+        }
+
+        .tool-feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .tool-feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .tool-feature-item i {
+            color: var(--primary-color);
+            margin-top: 4px;
+            font-size: 1.1rem;
+        }
+
+        .tool-feature-item div h4 {
+            font-family: 'Cinzel', serif;
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 3px;
+        }
+
+        .tool-feature-item div p {
+            font-size: 0.9rem;
+            color: #8c877d;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Mockup Box mimicking tool ui */
+        .showcase-mockup {
+            background: #120e0a;
+            border: 1px solid rgba(230, 183, 65, 0.15);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .mockup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .mockup-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 1px;
+        }
+
+        .mockup-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .mockup-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .mockup-dot.active {
+            background: var(--primary-color);
+        }
+
+        .mockup-row {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mockup-row span {
+            font-size: 0.85rem;
+            color: #d1cdb8;
+        }
+
+        .mockup-row .value {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .mockup-badge {
+            background: rgba(230, 183, 65, 0.1);
+            border: 1px solid rgba(230,183,65,0.3);
+            color: var(--primary-color);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+        }
+
+        /* Call To Action Glass box */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(20, 16, 12, 0.8) 0%, rgba(10, 8, 6, 0.9) 100%);
+            border: 1px solid rgba(230, 183, 65, 0.25);
+            border-radius: 24px;
+            padding: 60px 40px;
+            max-width: 950px;
+            margin: 0 auto 100px auto;
+            text-align: center;
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.6),
+                0 0 50px rgba(230, 183, 65, 0.05);
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section h2 {
+            font-family: 'Cinzel', serif;
+            color: #fff;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .cta-section p {
+            color: #c9c4b8;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .cta-buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .btn-premium {
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 15px 40px;
+            border-radius: 35px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: 1px;
+        }
+
+        .btn-premium-primary {
+            background: linear-gradient(135deg, var(--accent-gold-light), var(--accent-gold-dark));
+            color: #000;
+            border: 1px solid transparent;
+            box-shadow: 0 8px 25px rgba(230, 183, 65, 0.3);
+        }
+
+        .btn-premium-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(230, 183, 65, 0.45);
+        }
+
+        .btn-premium-secondary {
+            background: rgba(255, 255, 255, 0.02);
+            color: #fff;
+            border: 1px solid rgba(230, 183, 65, 0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-premium-secondary:hover {
+            transform: translateY(-4px);
+            background: rgba(230, 183, 65, 0.07);
+            border-color: var(--primary-color);
+            box-shadow: 0 12px 25px rgba(230, 183, 65, 0.15);
+        }
+
+        @media (max-width: 992px) {
+            .showcase-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 40px 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .community-hero h1 {
+                font-size: 2.8rem;
+            }
+            .community-hero .subtitle {
+                font-size: 1rem;
+            }
+            .stat-value {
+                font-size: 2rem;
+            }
+            .cta-section {
+                padding: 45px 20px;
+                margin: 0 15px 80px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Ambient Blur Glows -->
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+    
+    <div class="background-overlay"></div>
+    
+    <header style="height: auto; min-height: 120px; position: relative; z-index: 10;">
+        <nav>
+            <a href="../index.html">
+                <img src="assets/logo.png" alt="Zenith Logo" class="logo-img">
+            </a>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul>
+                <li><a href="guides/">Community Guides</a></li>
+                <li><a href="calendar/">Event Calendar</a></li>
+                <li><a href="tools/">Community Tools</a></li>
+                <li><a href="https://discord.gg/projectzenith" target="_blank" class="cta-button">Join Discord</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="community-hero">
+            <h1 class="fade-in">
+                <img src="https://cdn.discordapp.com/emojis/1462534406928339046.png" class="discord-emoji-large" alt="swords">
+                <span>𝐙𝐞𝐧𝐢𝐭𝐡 𝐂𝐨𝐦𝐦𝐮𝐧𝐢𝐭𝐲</span>
+                <img src="https://cdn.discordapp.com/emojis/1462534406928339046.png" class="discord-emoji-large" alt="swords">
+            </h1>
+            
+            <div class="divider-line fade-in">
+                <img src="https://cdn.discordapp.com/emojis/1514391506775965727.png" class="discord-emoji" alt="decor">
+                <img src="https://cdn.discordapp.com/emojis/1514391506775965727.png" class="discord-emoji" alt="decor">
+                <img src="https://cdn.discordapp.com/emojis/1514391506775965727.png" class="discord-emoji" alt="decor">
+                <img src="https://cdn.discordapp.com/emojis/1514340670205329541.png" class="discord-emoji" alt="zc">
+                <img src="https://cdn.discordapp.com/emojis/1514391506775965727.png" class="discord-emoji" alt="decor">
+                <img src="https://cdn.discordapp.com/emojis/1514391506775965727.png" class="discord-emoji" alt="decor">
+                <img src="https://cdn.discordapp.com/emojis/1514391506775965727.png" class="discord-emoji" alt="decor">
+            </div>
+
+            <p class="subtitle fade-in delay-1">
+                A highly organized and feature-rich gaming ecosystem built for Rise of Kingdoms. Whether you're looking for elite strategy databases, competitive community tournaments, or customized automation tools, Zenith Community has it all.
+            </p>
+        </section>
+
+        <!-- Stats Ribbon -->
+        <section class="stats-ribbon fade-in delay-1">
+            <div class="stat-item">
+                <div class="stat-value">69</div>
+                <div class="stat-label">Strategy Guides</div>
+            </div>
+            <div class="stat-item" style="border-left: 1px solid rgba(230,183,65,0.1); border-right: 1px solid rgba(230,183,65,0.1);">
+                <div class="stat-value">24/7</div>
+                <div class="stat-label">RoK Alerts & Tools</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">100%</div>
+                <div class="stat-label">Professional Staff</div>
+            </div>
+        </section>
+
+        <!-- Features Grid Section -->
+        <section class="feature-grid fade-in delay-2">
+            
+            <!-- 1. MANY guides -->
+            <div class="feature-card">
+                <div>
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>MANY guides</h3>
+                    <p>Access our strategic knowledge database. Covers advanced KvK tactics, commander setups, laws, events, and account progression guides.</p>
+                </div>
+            </div>
+
+            <!-- 2. Server Events -->
+            <div class="feature-card">
+                <div>
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>Server Events</h3>
+                    <p>We host weekly community events to build relationships outside RoK. Includes poker nights, golf games, movie sessions, and more.</p>
+                </div>
+            </div>
+
+            <!-- 3. Giveaways/Competitions -->
+            <div class="feature-card">
+                <div>
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3>Giveaways</h3>
+                    <p>Participate in regular competitions, tournament leagues, and events to win active Discord Nitro and other server giveaways.</p>
+                </div>
+            </div>
+
+            <!-- 4. Very Organized Server -->
+            <div class="feature-card">
+                <div>
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-sitemap"></i>
+                    </div>
+                    <h3>Very Organized</h3>
+                    <p>Clutter-free categories, automated clean registries, and perfect visual organization matching the strict design of Project Zenith.</p>
+                </div>
+            </div>
+
+            <!-- 5. Clear Purpose & Goals -->
+            <div class="feature-card">
+                <div>
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-compass"></i>
+                    </div>
+                    <h3>Clear Vision</h3>
+                    <p>Our goal, rules, and vision are explicitly stated from day one. Find everything clearly listed inside our server's info channel.</p>
+                </div>
+            </div>
+
+            <!-- 6. Recruitment Channels -->
+            <div class="feature-card">
+                <div>
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3>Recruitment Hub</h3>
+                    <p>Dedicated channels to advertise kingdoms, recruit active players, and explore opportunities with other high-end alliances.</p>
+                </div>
+            </div>
+
+            <!-- 7. RoK Tools -->
+            <div class="feature-card">
+                <div>
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>RoK Custom Tools</h3>
+                    <p>Convenient features including a speedup calculator, announcements for new kingdoms, automatic redeem code logs, and more.</p>
+                </div>
+            </div>
+
+            <!-- 8. Founded by Project Zenith Leadership -->
+            <div class="feature-card">
+                <div>
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h3>Zenith Legacy</h3>
+                    <p>Founded and managed directly by Project Zenith leadership. We guarantee a professional, toxic-free and highly active environment.</p>
+                </div>
+            </div>
+
+        </section>
+
+
+
+
+
+        <!-- CTA Section -->
+        <section class="cta-section fade-in">
+            <h2>Experience Zenith Community</h2>
+            <p>Dive into our extensive guides base directly on the web, or join the server to access all tools and community events.</p>
+            <div class="cta-buttons-container">
+                <a href="guides/" class="btn-premium btn-premium-primary">
+                    <i class="fas fa-book-open"></i> Read Strategy Guides
+                </a>
+                <a href="https://discord.gg/projectzenith" target="_blank" class="btn-premium btn-premium-secondary">
+                    <i class="fab fa-discord"></i> Join Our Discord
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Project Zenith. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

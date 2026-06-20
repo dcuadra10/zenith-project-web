@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kingdom Guides | Zenith</title>
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+    <link rel="stylesheet" href="../style.css?v=16">
+    <link rel="stylesheet" href="../info_nav.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Guides Page Styles */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px auto 40px auto;
+            max-width: 600px;
+            padding: 0 20px;
+        }
+
+        .search-bar {
+            width: 100%;
+            background: rgba(28, 22, 15, 0.45);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 215, 0, 0.25);
+            border-radius: 50px;
+            padding: 15px 25px;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-bar:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 25px rgba(230, 183, 65, 0.2);
+        }
+
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+            padding: 0 20px;
+        }
+
+        .category-tab {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 30px;
+            padding: 10px 20px;
+            color: var(--text-secondary);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-tab:hover, .category-tab.active {
+            background: linear-gradient(135deg, var(--accent-gold-light), var(--accent-gold-dark));
+            border-color: var(--primary-color);
+            color: #000;
+            font-weight: 600;
+            box-shadow: 0 0 15px rgba(230, 183, 65, 0.3);
+        }
+
+        /* Guide Card custom grid styling */
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .guides-grid.loading-fade {
+            opacity: 0;
+            transform: translateY(12px);
+        }
+
+        .guide-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: var(--card-radius);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 280px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .guide-card-banner {
+            width: calc(100% + 60px);
+            margin: -30px -30px 20px -30px;
+            height: 150px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(230, 183, 65, 0.2);
+            transition: transform 0.5s ease;
+        }
+
+        .guide-card:hover .guide-card-banner {
+            transform: scale(1.05);
+        }
+
+        .guide-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(230, 183, 65, 0.25);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(230, 183, 65, 0.05);
+        }
+
+        .guide-category-tag {
+            align-self: flex-start;
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            color: var(--primary-color);
+            border: 1px solid rgba(230, 183, 65, 0.3);
+            border-radius: 5px;
+            padding: 3px 10px;
+            margin-bottom: 15px;
+            background: rgba(230, 183, 65, 0.05);
+        }
+
+        .guide-title {
+            font-family: 'Cinzel', serif;
+            color: #fff;
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .guide-meta {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .guide-snippet {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .read-btn {
+            align-self: flex-start;
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            background: transparent;
+            border: 1px solid var(--primary-color);
+            border-radius: 30px;
+            padding: 8px 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .guide-card:hover .read-btn {
+            background: linear-gradient(135deg, var(--accent-gold-light), var(--accent-gold-dark));
+            color: #000;
+            border-color: transparent;
+            font-weight: bold;
+        }
+
+        /* Lector Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-box {
+            background: rgba(18, 14, 8, 0.95);
+            border: 1px solid rgba(230, 183, 65, 0.35);
+            border-radius: 24px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(230, 183, 65, 0.1);
+            transform: scale(0.9);
+            transition: transform 0.4s var(--ease-spring);
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            padding: 30px;
+            border-bottom: 1px solid rgba(230, 183, 65, 0.2);
+            position: relative;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            background: transparent;
+            border: 1px solid rgba(230, 183, 65, 0.3);
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close-btn:hover {
+            background: var(--primary-color);
+            color: #000;
+            border-color: transparent;
+        }
+
+        .modal-body {
+            padding: 30px;
+            overflow-y: auto;
+            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* Custom Basic Markdown rendering styling */
+        .modal-body h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--primary-color);
+            margin: 25px 0 12px 0;
+            border-bottom: 1px solid rgba(230, 183, 65, 0.15);
+            padding-bottom: 5px;
+        }
+
+        .modal-body h4 {
+            font-family: 'Cinzel', serif;
+            color: #fff;
+            margin: 20px 0 10px 0;
+        }
+
+        .modal-body ul, .modal-body ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .modal-body li {
+            margin-bottom: 8px;
+        }
+
+        .modal-body strong {
+            color: #fff;
+        }
+
+        .modal-body h1 {
+            font-family: 'Cinzel', serif;
+            color: var(--primary-color);
+            margin: 30px 0 15px 0;
+            border-bottom: 2px solid rgba(230, 183, 65, 0.2);
+            padding-bottom: 8px;
+            font-size: 1.8rem;
+        }
+
+        .modal-body h2 {
+            font-family: 'Cinzel', serif;
+            color: #fff;
+            margin: 28px 0 12px 0;
+            border-bottom: 1px dashed rgba(230, 183, 65, 0.15);
+            padding-bottom: 6px;
+            font-size: 1.5rem;
+        }
+
+        .modal-body a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px dashed rgba(230, 183, 65, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        .modal-body a:hover {
+            color: var(--accent-gold-light);
+            border-bottom-style: solid;
+            text-shadow: 0 0 10px rgba(230, 183, 65, 0.3);
+        }
+
+        .no-guides {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 0;
+            font-family: 'Cinzel', serif;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        /* Lightbox Premium Modal Styles */
+        .lightbox-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(4, 3, 2, 0.96);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            z-index: 20000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .lightbox-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #a39480;
+            font-size: 2.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 20002;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(230, 183, 65, 0.1);
+        }
+
+        .lightbox-close:hover {
+            color: #fff;
+            background: rgba(230, 183, 65, 0.15);
+            border-color: rgba(230, 183, 65, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .lightbox-controls {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 20002;
+            background: rgba(20, 16, 12, 0.85);
+            padding: 12px 24px;
+            border-radius: 50px;
+            border: 1px solid rgba(230, 183, 65, 0.2);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        }
+
+        .lightbox-btn {
+            background: transparent;
+            border: none;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .lightbox-btn:hover {
+            background: rgba(230, 183, 65, 0.15);
+            color: #fff;
+            transform: scale(1.15);
+        }
+
+        .lightbox-content-wrapper {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            cursor: grab;
+        }
+
+        .lightbox-content-wrapper:active {
+            cursor: grabbing;
+        }
+
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 80%;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.9);
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transform-origin: center center;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+    </style>
+</head>
+
+<body>
+    <svg width="0" height="0" style="position: absolute;">
+      <defs>
+        <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#F1CB6C" />
+          <stop offset="50%" stop-color="#E6B741" />
+          <stop offset="100%" stop-color="#C5921E" />
+        </linearGradient>
+      </defs>
+    </svg>
+    <div class="background-overlay"></div>
+    <header
+        style="height: 40vh; min-height: 300px; justify-content: center; display: flex; flex-direction: column; align-items: center;">
+        <nav>
+            <a href="../">
+                <img src="../assets/logo.png" alt="Zenith Logo" class="logo-img">
+            </a>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul>
+                <li><a href="../guides/" class="active">Community Guides</a></li>
+                <li><a href="../calendar/">Event Calendar</a></li>
+                <li><a href="../tools/">Community Tools</a></li>
+                <li><a href="https://discord.gg/projectzenith" target="_blank" class="cta-button">Join Discord</a></li>
+            </ul>
+        </nav>
+        <section class="hero" style="margin-top: 50px;">
+            <h1 class="fade-in">Zenith Guides</h1>
+            <p class="subtitle fade-in delay-1">Official strategy and tutorials loaded dynamically from Discord.</p>
+        </section>
+    </header>
+
+    <main style="margin-bottom: 80px;">
+        <!-- Search bar -->
+        <div class="search-container fade-in delay-2">
+            <input type="text" id="search-input" class="search-bar" placeholder="Search guides by title, category, or author...">
+        </div>
+
+        <!-- Categories Filters (Generated dynamically from database) -->
+        <div class="category-tabs fade-in delay-2" id="category-tabs-container">
+            <div class="category-tab active" data-category="all">All Categories</div>
+        </div>
+
+        <!-- Guides Cards List -->
+        <div class="guides-grid fade-in delay-3" id="guides-container">
+            <!-- Loading placeholder -->
+            <div class="no-guides">Loading guides database...</div>
+        </div>
+    </main>
+
+    <!-- Modal Lector Overlay -->
+    <div class="modal-overlay" id="guide-modal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <div class="guide-category-tag" id="modal-category">Category</div>
+                <h2 class="guide-title" style="font-size: 1.8rem; margin-bottom: 8px;" id="modal-title">Guide Title</h2>
+                <div class="guide-meta" id="modal-meta">By Author • Date</div>
+                <button class="modal-close-btn" id="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Guide content rendered here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Lightbox Modal Overlay -->
+    <div id="image-lightbox" class="lightbox-modal">
+        <span class="lightbox-close" id="lightbox-close-btn">&times;</span>
+        <div class="lightbox-controls">
+            <button id="zoom-in-btn" class="lightbox-btn" title="Zoom In"><i class="fas fa-search-plus"></i></button>
+            <button id="zoom-out-btn" class="lightbox-btn" title="Zoom Out"><i class="fas fa-search-minus"></i></button>
+            <button id="zoom-reset-btn" class="lightbox-btn" title="Reset Zoom"><i class="fas fa-undo"></i></button>
+        </div>
+        <div class="lightbox-content-wrapper" id="lightbox-wrapper">
+            <img id="lightbox-img" src="" alt="Zoomed View" class="lightbox-img">
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Project Zenith. All Rights Reserved.</p>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script>
+        // Guides Loader Logic
+        let allGuides = [];
+        let currentCategory = 'all';
+
+        // Load JSON
+        async function fetchGuides() {
+            try {
+                const response = await fetch('../assets/guides.json');
+                if (!response.ok) throw new Error('Could not load guides data.');
+                allGuides = await response.json();
+                renderCategoryTabs();
+                renderGuides();
+            } catch (err) {
+                console.error(err);
+                document.getElementById('guides-container').innerHTML = `
+                    <div class="no-guides">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 15px; display: block;"></i>
+                        No guides found. Connect your Discord bot to populate assets/guides.json
+                    </div>
+                `;
+            }
+        }
+
+        // Custom Light Markdown Parser to HTML
+        function parseMarkdown(text) {
+            if (!text) return '';
+            let html = text;
+            
+            // Inline Images (Markdown style: ![alt](url)) - updated click event to open the native custom lightbox
+            html = html.replace(/!\[(.*?)\]\((.*?)\)/g, (match, alt, url) => {
+                const correctedUrl = url.startsWith('assets/') ? '../' + url : url;
+                return `<img src="${correctedUrl}" alt="${alt}" class="guide-inline-image" style="max-width: 100%; border-radius: 12px; margin: 20px 0; border: 1px solid rgba(230, 183, 65, 0.2); display: block; box-shadow: 0 8px 25px rgba(0,0,0,0.5); cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform=\'scale(1.015)\'" onmouseout="this.style.transform=\'scale(1)\'" onclick="openLightbox(\'${correctedUrl}\')">`;
+            });
+
+            // Parse markdown links, supporting newlines between ] and ( (very common in raw Discord/markdown outputs)
+            html = html.replace(/\[(.*?)\]\s*\((.*?)\)/g, '<a href="$2" target="_blank">$1</a>');
+
+            // Discord Custom Emoji parsing (e.g. <:arrow:1462534615959994429> -> Discord CDN PNG)
+            html = html.replace(/<a?:[a-zA-Z0-9_]+:(\d+)>/g, '<img src="https://cdn.discordapp.com/emojis/$1.png" class="discord-emoji" alt="emoji" style="width: 20px; height: 20px; vertical-align: middle; display: inline-block; margin: 0 4px; filter: drop-shadow(0 2px 5px rgba(230, 183, 65, 0.35));">');
+
+            // Headings (supporting optional trailing hashes e.g. ### Title ###)
+            html = html.replace(/^# (.*?)( #*)?$/gm, '<h1>$1</h1>');
+            html = html.replace(/^## (.*?)( #*)?$/gm, '<h2>$1</h2>');
+            html = html.replace(/^### (.*?)( #*)?$/gm, '<h3>$1</h3>');
+            html = html.replace(/^#### (.*?)( #*)?$/gm, '<h4>$1</h4>');
+            
+            // Bold
+            html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            
+            // Italic
+            html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            
+            // Lists (bullets)
+            html = html.replace(/^\* (.*?)$/gm, '<li>$1</li>');
+            html = html.replace(/^- (.*?)$/gm, '<li>$1</li>');
+            html = html.replace(/^(\d+\. .*?)$/gm, '<li>$1</li>');
+            
+            // Wrap loose list items in ul tags
+            html = html.replace(/(<li>.*?<\/li>)/gs, '<ul>$1</ul>');
+            // Clean up consecutive ul elements
+            html = html.replace(/<\/ul>\s*<ul>/g, '');
+
+            // New lines to line breaks (excluding headings and lists)
+            html = html.replace(/\n/g, '<br>');
+
+            return html;
+        }
+
+        // Render Cards Grid
+        function renderGuides() {
+            const container = document.getElementById('guides-container');
+            const searchVal = document.getElementById('search-input').value.toLowerCase();
+            
+            // Filter
+            const filtered = allGuides.filter(g => {
+                const matchesCategory = currentCategory === 'all' || g.category === currentCategory;
+                const matchesSearch = g.title.toLowerCase().includes(searchVal) || 
+                                      g.category.toLowerCase().includes(searchVal) || 
+                                      g.content.toLowerCase().includes(searchVal) ||
+                                      (g.author && g.author.toLowerCase().includes(searchVal));
+                return matchesCategory && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="no-guides">No guides match your search/filter.</div>';
+                return;
+            }
+
+            container.innerHTML = filtered.map(g => {
+                // Short snippet of content without markdown tags, discord emojis, or links
+                let cleanSnippet = g.content
+                    .replace(/<a?:[a-zA-Z0-9_]+:\d+>/g, '') // remove discord custom emojis
+                    .replace(/!\[(.*?)\]\((.*?)\)/g, '') // remove markdown images
+                    .replace(/\[(.*?)\]\((.*?)\)/g, '$1') // replace markdown links with just the link text
+                    .replace(/[#*`\-_]/g, '') // remove markdown styling symbols
+                    .replace(/\s+/g, ' ') // replace multiple spaces/newlines with single space
+                    .trim();
+                
+                if (cleanSnippet.length > 110) {
+                    cleanSnippet = cleanSnippet.substring(0, 110) + '...';
+                }
+
+                // Determine banner image dynamically so that every single guide has a beautiful descriptive cover card
+                let bannerSrc = '';
+                const titleLower = g.title.toLowerCase();
+                const catLower = (g.category || '').toLowerCase();
+
+                if (titleLower.includes('7k gem')) {
+                    bannerSrc = 'assets/guides_images/7k_gem_banner.png';
+                } else if (titleLower.includes('olympia')) {
+                    bannerSrc = 'assets/guides_images/olympia_banner.png';
+                } else if (titleLower.includes('sharp eyes')) {
+                    bannerSrc = 'assets/guides_images/sharp_eyes_banner.png';
+                } else if (titleLower.includes('mge') || titleLower.includes('mightiest governor')) {
+                    bannerSrc = 'assets/guides_images/mge_banner.png';
+                } else if (titleLower.includes('commander swap')) {
+                    bannerSrc = 'assets/guides_images/commander_swap_banner.png';
+                } else if (titleLower.includes('smelt and meld') || titleLower.includes('smithy')) {
+                    bannerSrc = 'assets/guides_images/smelt_meld_banner.png';
+                } else if (titleLower.includes('calendar')) {
+                    bannerSrc = 'assets/guides_images/calendar_banner.png';
+                } else if (titleLower.includes('websites')) {
+                    bannerSrc = 'assets/guides_images/helpful_websites_banner.png';
+                } else if (catLower.includes('kvk') || titleLower.includes('kvk') || titleLower.includes('war') || titleLower.includes('rally') || titleLower.includes('fight') || titleLower.includes('combat') || titleLower.includes('fighting') || titleLower.includes('stragegy') || titleLower.includes('strategies')) {
+                    bannerSrc = 'assets/guides_images/banner_kvk.png';
+                } else if (catLower.includes('event') || titleLower.includes('event') || titleLower.includes('clash') || titleLower.includes('ceroli') || titleLower.includes('tempest') || titleLower.includes('hunt') || titleLower.includes('quiz') || titleLower.includes('mobilization') || titleLower.includes('raid') || titleLower.includes('assault') || titleLower.includes('cerioli') || titleLower.includes('special') || titleLower.includes('house') || titleLower.includes('supplies') || titleLower.includes('reserve') || titleLower.includes('history') || titleLower.includes('tribes') || titleLower.includes('trial') || titleLower.includes('ceremony') || titleLower.includes('melee') || titleLower.includes('treasure') || titleLower.includes('market') || titleLower.includes('appraiser')) {
+                    bannerSrc = 'assets/guides_images/banner_event.png';
+                } else if (catLower.includes('account') || titleLower.includes('tips') || titleLower.includes('progression') || titleLower.includes('vip') || titleLower.includes('tech') || titleLower.includes('upgrade') || titleLower.includes('academy') || titleLower.includes('farm') || titleLower.includes('reset') || titleLower.includes('t4') || titleLower.includes('migration') || titleLower.includes('passport') || titleLower.includes('builds') || titleLower.includes('accounts')) {
+                    bannerSrc = 'assets/guides_images/banner_account.png';
+                } else {
+                    bannerSrc = 'assets/guides_images/banner_misc.png';
+                }
+
+                const bannerImg = `<img src="../${bannerSrc}" alt="${g.title}" class="guide-card-banner">`;
+
+                return `
+                    <div class="guide-card" onclick="openGuide('${g.id}')">
+                        <div>
+                            ${bannerImg}
+                            <div class="guide-category-tag">${g.category}</div>
+                            <h3 class="guide-title">${g.title}</h3>
+                            <div class="guide-meta" style="display: flex; align-items: center; gap: 8px;">
+                                ${g.author_avatar ? `<img src="../${g.author_avatar}" alt="${g.author}" style="width: 24px; height: 24px; border-radius: 50%; border: 1px solid rgba(230,183,65,0.3); object-fit: cover;">` : '<i class="far fa-user" style="color: var(--primary-color);"></i>'}
+                                <span>By ${g.author || 'Zenith Team'} • ${g.date || 'June 2026'}</span>
+                            </div>
+                            <p class="guide-snippet">${cleanSnippet}</p>
+                        </div>
+                        <button class="read-btn">Read Guide</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Open Modal Reader
+        window.openGuide = function(guideId) {
+            const guide = allGuides.find(g => g.id === guideId);
+            if (!guide) return;
+
+            document.getElementById('modal-category').innerText = guide.category;
+            document.getElementById('modal-title').innerText = guide.title;
+            
+            const avatarHTML = guide.author_avatar 
+                ? `<img src="../${guide.author_avatar}" alt="${guide.author}" style="width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgba(230,183,65,0.4); object-fit: cover;">`
+                : `<i class="far fa-user" style="color: var(--primary-color); font-size: 1.1rem;"></i>`;
+
+            document.getElementById('modal-meta').innerHTML = `
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    ${avatarHTML}
+                    <span>By ${guide.author || 'Zenith Team'} • ${guide.date || 'June 2026'}</span>
+                </div>
+            `;
+            
+            document.getElementById('modal-body').innerHTML = parseMarkdown(guide.content);
+
+            document.getElementById('guide-modal').classList.add('active');
+        };
+
+        // Close Modal
+        function closeModal() {
+            document.getElementById('guide-modal').classList.remove('active');
+        }
+
+        document.getElementById('modal-close').addEventListener('click', closeModal);
+        document.getElementById('guide-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'guide-modal') closeModal();
+        });
+
+        // Debounce helper to prevent lag during fast typing in search
+        function debounce(func, delay) {
+            let timeout;
+            return function(...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), delay);
+            };
+        }
+
+        // Search & Filter Events with 150ms debounce
+        document.getElementById('search-input').addEventListener('input', debounce(renderGuides, 150));
+
+        // Dynamic Category Tabs Generator & Event Binder
+        function renderCategoryTabs() {
+            const tabsContainer = document.getElementById('category-tabs-container');
+            if (!tabsContainer) return;
+            
+            // Extract unique categories from JSON data
+            const categories = [...new Set(allGuides.map(g => g.category).filter(Boolean))];
+            
+            tabsContainer.innerHTML = `
+                <div class="category-tab ${currentCategory === 'all' ? 'active' : ''}" data-category="all">All Categories</div>
+                ${categories.map(cat => `
+                    <div class="category-tab ${currentCategory === cat ? 'active' : ''}" data-category="${cat}">${cat}</div>
+                `).join('')}
+            `;
+            
+            // Re-bind click events with premium smooth transitions
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    const gridContainer = document.getElementById('guides-container');
+                    
+                    // Trigger smooth fade-out and slide-down
+                    gridContainer.classList.add('loading-fade');
+                    
+                    document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    currentCategory = tab.getAttribute('data-category');
+                    
+                    // Wait for transition to complete before rendering and fading back in
+                    setTimeout(() => {
+                        renderGuides();
+                        gridContainer.classList.remove('loading-fade');
+                    }, 200);
+                });
+            });
+        }
+
+        // --- Lightbox Image Zoom and Drag Logic ---
+        let scale = 1;
+        let translateX = 0;
+        let translateY = 0;
+        let isDragging = false;
+        let startX, startY;
+
+        const lightbox = document.getElementById('image-lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxWrapper = document.getElementById('lightbox-wrapper');
+
+        function updateLightboxTransform() {
+            lightboxImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+        }
+
+        // Open Lightbox
+        window.openLightbox = function(src) {
+            lightboxImg.src = src;
+            scale = 1;
+            translateX = 0;
+            translateY = 0;
+            updateLightboxTransform();
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Lock background scrolling
+        };
+
+        // Close Lightbox
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+            setTimeout(() => {
+                lightboxImg.src = '';
+            }, 300);
+        }
+
+        document.getElementById('lightbox-close-btn').addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox || e.target === lightboxWrapper) {
+                closeLightbox();
+            }
+        });
+
+        // Zoom Controls
+        document.getElementById('zoom-in-btn').addEventListener('click', () => {
+            scale = Math.min(scale + 0.25, 4);
+            updateLightboxTransform();
+        });
+
+        document.getElementById('zoom-out-btn').addEventListener('click', () => {
+            scale = Math.max(scale - 0.25, 0.5);
+            updateLightboxTransform();
+        });
+
+        document.getElementById('zoom-reset-btn').addEventListener('click', () => {
+            scale = 1;
+            translateX = 0;
+            translateY = 0;
+            updateLightboxTransform();
+        });
+
+        // Mouse Wheel Zoom
+        lightboxWrapper.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const delta = e.deltaY > 0 ? -0.15 : 0.15;
+            scale = Math.min(Math.max(scale + delta, 0.5), 4);
+            updateLightboxTransform();
+        }, { passive: false });
+
+        // Grabbing & Dragging / Panning
+        lightboxWrapper.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            isDragging = true;
+            startX = e.clientX - translateX;
+            startY = e.clientY - translateY;
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            translateX = e.clientX - startX;
+            translateY = e.clientY - startY;
+            updateLightboxTransform();
+        });
+
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        // Keyboard Support (Esc to close)
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightbox();
+            }
+        });
+
+        // Init
+        fetchGuides();
+    </script>
+</body>
+
+</html>

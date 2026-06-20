@@ -1,0 +1,6 @@
+.env
+**/.env
+node_modules/
+*.log
+.git_backup/
+**/.git_backup/
